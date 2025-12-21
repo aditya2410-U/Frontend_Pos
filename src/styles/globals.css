@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@config "../../tailwind.config.js";
+
+/* ═══════════════════════════════════════════════════════════
+   HEALTHCARE MODERN THEME - Professional & Clean
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Background Colors */
+  --color-bg: #ffffff;
+  --color-bg-wrapper: #0f766e;
+  --color-bg-wrapper-light: #14b8a6;
+
+  /* Button Colors */
+  --color-btn-light: #f8fafc;
+  --color-btn-dark: #0f766e;
+  --color-btn-darker: #134e4a;
+  --color-btn-active: #135630;
+
+  /* Text Colors */
+  --color-text-light: #ffffff;
+  --color-text-dark: #0f172a;
+  --color-text-disabled: #94a3b8;
+
+  /* Accent Colors */
+  --color-accent: #135630;
+  --color-accent-hover: #0f766e;
+  --color-teal: #14b8a6;
+  --color-coral: #f43f5e;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME - Clean & Minimal
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --theme-bg: #f0fdfa;
+  --theme-bg-secondary: #ccfbf1;
+  --theme-bg-tertiary: #f1f5f9;
+  --theme-bg-wrapper: #0f766e;
+  --theme-bg-wrapper-light: #14b8a6;
+  --theme-text: #0f172a;
+  --theme-text-secondary: #334155;
+  --theme-text-muted: #94a3b8;
+  --theme-btn-bg: #f1f5f9;
+  --theme-btn-text: #0f172a;
+  --theme-btn-hover-bg: #0f766e;
+  --theme-btn-hover-text: #ffffff;
+  --theme-accent: #135630;
+  --theme-accent-hover: #0f766e;
+  --theme-accent-light: #ccfbf1;
+  --theme-border: #e2e8f0;
+  --theme-border-strong: #cbd5e1;
+  --theme-success: #10b981;
+  --theme-warning: #f59e0b;
+  --theme-danger: #ef4444;
+  --theme-info: #0ea5e9;
+  --theme-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --theme-card-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK THEME - Premium & Refined
+   ═══════════════════════════════════════════════════════════ */
+
+.dark {
+  --theme-bg: #09090b;
+  --theme-bg-secondary: #18181b;
+  --theme-bg-tertiary: #27272a;
+  --theme-bg-wrapper: #135630;
+  --theme-bg-wrapper-light: #14b8a6;
+  --theme-text: #fafafa;
+  --theme-text-secondary: #a1a1aa;
+  --theme-text-muted: #71717a;
+  --theme-btn-bg: #27272a;
+  --theme-btn-text: #fafafa;
+  --theme-btn-hover-bg: #135630;
+  --theme-btn-hover-text: #ffffff;
+  --theme-accent: #135630;
+  --theme-accent-hover: #14b8a6;
+  --theme-accent-light: rgba(13, 148, 136, 0.15);
+  --theme-border: #27272a;
+  --theme-border-strong: #3f3f46;
+  --theme-success: #4ade80;
+  --theme-warning: #fbbf24;
+  --theme-danger: #f87171;
+  --theme-info: #60a5fa;
+  --theme-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --theme-card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
