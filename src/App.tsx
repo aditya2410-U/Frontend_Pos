@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
-import { Input } from './components/ui/input'
-import { Textarea } from './components/ui/textarea'
-import { ModeToggle } from './components/ui/mode-toggle'
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Button } from "./common/@atoms/button";
+import { Input } from "./common/@atoms/input";
+import { Textarea } from "./common/@atoms/textarea";
+import { ModeToggle } from "./common/@atoms/mode-toggle";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <div>
@@ -22,7 +19,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-       <Button>Click me</Button>
+        <Button>Click me</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -34,7 +31,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

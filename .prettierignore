@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+package-lock.json
+
+# Build outputs
+dist
+build
+.vite
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+
