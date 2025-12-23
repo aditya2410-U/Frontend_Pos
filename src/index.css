@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import "./fonts/switzer.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -42,38 +44,71 @@
 }
 
 :root {
+  /* Theme Palette Colors - Light to Dark */
+  /* EBF4DD (lightest), B0CE88 (light), 4C763B (medium), 043915 (dark), FFFD8F (yellow) */
+  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
+  --color-light: rgb(176, 206, 136); /* B0CE88 */
+  --color-medium: rgb(76, 118, 59); /* 4C763B */
+  --color-dark: rgb(4, 57, 21); /* 043915 */
+  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
+
+  /* Core Theme Variables - Neutral (white/black based) */
   --background: rgb(255, 255, 255);
   --foreground: rgb(10, 10, 10);
   --card: rgb(255, 255, 255);
   --card-foreground: rgb(10, 10, 10);
   --popover: rgb(255, 255, 255);
   --popover-foreground: rgb(10, 10, 10);
-  --primary: rgb(23, 23, 23);
-  --primary-foreground: rgb(250, 250, 250);
+
+  /* Primary Colors - Green Palette (for buttons, switches, checkboxes, focus) */
+  --primary: var(--color-medium); /* 4C763B */
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-dark); /* 043915 */
+  --primary-light: var(--color-lightest); /* EBF4DD */
+  --primary-text: var(--color-dark); /* 043915 */
+  --primary-text-light: rgb(255, 255, 255);
+
+  /* Secondary Colors - Neutral */
   --secondary: rgb(245, 245, 245);
   --secondary-foreground: rgb(23, 23, 23);
+
+  /* Muted Colors - Neutral */
   --muted: rgb(245, 245, 245);
   --muted-foreground: rgb(115, 115, 115);
-  --accent: rgb(245, 245, 245);
-  --accent-foreground: rgb(23, 23, 23);
-  --destructive: rgb(231, 0, 11);
+
+  /* Accent Colors - Uses palette for interactive highlights */
+  --accent: var(--color-lightest); /* EBF4DD */
+  --accent-foreground: var(--color-dark);
+
+  /* Destructive Colors */
+  --destructive: rgb(220, 38, 38);
   --destructive-foreground: rgb(255, 255, 255);
+
+  /* Border & Input - Neutral */
   --border: rgb(229, 229, 229);
   --input: rgb(229, 229, 229);
-  --ring: rgb(161, 161, 161);
-  --chart-1: rgb(145, 197, 255);
-  --chart-2: rgb(58, 129, 246);
-  --chart-3: rgb(37, 99, 239);
-  --chart-4: rgb(26, 78, 218);
-  --chart-5: rgb(31, 63, 173);
+  --ring: var(--color-medium); /* 4C763B - Focus ring uses palette */
+
+  /* Chart Colors - Uses palette */
+  --chart-1: var(--color-medium); /* 4C763B */
+  --chart-2: var(--color-light); /* B0CE88 */
+  --chart-3: var(--color-dark); /* 043915 */
+  --chart-4: var(--color-yellow); /* FFFD8F */
+  --chart-5: var(--color-lightest); /* EBF4DD */
+
+  /* Sidebar Colors - Neutral */
   --sidebar: rgb(250, 250, 250);
   --sidebar-foreground: rgb(10, 10, 10);
-  --sidebar-primary: rgb(23, 23, 23);
-  --sidebar-primary-foreground: rgb(250, 250, 250);
+  --sidebar-primary: var(
+    --color-medium
+  ); /* 4C763B - Active items use palette */
+  --sidebar-primary-foreground: rgb(255, 255, 255);
   --sidebar-accent: rgb(245, 245, 245);
   --sidebar-accent-foreground: rgb(23, 23, 23);
   --sidebar-border: rgb(229, 229, 229);
-  --sidebar-ring: rgb(161, 161, 161);
+  --sidebar-ring: var(--color-medium); /* 4C763B */
+
+  /* Typography */
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -82,6 +117,8 @@
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
+
+  /* Spacing & Radius */
   --radius: 0.625rem;
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -103,41 +140,97 @@
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+  /* Semantic Color Variables - For buttons/interactive elements */
+  --info: var(--color-medium); /* 4C763B */
+  --info-hover: var(--color-dark); /* 043915 */
+  --info-light: var(--color-lightest); /* EBF4DD */
+  --info-text: var(--color-dark); /* 043915 */
+
+  --success: var(--color-medium); /* 4C763B */
+  --success-hover: var(--color-dark); /* 043915 */
+  --success-light: var(--color-lightest); /* EBF4DD */
+  --success-text: var(--color-dark); /* 043915 */
+
+  --error: rgb(220, 38, 38);
+  --error-hover: rgb(185, 28, 28);
+  --error-light: rgba(220, 38, 38, 0.1);
+  --error-text: rgb(220, 38, 38);
+
+  --warning: var(--color-yellow); /* FFFD8F */
+  --warning-hover: rgb(234, 179, 8);
+  --warning-light: rgba(255, 253, 143, 0.2);
+  --warning-text: rgb(161, 98, 7);
+
+  --white: rgb(255, 255, 255);
+  --text-primary: rgb(10, 10, 10);
+  --text-secondary: rgb(115, 115, 115);
+  --border-outlined: var(--color-dark); /* 043915 - For outlined buttons */
 }
 
 .dark {
+  /* Theme Palette Colors - Keep for reference */
+  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
+  --color-light: rgb(176, 206, 136); /* B0CE88 */
+  --color-medium: rgb(76, 118, 59); /* 4C763B */
+  --color-dark: rgb(4, 57, 21); /* 043915 */
+  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
+
+  /* Core Theme Variables - Dark Mode - Black based */
   --background: rgb(10, 10, 10);
   --foreground: rgb(250, 250, 250);
   --card: rgb(23, 23, 23);
   --card-foreground: rgb(250, 250, 250);
   --popover: rgb(38, 38, 38);
   --popover-foreground: rgb(250, 250, 250);
-  --primary: rgb(229, 229, 229);
-  --primary-foreground: rgb(23, 23, 23);
+
+  /* Primary Colors - WHITE for buttons, switches, checkboxes, focus */
+  --primary: rgb(255, 255, 255);
+  --primary-foreground: rgb(10, 10, 10);
+  --primary-hover: rgb(229, 229, 229);
+  --primary-light: rgba(255, 255, 255, 0.1);
+  --primary-text: rgb(250, 250, 250);
+  --primary-text-light: rgb(10, 10, 10);
+
+  /* Secondary Colors - Neutral dark */
   --secondary: rgb(38, 38, 38);
   --secondary-foreground: rgb(250, 250, 250);
+
+  /* Muted Colors - Neutral dark */
   --muted: rgb(38, 38, 38);
   --muted-foreground: rgb(161, 161, 161);
-  --accent: rgb(64, 64, 64);
+
+  /* Accent Colors - Light for dark mode */
+  --accent: rgba(255, 255, 255, 0.1);
   --accent-foreground: rgb(250, 250, 250);
+
+  /* Destructive Colors */
   --destructive: rgb(255, 100, 103);
   --destructive-foreground: rgb(250, 250, 250);
+
+  /* Border & Input - Dark neutral */
   --border: rgb(40, 40, 40);
   --input: rgb(52, 52, 52);
-  --ring: rgb(115, 115, 115);
-  --chart-1: rgb(145, 197, 255);
-  --chart-2: rgb(58, 129, 246);
-  --chart-3: rgb(37, 99, 239);
-  --chart-4: rgb(26, 78, 218);
-  --chart-5: rgb(31, 63, 173);
+  --ring: rgb(255, 255, 255); /* White focus ring */
+
+  /* Chart Colors - Uses palette */
+  --chart-1: var(--color-light); /* B0CE88 */
+  --chart-2: var(--color-medium); /* 4C763B */
+  --chart-3: var(--color-lightest); /* EBF4DD */
+  --chart-4: var(--color-yellow); /* FFFD8F */
+  --chart-5: rgb(255, 255, 255);
+
+  /* Sidebar Colors - Dark */
   --sidebar: rgb(23, 23, 23);
   --sidebar-foreground: rgb(250, 250, 250);
-  --sidebar-primary: rgb(20, 71, 230);
-  --sidebar-primary-foreground: rgb(250, 250, 250);
+  --sidebar-primary: rgb(255, 255, 255);
+  --sidebar-primary-foreground: rgb(10, 10, 10);
   --sidebar-accent: rgb(38, 38, 38);
   --sidebar-accent-foreground: rgb(250, 250, 250);
   --sidebar-border: rgb(40, 40, 40);
-  --sidebar-ring: rgb(82, 82, 82);
+  --sidebar-ring: rgb(255, 255, 255);
+
+  /* Typography */
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -146,6 +239,8 @@
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
+
+  /* Spacing & Radius */
   --radius: 0.625rem;
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -165,13 +260,44 @@
   --shadow-xl:
     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+  /* Semantic Color Variables - White based for dark mode */
+  --info: rgb(255, 255, 255);
+  --info-hover: rgb(229, 229, 229);
+  --info-light: rgba(255, 255, 255, 0.1);
+  --info-text: rgb(250, 250, 250);
+
+  --success: rgb(255, 255, 255);
+  --success-hover: rgb(229, 229, 229);
+  --success-light: rgba(255, 255, 255, 0.1);
+  --success-text: rgb(250, 250, 250);
+
+  --error: rgb(248, 113, 113);
+  --error-hover: rgb(239, 68, 68);
+  --error-light: rgba(248, 113, 113, 0.15);
+  --error-text: rgb(248, 113, 113);
+
+  --warning: var(--color-yellow); /* FFFD8F */
+  --warning-hover: rgb(251, 191, 36);
+  --warning-light: rgba(255, 253, 143, 0.2);
+  --warning-text: var(--color-yellow);
+
+  --white: rgb(255, 255, 255);
+  --text-primary: rgb(250, 250, 250);
+  --text-secondary: rgb(161, 161, 161);
+  --border-outlined: rgb(255, 255, 255); /* White for outlined buttons */
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  H1 {
+    font-family: "IBM Plex Serif", serif;
   }
 }
