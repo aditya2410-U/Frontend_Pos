@@ -138,6 +138,7 @@
   --shadow-xl:
     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --card-shadow: rgba(0, 0, 0, 0.04) 0px 0px 0px 6px;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
@@ -260,6 +261,7 @@
   --shadow-xl:
     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --card-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 6px;
 
   /* Semantic Color Variables - White based for dark mode */
   --info: rgb(255, 255, 255);
