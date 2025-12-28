@@ -46,12 +46,18 @@ function Button({
       className={cn(styles.button, variantClass, sizeClass, className)}
       {...props}
     >
-      {icon && iconPosition === "left" && (
-        <span className="size-5 flex items-center justify-center">{icon}</span>
-      )}
-      {children}
-      {icon && iconPosition === "right" && (
-        <span className="size-5 flex items-center justify-center">{icon}</span>
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {icon && iconPosition === "left" && (
+            <span className="size-5 flex items-center justify-center">{icon}</span>
+          )}
+          {children}
+          {icon && iconPosition === "right" && (
+            <span className="size-5 flex items-center justify-center">{icon}</span>
+          )}
+        </>
       )}
     </Comp>
   );
