@@ -1,6 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 
-import { Button } from "./Button";
+import { Button } from "@/common/@atoms/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
