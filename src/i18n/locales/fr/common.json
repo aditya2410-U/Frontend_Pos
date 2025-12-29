@@ -61,14 +61,71 @@
     "loading": "Chargement",
     "pleaseWait": "Veuillez patienter..."
   },
-  "roles": {
-    "create": "Créer un rôle"
+  "common": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "creating": "Création...",
+    "updating": "Mise à jour...",
+    "loading": "Chargement..."
   },
-  "outlets": {
-    "create": "Créer un point de vente"
+  "forms": {
+    "fields": {
+      "name": "Nom",
+      "fullName": "Nom complet",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "role": "Rôle",
+      "outlet": "Point de vente",
+      "address": "Adresse",
+      "description": "Description",
+      "status": "Statut",
+      "activeStatus": "Statut actif",
+      "permissions": "Permissions"
+    },
+    "placeholders": {
+      "name": "Entrez le nom",
+      "fullName": "Jean Dupont",
+      "email": "jean@exemple.com",
+      "password": "••••••••",
+      "selectRole": "Sélectionner un rôle",
+      "selectOutlet": "Sélectionner un point de vente",
+      "address": "123 Rue du Marché",
+      "outletName": "Succursale principale",
+      "roleName": "ex. Gérant de magasin",
+      "description": "Décrivez ce que ce rôle peut faire..."
+    },
+    "labels": {
+      "optional": "(Optionnel)"
+    }
   },
   "users": {
+    "title": "Utilisateurs",
     "create": "Créer un utilisateur",
-    "edit": "Modifier l'utilisateur"
+    "createNew": "Créer un nouvel utilisateur",
+    "edit": "Modifier l'utilisateur",
+    "details": "Détails de l'utilisateur",
+    "createButton": "Créer l'utilisateur",
+    "updateButton": "Mettre à jour l'utilisateur",
+    "manageSubtitle": "Gérez les utilisateurs de votre magasin."
+  },
+  "roles": {
+    "title": "Rôles",
+    "create": "Créer un rôle",
+    "createNew": "Créer un nouveau rôle",
+    "details": "Détails du rôle",
+    "createButton": "Créer le rôle",
+    "manageSubtitle": "Gérez les rôles et les permissions des utilisateurs."
+  },
+  "outlets": {
+    "title": "Points de vente",
+    "create": "Créer un point de vente",
+    "createNew": "Créer un nouveau point de vente",
+    "details": "Détails du point de vente",
+    "createButton": "Créer le point de vente",
+    "manageSubtitle": "Gérez les points de vente de votre magasin."
   }
 }

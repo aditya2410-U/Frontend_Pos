@@ -1,21 +1,47 @@
 import { useRoles } from "@/api/queries/useRoles";
-import { Button } from "@/common/@atoms/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
+import { Button } from "@/common/@atoms/Button";
 import { Spinner } from "@/common/@atoms/spinner";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/common/@atoms/table";
+import { DataTable } from "@/common/DataTable";
+import type { ColDef, ICellRendererParams } from "ag-grid-community";
+import { useMemo } from "react";
+import type { Role } from "@/api/schemas/role";
+import { ROLE_COLUMNS } from "@/lib/tableColumns";
 
 export default function RoleList() {
   const { data: roles, isLoading, isError } = useRoles();
   const navigate = useNavigate();
+
+  const columnDefs = useMemo<ColDef<Role>[]>(
+    () => [
+      ...ROLE_COLUMNS,
+      {
+        headerName: "Permissions",
+        field: "permissions",
+        flex: 2,
+        filter: false,
+        cellRenderer: (params: ICellRendererParams<Role>) => {
+          const role = params.data;
+          if (!role?.permissions || role.permissions.length === 0) return null;
+          return (
+            <div className="flex flex-wrap gap-1 py-1">
+              {role.permissions.map((p) => (
+                <span
+                  key={p.permission.id}
+                  className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                >
+                  {p.permission.key}
+                </span>
+              ))}
+            </div>
+          );
+        },
+        autoHeight: true,
+      },
+    ],
+    []
+  );
 
   if (isLoading)
     return (
@@ -38,51 +64,14 @@ export default function RoleList() {
         </Button>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>All Roles</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>No.</TableHead>
-                <TableHead>Role Name</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Permissions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {roles?.map((role, index: number) => (
-                <TableRow key={role.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell className="font-medium">{role.name}</TableCell>
-                  <TableCell>{role.description || "-"}</TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap gap-1">
-                      {role?.permissions?.map((p) => (
-                        <span
-                          key={p.permission.id}
-                          className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                        >
-                          {p.permission.key}
-                        </span>
-                      ))}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-              {(!roles || roles.length === 0) && (
-                <TableRow>
-                  <TableCell colSpan={4} className="h-24 text-center">
-                    No roles found.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <DataTable<Role>
+        rowData={roles || []}
+        columnDefs={columnDefs}
+        height={400}
+        floatingFilter
+        noRowsOverlayText="No roles found."
+        getRowId={(params) => params.data.id}
+      />
     </div>
   );
 }

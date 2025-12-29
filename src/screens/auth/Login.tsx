@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Button } from "@/common/@atoms/button";
+import { useMemo } from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "@/common/@atoms/Button";
 import {
   Card,
   CardContent,
@@ -7,22 +8,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/common/@atoms/card";
-import { Input } from "@/common/@atoms/input";
-import { Label } from "@/common/@atoms/label";
 import { useLogin } from "@/api/queries/useAuth";
 import { Spinner } from "@/common/@atoms/spinner";
 import { StoreIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Form } from "@/common/@atoms/form";
+import { FormBuilder } from "@/common/FormBuilder";
+import type { FormFieldConfig } from "@/common/FormBuilder";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
   const { t } = useTranslation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { mutate: login, isPending } = useLogin();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    login({ email, password });
+  const form = useForm<LoginFormData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const fields: FormFieldConfig<LoginFormData>[] = useMemo(
+    () => [
+      {
+        name: "email",
+        type: "email",
+        label: t("auth.email"),
+        placeholder: t("auth.emailPlaceholder"),
+        validations: { required: true },
+      },
+      {
+        name: "password",
+        type: "text",
+        label: t("auth.password"),
+        validations: { required: true },
+      },
+    ],
+    [t]
+  );
+
+  const onSubmit = (data: LoginFormData) => {
+    login({ email: data.email, password: data.password });
   };
 
   return (
@@ -56,42 +86,28 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-5">
-              <div className="grid gap-2">
-                <Label htmlFor="email">{t("auth.email")}</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={t("auth.emailPlaceholder")}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="flex flex-col gap-5">
+                <FormBuilder
+                  fields={fields}
+                  control={form.control}
+                  getValues={form.getValues}
                 />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">{t("auth.password")}</Label>
 
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? (
+                    <>
+                      <Spinner className="mr-2 size-4" />
+                      {t("auth.signingIn")}
+                    </>
+                  ) : (
+                    t("auth.signIn")
+                  )}
+                </Button>
               </div>
-              <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? (
-                  <>
-                    <Spinner className="mr-2 size-4" />
-                    {t("auth.signingIn")}
-                  </>
-                ) : (
-                  t("auth.signIn")
-                )}
-              </Button>
-            </div>
-          </form>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </div>

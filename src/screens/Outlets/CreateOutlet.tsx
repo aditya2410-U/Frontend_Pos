@@ -1,23 +1,54 @@
-import { useState } from "react";
-import { Button } from "@/common/@atoms/button";
+import { useMemo } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Button } from "@/common/@atoms/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
-import { Input } from "@/common/@atoms/input";
-import { Label } from "@/common/@atoms/label";
 import { useCreateOutlet } from "@/api/queries/useOutlets";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/common/@atoms/spinner";
+import { Form } from "@/common/@atoms/form";
+import { FormBuilder } from "@/common/FormBuilder";
+import type { FormFieldConfig } from "@/common/FormBuilder";
+
+interface CreateOutletFormData {
+  name: string;
+  address: string;
+}
 
 export default function CreateOutlet() {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-
+  const { t } = useTranslation();
   const { mutate: createOutlet, isPending } = useCreateOutlet();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<CreateOutletFormData>({
+    defaultValues: {
+      name: "",
+      address: "",
+    },
+  });
+
+  const fields: FormFieldConfig<CreateOutletFormData>[] = useMemo(
+    () => [
+      {
+        name: "name",
+        type: "text",
+        label: t("forms.fields.name"),
+        placeholder: t("forms.placeholders.outletName"),
+        validations: { required: true },
+      },
+      {
+        name: "address",
+        type: "text",
+        label: t("forms.fields.address"),
+        placeholder: t("forms.placeholders.address"),
+      },
+    ],
+    [t]
+  );
+
+  const onSubmit = (data: CreateOutletFormData) => {
     createOutlet(
-      { name, address },
+      { name: data.name, address: data.address },
       {
         onSuccess: () => navigate("/outlets"),
       }
@@ -27,49 +58,38 @@ export default function CreateOutlet() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Create New Outlet</h1>
-        <Button variant="outline" onClick={() => navigate("/outlets")}>
-          Cancel
+        <h1 className="text-3xl font-bold tracking-tight">
+          {t("outlets.createNew")}
+        </h1>
+        <Button variant="outlined" onClick={() => navigate("/outlets")}>
+          {t("common.cancel")}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Outlet Details</CardTitle>
+          <CardTitle>{t("outlets.details")}</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-2">
-              <Label htmlFor="name">Outlet Name</Label>
-              <Input
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Main Branch"
-                required
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormBuilder
+                fields={fields}
+                control={form.control}
+                getValues={form.getValues}
               />
-            </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="123 Market St"
-              />
-            </div>
-
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? (
-                <>
-                  <Spinner className="mr-2 size-4" /> Creating...
-                </>
-              ) : (
-                "Create Outlet"
-              )}
-            </Button>
-          </form>
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? (
+                  <>
+                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
+                  </>
+                ) : (
+                  t("outlets.createButton")
+                )}
+              </Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </div>

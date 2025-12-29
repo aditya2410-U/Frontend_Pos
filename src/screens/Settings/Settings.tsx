@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "@/common/@atoms/button";
+import { Button } from "@/common/@atoms/Button";
 import { useTheme } from "@/common/@atoms/theme-provider";
 
 export default function Settings() {
@@ -31,25 +31,25 @@ export default function Settings() {
           </h2>
           <div className="flex gap-2 flex-wrap">
             <Button
-              variant={i18n.language === "en" ? "default" : "outline"}
+              variant={i18n.language === "en" ? "default" : "outlined"}
               onClick={() => changeLanguage("en")}
             >
               English
             </Button>
             <Button
-              variant={i18n.language === "fr" ? "default" : "outline"}
+              variant={i18n.language === "fr" ? "default" : "outlined"}
               onClick={() => changeLanguage("fr")}
             >
               Français
             </Button>
             <Button
-              variant={i18n.language === "es" ? "default" : "outline"}
+              variant={i18n.language === "es" ? "default" : "outlined"}
               onClick={() => changeLanguage("es")}
             >
               Español
             </Button>
             <Button
-              variant={i18n.language === "hi" ? "default" : "outline"}
+              variant={i18n.language === "hi" ? "default" : "outlined"}
               onClick={() => changeLanguage("hi")}
             >
               हिंदी
@@ -62,19 +62,19 @@ export default function Settings() {
           <h2 className="text-lg font-semibold">{t("settings.selectMode")}</h2>
           <div className="flex gap-2 flex-wrap">
             <Button
-              variant={theme === "light" ? "default" : "outline"}
+              variant={theme === "light" ? "default" : "outlined"}
               onClick={() => setTheme("light")}
             >
               {t("settings.modes.light")}
             </Button>
             <Button
-              variant={theme === "dark" ? "default" : "outline"}
+              variant={theme === "dark" ? "default" : "outlined"}
               onClick={() => setTheme("dark")}
             >
               {t("settings.modes.dark")}
             </Button>
             <Button
-              variant={theme === "system" ? "default" : "outline"}
+              variant={theme === "system" ? "default" : "outlined"}
               onClick={() => setTheme("system")}
             >
               {t("settings.modes.system")}
@@ -87,7 +87,7 @@ export default function Settings() {
           <h2 className="text-lg font-semibold">{t("settings.selectTheme")}</h2>
           <div className="flex gap-2 flex-wrap">
             <Button
-              variant={colorTheme === "theme-green" ? "default" : "outline"}
+              variant={colorTheme === "theme-green" ? "default" : "outlined"}
               onClick={() => setColorTheme("theme-green")}
               className={
                 colorTheme === "theme-green"
@@ -98,7 +98,7 @@ export default function Settings() {
               {t("settings.themes.green")}
             </Button>
             <Button
-              variant={colorTheme === "theme-blue" ? "default" : "outline"}
+              variant={colorTheme === "theme-blue" ? "default" : "outlined"}
               onClick={() => setColorTheme("theme-blue")}
               className={
                 colorTheme === "theme-blue"
@@ -109,7 +109,7 @@ export default function Settings() {
               {t("settings.themes.blue")}
             </Button>
             <Button
-              variant={colorTheme === "theme-rose" ? "default" : "outline"}
+              variant={colorTheme === "theme-rose" ? "default" : "outlined"}
               onClick={() => setColorTheme("theme-rose")}
               className={
                 colorTheme === "theme-rose"
@@ -120,7 +120,7 @@ export default function Settings() {
               {t("settings.themes.rose")}
             </Button>
             <Button
-              variant={colorTheme === "theme-orange" ? "default" : "outline"}
+              variant={colorTheme === "theme-orange" ? "default" : "outlined"}
               onClick={() => setColorTheme("theme-orange")}
               className={
                 colorTheme === "theme-orange"

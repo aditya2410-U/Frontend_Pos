@@ -29,7 +29,7 @@ const LoaderScreen = () => {
 
         {/* Center dot with glow */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="size-4 rounded-full bg-linear-to-r from-chart-1 to-chart-2 animate-pulse shadow-lg shadow-purple-500/50" />
+          <div className="size-4 rounded-full bg-linear-to-r from-chart-1 to-chart-2 animate-pulse loader-glow" />
         </div>
       </div>
 
@@ -87,6 +87,10 @@ const LoaderScreen = () => {
         }
         .animate-float {
           animation: float 4s ease-in-out infinite;
+        }
+        .loader-glow {
+          box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--chart-1) 50%, transparent), 
+                      0 4px 6px -4px color-mix(in srgb, var(--chart-2) 50%, transparent);
         }
       `}</style>
     </div>

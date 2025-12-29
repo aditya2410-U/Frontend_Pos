@@ -53,6 +53,15 @@
   --color-yellow: rgb(255, 253, 143); /* FFFD8F */
 
   /* Core Theme Variables - Neutral (white/black based) */
+  /* Theme Palette Colors - Light to Dark */
+  /* EBF4DD (lightest), B0CE88 (light), 4C763B (medium), 043915 (dark), FFFD8F (yellow) */
+  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
+  --color-light: rgb(176, 206, 136); /* B0CE88 */
+  --color-medium: rgb(76, 118, 59); /* 4C763B */
+  --color-dark: rgb(4, 57, 21); /* 043915 */
+  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
+
+  /* Core Theme Variables - Neutral (white/black based) */
   --background: rgb(255, 255, 255);
   --foreground: rgb(10, 10, 10);
   --card: rgb(255, 255, 255);
@@ -261,6 +270,33 @@
   --shadow-xl:
     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --card-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 6px;
+
+  /* Semantic Color Variables - White based for dark mode */
+  --info: rgb(255, 255, 255);
+  --info-hover: rgb(229, 229, 229);
+  --info-light: rgba(255, 255, 255, 0.1);
+  --info-text: rgb(250, 250, 250);
+
+  --success: rgb(255, 255, 255);
+  --success-hover: rgb(229, 229, 229);
+  --success-light: rgba(255, 255, 255, 0.1);
+  --success-text: rgb(250, 250, 250);
+
+  --error: rgb(248, 113, 113);
+  --error-hover: rgb(239, 68, 68);
+  --error-light: rgba(248, 113, 113, 0.15);
+  --error-text: rgb(248, 113, 113);
+
+  --warning: var(--color-yellow); /* FFFD8F */
+  --warning-hover: rgb(251, 191, 36);
+  --warning-light: rgba(255, 253, 143, 0.2);
+  --warning-text: var(--color-yellow);
+
+  --white: rgb(255, 255, 255);
+  --text-primary: rgb(250, 250, 250);
+  --text-secondary: rgb(161, 161, 161);
+  --border-outlined: rgb(255, 255, 255); /* White for outlined buttons */
   --card-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 6px;
 
   /* Semantic Color Variables - White based for dark mode */
