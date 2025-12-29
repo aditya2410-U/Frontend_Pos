@@ -38,4 +38,3 @@ export function PublicRoute({ children }: ProtectedRouteProps) {
 
   return <>{children}</>;
 }
-

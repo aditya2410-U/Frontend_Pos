@@ -10,10 +10,10 @@ export default function Products() {
 
       <div className="rounded-lg border bg-card p-6">
         <p className="text-muted-foreground">
-          Product management features will be implemented here. This is a mock page with placeholder content.
+          Product management features will be implemented here. This is a mock
+          page with placeholder content.
         </p>
       </div>
     </div>
   );
 }
-

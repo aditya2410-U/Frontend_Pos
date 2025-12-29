@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { HomeIcon, ArrowLeftIcon, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/common/@atoms/Button';
 
 export default function NotFound() {
   return (
@@ -35,7 +35,7 @@ export default function NotFound() {
             Go to Dashboard
           </Link>
         </Button>
-        <Button asChild variant="outline" onClick={() => window.history.back()}>
+        <Button asChild variant="outlined" onClick={() => window.history.back()}>
           <Link to="#" onClick={(e) => { e.preventDefault(); window.history.back(); }}>
             <ArrowLeftIcon className="mr-2 size-4" />
             Go Back
@@ -45,4 +45,3 @@ export default function NotFound() {
     </div>
   );
 }
-

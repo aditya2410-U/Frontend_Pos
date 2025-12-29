@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
-import { Provider } from '@/provider';
+import { Outlet } from "react-router-dom";
+import { Provider } from "@/provider";
 
 export default function RouterProviderWrapper() {
   return (
@@ -8,4 +8,3 @@ export default function RouterProviderWrapper() {
     </Provider>
   );
 }
-

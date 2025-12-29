@@ -5,8 +5,6 @@ import { Toaster } from 'sonner';
 import './App.css';
 
 function App() {
-  
-
   return (
     <AuthProvider>
       <RouterProvider router={AllRouter} />
@@ -15,4 +13,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

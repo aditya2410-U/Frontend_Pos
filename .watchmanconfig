@@ -1,0 +1,12 @@
+{
+  "ignore_dirs": [
+    "node_modules",
+    ".git",
+    "dist",
+    "build",
+    ".vite",
+    "coverage",
+    ".husky"
+  ]
+}
+

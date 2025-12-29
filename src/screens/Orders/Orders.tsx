@@ -10,10 +10,10 @@ export default function Orders() {
 
       <div className="rounded-lg border bg-card p-6">
         <p className="text-muted-foreground">
-          Order management features will be implemented here. This is a mock page with placeholder content.
+          Order management features will be implemented here. This is a mock
+          page with placeholder content.
         </p>
       </div>
     </div>
   );
 }
-

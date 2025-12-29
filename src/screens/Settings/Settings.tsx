@@ -10,10 +10,10 @@ export default function Settings() {
 
       <div className="rounded-lg border bg-card p-6">
         <p className="text-muted-foreground">
-          Settings configuration options will be implemented here. This is a mock page with placeholder content.
+          Settings configuration options will be implemented here. This is a
+          mock page with placeholder content.
         </p>
       </div>
     </div>
   );
 }
-

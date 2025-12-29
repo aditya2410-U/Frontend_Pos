@@ -85,4 +85,3 @@ const LoaderScreen = () => {
 };
 
 export default LoaderScreen;
-
