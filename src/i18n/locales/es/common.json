@@ -1,0 +1,59 @@
+{
+  "sidebar": {
+    "dashboard": "Panel de control",
+    "products": "Productos",
+    "orders": "Pedidos",
+    "userManagement": "Gestión de usuarios",
+    "roles": "Roles",
+    "outlets": "Puntos de venta",
+    "administration": "Administración",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "posSystem": "Sistema POS",
+    "adminPanel": "Panel de administración",
+    "logout": "Cerrar sesión"
+  },
+  "auth": {
+    "welcomeBack": "Bienvenido de nuevo",
+    "enterCredentials": "Ingrese sus credenciales para acceder a su cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "signIn": "Iniciar sesión",
+    "signingIn": "Iniciando sesión...",
+    "emailPlaceholder": "tu@ejemplo.com"
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "totalSales": "Ventas totales",
+    "activeUsers": "Usuarios activos",
+    "salesTrend": "+20.1% respecto al mes pasado",
+    "usersTrend": "+180.1% respecto al mes pasado"
+  },
+  "settings": {
+    "title": "Configuración",
+    "description": "Configure los ajustes de su sistema POS.",
+    "language": "Idioma",
+    "selectLanguage": "Seleccionar idioma",
+    "placeholder": "Las opciones de configuración se implementarán aquí. Esta es una página de prueba con contenido de marcador de posición."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "message": "Lo sentimos, no pudimos encontrar la página que busca. Es posible que se haya movido, eliminado o que haya escrito mal la URL.",
+    "goDashboard": "Ir al panel de control",
+    "goBack": "Regresar"
+  },
+  "loader": {
+    "loading": "Cargando",
+    "pleaseWait": "Por favor espere..."
+  },
+  "roles": {
+    "create": "Crear rol"
+  },
+  "outlets": {
+    "create": "Crear punto de venta"
+  },
+  "users": {
+    "create": "Crear usuario",
+    "edit": "Editar usuario"
+  }
+}

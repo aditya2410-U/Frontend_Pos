@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
-import { HomeIcon, ArrowLeftIcon, Search } from 'lucide-react';
-import { Button } from '@/common/@atoms/Button';
+import { Link } from "react-router-dom";
+import { HomeIcon, ArrowLeftIcon, Search } from "lucide-react";
+import { Button } from "@/common/@atoms/Button";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-4">
       {/* Animated 404 */}
@@ -13,7 +15,7 @@ export default function NotFound() {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex flex-col items-center gap-2">
             <div className="size-16 rounded-full bg-linear-to-br from-chart-1 to-chart-2 flex items-center justify-center shadow-lg animate-bounce">
-              <Search color="white"/>
+              <Search color="white" />
             </div>
           </div>
         </div>
@@ -21,9 +23,11 @@ export default function NotFound() {
 
       {/* Message */}
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold tracking-tight">Page Not Found</h2>
+        <h2 className="text-2xl font-bold tracking-tight">
+          {t("notFound.title")}
+        </h2>
         <p className="text-muted-foreground max-w-md">
-          Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or you may have mistyped the URL.
+          {t("notFound.message")}
         </p>
       </div>
 
@@ -32,13 +36,23 @@ export default function NotFound() {
         <Button asChild variant="default">
           <Link to="/dashboard">
             <HomeIcon className="mr-2 size-4" />
-            Go to Dashboard
+            {t("notFound.goDashboard")}
           </Link>
         </Button>
-        <Button asChild variant="outlined" onClick={() => window.history.back()}>
-          <Link to="#" onClick={(e) => { e.preventDefault(); window.history.back(); }}>
+        <Button
+          asChild
+          variant="outlined"
+          onClick={() => window.history.back()}
+        >
+          <Link
+            to="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.back();
+            }}
+          >
             <ArrowLeftIcon className="mr-2 size-4" />
-            Go Back
+            {t("notFound.goBack")}
           </Link>
         </Button>
       </div>

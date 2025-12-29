@@ -17,6 +17,7 @@ const MainLayout = lazy(() => import("@/components/Layout/DashboardLayout"));
 const Dashboard = lazy(() => import("@/screens/Dashboard/Dashboard"));
 const OutletList = lazy(() => import("@/screens/Outlets/OutletList"));
 const CreateOutlet = lazy(() => import("@/screens/Outlets/CreateOutlet"));
+const Settings = lazy(() => import("@/screens/Settings/Settings"));
 const NotFound = lazy(() => import("@/utils/NotFound"));
 
 // SuperAdmin imports removed
@@ -50,6 +51,9 @@ const RouteNames = {
   home: {
     path: "/",
   },
+  settings: {
+    path: "/settings",
+  },
 };
 
 const routes: RouteObject[] = [
@@ -81,7 +85,7 @@ const routes: RouteObject[] = [
       },
       {
         path: RouteNames.dashboard.path,
-        handle: { breadcrumb: "Dashboard" },
+        handle: { breadcrumb: "sidebar.dashboard" },
         element: (
           <Suspense fallback={<LoaderScreen />}>
             <Dashboard />
@@ -90,7 +94,7 @@ const routes: RouteObject[] = [
       },
       {
         path: RouteNames.roles.path,
-        handle: { breadcrumb: "Roles" },
+        handle: { breadcrumb: "sidebar.roles" },
         children: [
           {
             index: true,
@@ -102,7 +106,7 @@ const routes: RouteObject[] = [
           },
           {
             path: "new",
-            handle: { breadcrumb: "Create Role" },
+            handle: { breadcrumb: "roles.create" },
             element: (
               <Suspense fallback={<LoaderScreen />}>
                 <CreateRole />
@@ -113,7 +117,7 @@ const routes: RouteObject[] = [
       },
       {
         path: RouteNames.outlets.path,
-        handle: { breadcrumb: "Outlets" },
+        handle: { breadcrumb: "sidebar.outlets" },
         children: [
           {
             index: true,
@@ -125,7 +129,7 @@ const routes: RouteObject[] = [
           },
           {
             path: "new",
-            handle: { breadcrumb: "Create Outlet" },
+            handle: { breadcrumb: "outlets.create" },
             element: (
               <Suspense fallback={<LoaderScreen />}>
                 <CreateOutlet />
@@ -136,7 +140,7 @@ const routes: RouteObject[] = [
       },
       {
         path: RouteNames.users.path,
-        handle: { breadcrumb: "User Management" },
+        handle: { breadcrumb: "sidebar.userManagement" },
         children: [
           {
             index: true,
@@ -148,7 +152,7 @@ const routes: RouteObject[] = [
           },
           {
             path: "new",
-            handle: { breadcrumb: "Create User" },
+            handle: { breadcrumb: "users.create" },
             element: (
               <Suspense fallback={<LoaderScreen />}>
                 <CreateUser />
@@ -157,7 +161,7 @@ const routes: RouteObject[] = [
           },
           {
             path: ":id/edit",
-            handle: { breadcrumb: "Edit User" },
+            handle: { breadcrumb: "users.edit" },
             element: (
               <Suspense fallback={<LoaderScreen />}>
                 <EditUser />
@@ -165,6 +169,15 @@ const routes: RouteObject[] = [
             ),
           },
         ],
+      },
+      {
+        path: RouteNames.settings.path,
+        handle: { breadcrumb: "sidebar.settings" },
+        element: (
+          <Suspense fallback={<LoaderScreen />}>
+            <Settings />
+          </Suspense>
+        ),
       },
       // Catch all for 404 inside authenticated area
       {
