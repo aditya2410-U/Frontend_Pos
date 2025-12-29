@@ -5,135 +5,78 @@ import {
   type ColorTheme,
 } from "@/common/@atoms/theme-provider";
 import { cn } from "@/lib/utils";
-import { Sun, Moon, Monitor, Check } from "lucide-react";
+import { Check } from "lucide-react";
+import {
+  LightThemePreview,
+  DarkThemePreview,
+  SystemThemePreviewLight,
+  SystemThemePreviewDark,
+  THEME_COLORS,
+} from "@/assets/theme-previews";
 
-// Theme preview component - Attio style
+// Theme preview component - Exact Attio style
 interface ThemePreviewProps {
   mode: Theme;
   isSelected: boolean;
   onClick: () => void;
   label: string;
+  accentColor: string;
 }
 
-function ThemePreview({ mode, isSelected, onClick, label }: ThemePreviewProps) {
-  const isDark = mode === "dark";
-  const isSystem = mode === "system";
-
+function ThemePreview({
+  mode,
+  isSelected,
+  onClick,
+  label,
+  accentColor,
+}: ThemePreviewProps) {
   return (
     <button
       onClick={onClick}
       className={cn(
-        "group relative flex flex-col items-center gap-3 rounded-xl border-2 p-4 transition-all duration-200 cursor-pointer",
+        // Outer container - theme-aware styles
+        "flex gap-1 p-1 rounded-md cursor-pointer transition-colors",
+        "bg-card",
+        "border",
         isSelected
-          ? "border-primary bg-accent/50"
-          : "border-border hover:border-muted-foreground/30 hover:bg-muted/30"
+          ? "border-primary"
+          : "border-border hover:border-muted-foreground/40"
       )}
     >
-      {/* Preview Card */}
-      <div
-        className={cn(
-          "relative w-full aspect-[16/10] rounded-lg overflow-hidden border shadow-sm",
-          isDark
-            ? "bg-[#0f172a]"
-            : isSystem
-              ? "bg-gradient-to-r from-white to-[#0f172a]"
-              : "bg-white"
-        )}
-      >
-        {/* Sidebar Preview */}
+      {/* Inner wrapper - column layout */}
+      <div className="flex flex-col items-center justify-start gap-1">
+        {/* SVG container - theme-aware styles */}
         <div
           className={cn(
-            "absolute left-0 top-0 bottom-0 w-[28%] border-r",
-            isDark
-              ? "bg-[#1e293b] border-[#334155]"
-              : isSystem
-                ? "bg-gradient-to-b from-[#fafbfc] to-[#1e293b]"
-                : "bg-[#fafbfc] border-[#e5e7eb]"
+            "flex flex-row items-center justify-start gap-[1px] rounded-md overflow-hidden",
+            "bg-muted",
+            "border border-border"
           )}
         >
-          {/* Logo area */}
-          <div className="p-2">
-            <div
-              className={cn(
-                "w-4 h-4 rounded-md",
-                isDark ? "bg-[#3b82f6]" : "bg-primary"
-              )}
-            />
-          </div>
-          {/* Sidebar items */}
-          <div className="px-2 space-y-1">
-            {[...Array(5)].map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-2 rounded",
-                  isDark ? "bg-[#334155]" : "bg-[#e5e7eb]",
-                  i === 1 && (isDark ? "bg-[#3b82f6]" : "bg-primary")
-                )}
-                style={{ width: `${60 + Math.random() * 30}%` }}
-              />
-            ))}
-          </div>
+          {mode === "light" && <LightThemePreview accentColor={accentColor} />}
+          {mode === "dark" && <DarkThemePreview accentColor={accentColor} />}
+          {mode === "system" && (
+            <>
+              <SystemThemePreviewLight accentColor={accentColor} />
+              <SystemThemePreviewDark accentColor={accentColor} />
+            </>
+          )}
         </div>
 
-        {/* Main Content Preview */}
-        <div className="absolute left-[28%] right-0 top-0 bottom-0 p-3">
-          {/* Header */}
-          <div
+        {/* Label container - exact Attio styles */}
+        <div className="flex flex-row items-center justify-center gap-2 py-1">
+          {isSelected && (
+            <Check className="size-3.5 text-primary" strokeWidth={2.5} />
+          )}
+          <span
             className={cn(
-              "h-2 w-1/3 rounded mb-3",
-              isDark ? "bg-[#334155]" : "bg-[#e5e7eb]"
+              "text-sm font-medium",
+              isSelected ? "text-foreground" : "text-muted-foreground"
             )}
-          />
-          {/* Content blocks */}
-          <div className="space-y-1.5">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-1.5 rounded",
-                  isDark ? "bg-[#334155]" : "bg-[#e5e7eb]"
-                )}
-                style={{ width: `${70 + Math.random() * 30}%` }}
-              />
-            ))}
-          </div>
-          {/* Cards */}
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {[...Array(2)].map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-6 rounded",
-                  isDark
-                    ? "bg-[#1e293b] border border-[#334155]"
-                    : "bg-white border border-[#e5e7eb]"
-                )}
-              />
-            ))}
-          </div>
+          >
+            {label}
+          </span>
         </div>
-
-        {/* Selection Check */}
-        {isSelected && (
-          <div className="absolute top-2 right-2 size-5 rounded-full bg-primary flex items-center justify-center shadow-sm">
-            <Check className="size-3 text-primary-foreground" strokeWidth={3} />
-          </div>
-        )}
-      </div>
-
-      {/* Label with Icon */}
-      <div className="flex items-center gap-2 text-sm font-medium">
-        {mode === "light" && <Sun className="size-4 text-muted-foreground" />}
-        {mode === "dark" && <Moon className="size-4 text-muted-foreground" />}
-        {mode === "system" && (
-          <Monitor className="size-4 text-muted-foreground" />
-        )}
-        <span
-          className={isSelected ? "text-foreground" : "text-muted-foreground"}
-        >
-          {label}
-        </span>
       </div>
     </button>
   );
@@ -189,10 +132,11 @@ function LanguageOption({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all duration-200 text-left",
+        "flex items-center gap-3 px-4 py-3 rounded-md border transition-all duration-200 text-left",
+        "bg-card",
         isSelected
-          ? "border-primary bg-accent/50"
-          : "border-border hover:border-muted-foreground/30 hover:bg-muted/30"
+          ? "border-primary"
+          : "border-border hover:border-muted-foreground/40"
       )}
     >
       <span className="text-2xl">{flag}</span>
@@ -214,6 +158,10 @@ function LanguageOption({
 export default function Settings() {
   const { t, i18n } = useTranslation();
   const { theme, setTheme, colorTheme, setColorTheme } = useTheme();
+
+  // Get the current accent color based on selected color theme
+  const currentAccentColor =
+    THEME_COLORS[colorTheme] || THEME_COLORS["theme-orange"];
 
   const colorOptions: { theme: ColorTheme; color: string }[] = [
     { theme: "theme-teal", color: "#14b8a6" },
@@ -255,24 +203,27 @@ export default function Settings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 max-w-2xl">
+        <div className="flex flex-wrap gap-4">
           <ThemePreview
             mode="light"
             isSelected={theme === "light"}
             onClick={() => setTheme("light")}
             label={t("settings.modes.light")}
+            accentColor={currentAccentColor}
           />
           <ThemePreview
             mode="dark"
             isSelected={theme === "dark"}
             onClick={() => setTheme("dark")}
             label={t("settings.modes.dark")}
+            accentColor={currentAccentColor}
           />
           <ThemePreview
             mode="system"
             isSelected={theme === "system"}
             onClick={() => setTheme("system")}
             label={t("settings.modes.system")}
+            accentColor={currentAccentColor}
           />
         </div>
       </section>
@@ -312,7 +263,7 @@ export default function Settings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {languageOptions.map((lang) => (
             <LanguageOption
               key={lang.code}
