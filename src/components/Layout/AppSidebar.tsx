@@ -6,6 +6,7 @@ import {
   LogOut,
   SettingsIcon,
   UsersIcon,
+  ShieldIcon,
 } from "lucide-react";
 
 import {
@@ -21,9 +22,9 @@ import {
   SidebarFooter,
 } from "@/common/@atoms/sidebar";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Button } from "@/common/@atoms/Button";
 import { useLogout } from "@/api/queries/useAuth";
 import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/utils";
 
 export function AppSidebar() {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
+  const mainMenuItems = [
     {
       title: t("sidebar.dashboard"),
       icon: LayoutDashboardIcon,
@@ -47,6 +48,9 @@ export function AppSidebar() {
       icon: ShoppingCartIcon,
       url: "/orders",
     },
+  ];
+
+  const managementItems = [
     {
       title: t("sidebar.userManagement"),
       icon: UsersIcon,
@@ -54,18 +58,13 @@ export function AppSidebar() {
     },
     {
       title: t("sidebar.roles"),
-      icon: SettingsIcon,
+      icon: ShieldIcon,
       url: "/roles",
     },
     {
       title: t("sidebar.outlets"),
       icon: StoreIcon,
       url: "/outlets",
-    },
-    {
-      title: t("sidebar.settings"),
-      icon: SettingsIcon,
-      url: "/settings",
     },
   ];
 
@@ -81,18 +80,47 @@ export function AppSidebar() {
     return location.pathname.startsWith(url);
   };
 
+  const MenuItemComponent = ({ item }: { item: (typeof mainMenuItems)[0] }) => {
+    const active = isActive(item.url);
+    return (
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          asChild
+          tooltip={item.title}
+          isActive={active}
+          className={cn(
+            "h-9 rounded-lg transition-all duration-150",
+            active
+              ? "bg-primary text-primary-foreground font-medium shadow-sm"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted"
+          )}
+        >
+          <Link to={item.url}>
+            <item.icon className="size-4" />
+            <span>{item.title}</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
+
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
+    <Sidebar collapsible="icon" className="border-r border-border/60">
+      {/* Logo Header */}
+      <SidebarHeader className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link to="/">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <StoreIcon className="size-4" />
+            <SidebarMenuButton
+              size="lg"
+              asChild
+              className="h-10 hover:bg-transparent"
+            >
+              <Link to="/" className="flex items-center gap-3">
+                <div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+                  <StoreIcon className="size-5" />
                 </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">
+                <div className="grid flex-1 text-left leading-tight">
+                  <span className="truncate text-sm font-semibold text-foreground">
                     {t("sidebar.posSystem")}
                   </span>
                   <span className="truncate text-xs text-muted-foreground">
@@ -105,53 +133,65 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="px-3">
+        {/* Main Navigation */}
         <SidebarGroup>
-          <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton
-                    asChild
-                    tooltip={item.title}
-                    isActive={isActive(item.url)}
-                    className={
-                      isActive(item.url)
-                        ? "bg-foreground text-background hover:bg-foreground/90 hover:text-background data-[active=true]:bg-primary data-[active=true]:text-background"
-                        : ""
-                    }
-                  >
-                    <Link to={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+            <SidebarMenu className="gap-1">
+              {mainMenuItems.map((item) => (
+                <MenuItemComponent key={item.url} item={item} />
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Management Section */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-medium text-muted-foreground/70 uppercase tracking-wider px-2 mb-1">
+            {t("sidebar.administration")}
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu className="gap-1">
+              {managementItems.map((item) => (
+                <MenuItemComponent key={item.url} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t">
-        <SidebarMenu>
+      {/* Footer with Settings & Logout */}
+      <SidebarFooter className="p-3 border-t border-border/60">
+        <SidebarMenu className="gap-1">
+          {/* Settings */}
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              tooltip={t("sidebar.logout")}
-              className="group-data-[collapsible=icon]:justify-center"
+              tooltip={t("sidebar.settings")}
+              isActive={isActive("/settings")}
+              className={cn(
+                "h-9 rounded-lg transition-all duration-150",
+                isActive("/settings")
+                  ? "bg-primary text-primary-foreground font-medium shadow-sm"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+              )}
             >
-              <Button
-                variant="outlined"
-                className="w-full justify-start group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 hover:bg-red-600 hover:text-white"
-                onClick={handleLogout}
-              >
-                <LogOut className="h-4 w-4" />
-                <span className="group-data-[collapsible=icon]:hidden">
-                  {t("sidebar.logout")}
-                </span>
-              </Button>
+              <Link to="/settings">
+                <SettingsIcon className="size-4" />
+                <span>{t("sidebar.settings")}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          {/* Logout */}
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              tooltip={t("sidebar.logout")}
+              onClick={handleLogout}
+              className="h-9 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-150"
+            >
+              <LogOut className="size-4" />
+              <span>{t("sidebar.logout")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

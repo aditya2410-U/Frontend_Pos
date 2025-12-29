@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { Label } from "@/common/@atoms/label";
 import { useCreateRole } from "@/api/queries/useRoles";
 import { usePermissions } from "@/api/queries/usePermissions";
@@ -12,6 +11,7 @@ import { Checkbox } from "@/common/@atoms/checkbox";
 import { Form } from "@/common/@atoms/form";
 import { FormBuilder } from "@/common/FormBuilder";
 import type { FormFieldConfig } from "@/common/FormBuilder";
+import { ArrowLeft } from "lucide-react";
 
 interface CreateRoleFormData {
   name: string;
@@ -72,81 +72,97 @@ export default function CreateRole() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">
+    <div className="max-w-xl">
+      {/* Back button */}
+      <button
+        onClick={() => navigate("/roles")}
+        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+      >
+        <ArrowLeft className="size-4" />
+        Back to roles
+      </button>
+
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-semibold tracking-tight">
           {t("roles.createNew")}
         </h1>
-        <Button variant="outlined" onClick={() => navigate("/roles")}>
-          {t("common.cancel")}
-        </Button>
+        <p className="text-sm text-muted-foreground mt-1">
+          Create a new role with specific permissions.
+        </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("roles.details")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormBuilder
-                fields={fields}
-                control={form.control}
-                getValues={form.getValues}
-              />
+      {/* Form Card */}
+      <div className="bg-card border border-border/60 rounded-xl p-6">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormBuilder
+              fields={fields}
+              control={form.control}
+              getValues={form.getValues}
+            />
 
-              <div className="grid gap-4">
-                <Label>{t("forms.fields.permissions")}</Label>
-                {isLoadingPermissions ? (
-                  <div className="flex justify-center p-4">
-                    <Spinner />
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border p-4 rounded-md">
-                    {permissions?.map((perm) => (
-                      <div
-                        key={perm.key}
-                        className="flex items-center space-x-2"
-                      >
-                        <Checkbox
-                          id={perm.key}
-                          checked={selectedPermissions.includes(perm.key)}
-                          onCheckedChange={() =>
-                            handlePermissionChange(perm.key)
-                          }
-                        />
-                        <div className="grid gap-1.5 leading-none">
-                          <label
-                            htmlFor={perm.key}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            {perm.key}
-                          </label>
-                          {perm.description && (
-                            <p className="text-xs text-muted-foreground">
-                              {perm.description}
-                            </p>
-                          )}
-                        </div>
+            {/* Permissions Section */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">
+                {t("forms.fields.permissions")}
+              </Label>
+              {isLoadingPermissions ? (
+                <div className="flex justify-center p-6">
+                  <Spinner />
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-2 p-4 bg-muted/30 rounded-lg border border-border/60">
+                  {permissions?.map((perm) => (
+                    <label
+                      key={perm.key}
+                      className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors"
+                    >
+                      <Checkbox
+                        id={perm.key}
+                        checked={selectedPermissions.includes(perm.key)}
+                        onCheckedChange={() => handlePermissionChange(perm.key)}
+                        className="mt-0.5"
+                      />
+                      <div className="flex-1">
+                        <span className="text-sm font-medium text-foreground">
+                          {perm.key}
+                        </span>
+                        {perm.description && (
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {perm.description}
+                          </p>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
 
-              <Button type="submit" className="w-full" disabled={isPending}>
+            <div className="flex items-center gap-3 pt-2">
+              <Button
+                type="button"
+                variant="outlined"
+                onClick={() => navigate("/roles")}
+                className="flex-1"
+              >
+                {t("common.cancel")}
+              </Button>
+              <Button type="submit" className="flex-1" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
+                    <Spinner className="size-4" />
+                    {t("common.creating")}
                   </>
                 ) : (
                   t("roles.createButton")
                 )}
               </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+            </div>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }

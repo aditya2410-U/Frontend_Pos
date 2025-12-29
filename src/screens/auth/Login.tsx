@@ -1,13 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/common/@atoms/Button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/common/@atoms/card";
 import { useLogin } from "@/api/queries/useAuth";
 import { Spinner } from "@/common/@atoms/spinner";
 import { StoreIcon } from "lucide-react";
@@ -45,6 +38,7 @@ export default function Login() {
         name: "password",
         type: "text",
         label: t("auth.password"),
+        placeholder: "••••••••",
         validations: { required: true },
       },
     ],
@@ -56,60 +50,81 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 size-80 rounded-full bg-chart-3/20  blur-3xl animate-pulse" />
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      {/* Subtle background gradient - Attio style */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute -bottom-40 -left-40 size-80 rounded-full bg-chart-2/20 blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
+          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, var(--primary) 0%, transparent 70%)",
+          }}
         />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-96 rounded-full bg-chart-4/20 blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, var(--chart-4) 0%, transparent 70%)",
+          }}
         />
       </div>
 
-      {/* Login Card with glassmorphism */}
-      <Card className="w-full max-w-md relative backdrop-blur-xl shadow-2xl">
-        <CardHeader className="space-y-1">
-          <div className="flex items-center justify-center mb-4">
-            <div className="size-12 rounded-xl bg-linear-to-br from-chart-1 to-chart-2 flex items-center justify-center shadow-lg">
-              <StoreIcon color="white" />
+      {/* Login Container */}
+      <div className="relative w-full max-w-[400px] mx-4">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <div className="flex items-center gap-3">
+            <div className="size-10 rounded-xl bg-primary flex items-center justify-center shadow-lg">
+              <StoreIcon className="size-5 text-primary-foreground" />
             </div>
+            <span className="text-xl font-semibold text-foreground">
+              {t("sidebar.posSystem")}
+            </span>
           </div>
-          <CardTitle className="text-2xl font-bold text-center">
-            {t("auth.welcomeBack")}
-          </CardTitle>
-          <CardDescription className="text-center">
-            {t("auth.enterCredentials")}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="flex flex-col gap-5">
-                <FormBuilder
-                  fields={fields}
-                  control={form.control}
-                  getValues={form.getValues}
-                />
+        </div>
 
-                <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? (
-                    <>
-                      <Spinner className="mr-2 size-4" />
-                      {t("auth.signingIn")}
-                    </>
-                  ) : (
-                    t("auth.signIn")
-                  )}
-                </Button>
-              </div>
+        {/* Login Card */}
+        <div className="bg-card border border-border/60 rounded-2xl shadow-xl p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-semibold text-foreground mb-2">
+              {t("auth.welcomeBack")}
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {t("auth.enterCredentials")}
+            </p>
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormBuilder
+                fields={fields}
+                control={form.control}
+                getValues={form.getValues}
+              />
+
+              <Button
+                type="submit"
+                className="w-full h-11 text-sm font-medium"
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <>
+                    <Spinner className="mr-2 size-4" />
+                    {t("auth.signingIn")}
+                  </>
+                ) : (
+                  t("auth.signIn")
+                )}
+              </Button>
             </form>
           </Form>
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-muted-foreground mt-6">
+          By continuing, you agree to our Terms of Service and Privacy Policy.
+        </p>
+      </div>
     </div>
   );
 }

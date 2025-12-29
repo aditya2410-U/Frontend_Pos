@@ -1,3 +1,8 @@
+/* ============================================
+   ATTIO-STYLE BUTTON SYSTEM
+   Clean, minimal, professional design
+   ============================================ */
+
 /* Base button styles */
 .button {
   display: inline-flex;
@@ -6,12 +11,13 @@
   gap: 0.5rem;
   white-space: nowrap;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
   outline: none;
   cursor: pointer;
-  border-radius: 12px;
-  font-size: 0.875rem;
+  border-radius: 8px;
+  font-size: 14px;
   line-height: 1.25rem;
+  font-family: var(--font-sans);
 }
 
 .button:disabled {
@@ -20,251 +26,211 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  ring: 2px;
-  ring-offset: 2px;
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--ring);
 }
 
-/* Sizes */
+/* Sizes - Attio uses compact, consistent sizing */
 .size-sm {
-  height: 2.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.8125rem;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  border-radius: 6px;
 }
 
 .size-md,
 .size-default {
-  height: 2.5rem;
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 14px;
 }
 
 .size-lg {
-  height: 2.75rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9375rem;
+  height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
 }
 
 .size-xl {
-  height: 3.25rem;
-  padding: 0.875rem 2rem;
-  font-size: 1rem;
+  height: 44px;
+  padding: 0 22px;
+  font-size: 15px;
 }
 
 .size-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 36px;
+  height: 36px;
   padding: 0;
 }
 
 .size-icon-xs {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 28px;
+  height: 28px;
   padding: 0;
+  border-radius: 6px;
 }
 
 .size-icon-sm {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   padding: 0;
+  border-radius: 6px;
 }
 
 .size-icon-lg {
-  width: 3rem;
-  height: 3rem;
+  width: 40px;
+  height: 40px;
   padding: 0;
 }
 
-/* Variant: Default (Filled) - Premium style with double border and inset shadows */
-/* Theme-aware: Adapts to all color themes (green, blue, rose, orange) */
+/* ============================================
+   Variant: Default (Filled)
+   Attio-style solid button with subtle shadow
+   ============================================ */
 .variant-default {
   background-color: var(--primary);
   color: var(--primary-foreground);
-  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
-    rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
-      0.278667px -0.1875px inset,
-    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
-      0.845077px -0.375px inset,
-    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
-      2.23393px -0.5625px inset,
-    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
-      7px -0.75px inset;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .variant-default:hover {
   background-color: var(--primary-hover);
-  color: var(--primary-foreground);
-  border-color: color-mix(in srgb, var(--color-lightest) 60%, transparent);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.variant-default:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* Error type */
 .variant-default[data-type="error"] {
-  background-color: rgb(220, 38, 38);
-  color: rgb(255, 255, 255);
-  border: 2px double rgba(248, 113, 113, 0.6);
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
-    rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    rgba(127, 29, 29, 0.08) 0px -0.557334px 0.278667px -0.1875px inset,
-    rgba(127, 29, 29, 0.1) 0px -1.69015px 0.845077px -0.375px inset,
-    rgba(127, 29, 29, 0.165) 0px -4.46786px 2.23393px -0.5625px inset,
-    rgba(127, 29, 29, 0.373) 0px -14px 7px -0.75px inset;
+  background-color: var(--error);
+  color: #ffffff;
 }
 
 .variant-default[data-type="error"]:hover {
-  background-color: rgb(185, 28, 28);
-  color: rgb(255, 255, 255);
+  background-color: var(--error-hover);
 }
 
+/* Info type */
 .variant-default[data-type="info"] {
   background-color: var(--info);
   color: var(--primary-foreground);
-  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
-    rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
-      0.278667px -0.1875px inset,
-    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
-      0.845077px -0.375px inset,
-    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
-      2.23393px -0.5625px inset,
-    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
-      7px -0.75px inset;
 }
 
 .variant-default[data-type="info"]:hover {
   background-color: var(--info-hover);
-  color: var(--primary-foreground);
 }
 
+/* Success type */
 .variant-default[data-type="success"] {
   background-color: var(--success);
-  color: var(--primary-foreground);
-  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
-    rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
-      0.278667px -0.1875px inset,
-    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
-      0.845077px -0.375px inset,
-    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
-      2.23393px -0.5625px inset,
-    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
-      7px -0.75px inset;
+  color: #ffffff;
 }
 
 .variant-default[data-type="success"]:hover {
   background-color: var(--success-hover);
-  color: var(--primary-foreground);
 }
 
+/* Warning type */
 .variant-default[data-type="warning"] {
-  background-color: rgb(255, 253, 143); /* FFFD8F */
-  color: rgb(161, 98, 7);
-  border: 2px double rgba(234, 179, 8, 0.6);
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
-    rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    rgba(161, 98, 7, 0.08) 0px -0.557334px 0.278667px -0.1875px inset,
-    rgba(161, 98, 7, 0.1) 0px -1.69015px 0.845077px -0.375px inset,
-    rgba(161, 98, 7, 0.165) 0px -4.46786px 2.23393px -0.5625px inset,
-    rgba(161, 98, 7, 0.373) 0px -14px 7px -0.75px inset;
+  background-color: var(--warning);
+  color: var(--warning-text);
 }
 
 .variant-default[data-type="warning"]:hover {
-  background-color: rgb(234, 179, 8);
-  color: rgb(161, 98, 7);
+  background-color: var(--warning-hover);
 }
 
-/* Variant: Outlined */
-/* Theme-aware: Adapts to all color themes */
+/* ============================================
+   Variant: Outlined
+   Attio-style ghost button with border
+   ============================================ */
 .variant-outlined {
   background-color: transparent;
-  border: 2px double color-mix(in srgb, var(--primary) 60%, transparent);
-  color: var(--primary);
-  box-shadow:
-    rgba(0, 0, 0, 0.05) 0px 0.602187px 0.602187px -1.25px,
-    rgba(0, 0, 0, 0.04) 0px 2.28853px 2.28853px -2.5px;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .variant-outlined:hover {
-  background-color: var(--color-lightest);
-  border-color: color-mix(in srgb, var(--primary-hover) 60%, transparent);
-  color: var(--primary-hover);
+  background-color: var(--muted);
+  border-color: var(--muted-foreground);
 }
 
+.variant-outlined:active {
+  transform: translateY(1px);
+}
+
+/* Error type */
 .variant-outlined[data-type="error"] {
-  border: 2px double rgba(220, 38, 38, 0.6);
-  color: rgb(220, 38, 38);
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .variant-outlined[data-type="error"]:hover {
-  background-color: rgb(220, 38, 38);
-  border-color: rgba(220, 38, 38, 0.6);
-  color: rgb(255, 255, 255);
+  background-color: var(--error-light);
+  border-color: var(--error-hover);
 }
 
+/* Info type */
 .variant-outlined[data-type="info"] {
-  border: 2px double color-mix(in srgb, var(--info) 60%, transparent);
+  border-color: var(--info);
   color: var(--info);
 }
 
 .variant-outlined[data-type="info"]:hover {
-  background-color: var(--info);
-  border-color: color-mix(in srgb, var(--color-light) 60%, transparent);
-  color: var(--primary-foreground);
+  background-color: var(--info-light);
+  border-color: var(--info-hover);
 }
 
+/* Success type */
 .variant-outlined[data-type="success"] {
-  border: 2px double color-mix(in srgb, var(--success) 60%, transparent);
+  border-color: var(--success);
   color: var(--success);
 }
 
 .variant-outlined[data-type="success"]:hover {
-  background-color: var(--success);
-  border-color: color-mix(in srgb, var(--color-light) 60%, transparent);
-  color: var(--primary-foreground);
+  background-color: var(--success-light);
+  border-color: var(--success-hover);
 }
 
+/* Warning type */
 .variant-outlined[data-type="warning"] {
-  border: 2px double rgba(234, 179, 8, 0.6);
-  color: rgb(161, 98, 7);
+  border-color: var(--warning);
+  color: var(--warning-text);
 }
 
 .variant-outlined[data-type="warning"]:hover {
-  background-color: rgb(255, 253, 143);
-  border-color: rgba(234, 179, 8, 0.6);
-  color: rgb(161, 98, 7);
+  background-color: var(--warning-light);
+  border-color: var(--warning-hover);
 }
 
-/* Variant: Text */
-/* Theme-aware: Adapts to all color themes */
+/* ============================================
+   Variant: Text (Ghost)
+   Attio-style minimal text button
+   ============================================ */
 .variant-text {
   background-color: transparent;
   border: none;
-  color: var(--primary);
+  color: var(--muted-foreground);
 }
 
 .variant-text:hover {
-  background-color: var(--color-lightest);
+  background-color: var(--muted);
+  color: var(--foreground);
 }
 
 .variant-text[data-type="error"] {
-  color: rgb(220, 38, 38);
+  color: var(--error);
 }
 
 .variant-text[data-type="error"]:hover {
-  background-color: rgba(220, 38, 38, 0.1);
+  background-color: var(--error-light);
 }
 
 .variant-text[data-type="info"] {
@@ -284,37 +250,36 @@
 }
 
 .variant-text[data-type="warning"] {
-  color: rgb(161, 98, 7);
+  color: var(--warning-text);
 }
 
 .variant-text[data-type="warning"]:hover {
-  background-color: rgba(255, 253, 143, 0.2);
+  background-color: var(--warning-light);
 }
 
-/* Variant: Dashed */
-/* Theme-aware: Adapts to all color themes */
+/* ============================================
+   Variant: Dashed
+   Attio-style dashed border button
+   ============================================ */
 .variant-dashed {
   background-color: transparent;
-  border-width: 2px;
-  border-style: dashed;
-  border-color: var(--primary);
-  color: var(--primary);
+  border: 1px dashed var(--border);
+  color: var(--muted-foreground);
 }
 
 .variant-dashed:hover {
-  background-color: var(--color-lightest);
-  border-color: var(--primary-hover);
-  color: var(--primary-hover);
+  background-color: var(--muted);
+  border-color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .variant-dashed[data-type="error"] {
-  border-color: rgb(220, 38, 38);
-  color: rgb(220, 38, 38);
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .variant-dashed[data-type="error"]:hover {
-  background-color: rgba(220, 38, 38, 0.1);
-  border-color: rgb(185, 28, 28);
+  background-color: var(--error-light);
 }
 
 .variant-dashed[data-type="info"] {
@@ -324,7 +289,6 @@
 
 .variant-dashed[data-type="info"]:hover {
   background-color: var(--info-light);
-  border-color: var(--info-hover);
 }
 
 .variant-dashed[data-type="success"] {
@@ -334,15 +298,13 @@
 
 .variant-dashed[data-type="success"]:hover {
   background-color: var(--success-light);
-  border-color: var(--success-hover);
 }
 
 .variant-dashed[data-type="warning"] {
-  border-color: rgb(234, 179, 8);
-  color: rgb(161, 98, 7);
+  border-color: var(--warning);
+  color: var(--warning-text);
 }
 
 .variant-dashed[data-type="warning"]:hover {
-  background-color: rgba(255, 253, 143, 0.2);
-  border-color: rgb(161, 98, 7);
+  background-color: var(--warning-light);
 }

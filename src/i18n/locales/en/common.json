@@ -30,26 +30,19 @@
     "usersTrend": "+180.1% from last month"
   },
   "settings": {
-    "title": "Settings",
-    "description": "Configure your POS system settings.",
-    "language": "Language",
-    "selectLanguage": "Select Language",
+    "title": "Appearance",
+    "description": "Customize the look and feel of your platform",
     "theme": "Theme",
-    "selectTheme": "Select Theme",
-    "themes": {
-      "green": "Green",
-      "blue": "Blue",
-      "rose": "Rose",
-      "orange": "Orange"
-    },
-    "mode": "Mode",
-    "selectMode": "Select Mode",
+    "themeDescription": "Select a theme to personalize your platform's appearance",
+    "accentColor": "Accent color",
+    "accentColorDescription": "Choose the main color that defines the overall tone",
+    "language": "Language",
+    "selectLanguage": "Select your preferred language",
     "modes": {
       "light": "Light",
       "dark": "Dark",
       "system": "System"
-    },
-    "placeholder": "Settings configuration options will be implemented here. This is a mock page with placeholder content."
+    }
   },
   "notFound": {
     "title": "Page Not Found",

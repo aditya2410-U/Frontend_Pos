@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { useCreateOutlet } from "@/api/queries/useOutlets";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/common/@atoms/spinner";
 import { Form } from "@/common/@atoms/form";
 import { FormBuilder } from "@/common/FormBuilder";
 import type { FormFieldConfig } from "@/common/FormBuilder";
+import { ArrowLeft } from "lucide-react";
 
 interface CreateOutletFormData {
   name: string;
@@ -56,42 +56,59 @@ export default function CreateOutlet() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">
+    <div className="max-w-xl">
+      {/* Back button */}
+      <button
+        onClick={() => navigate("/outlets")}
+        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+      >
+        <ArrowLeft className="size-4" />
+        Back to outlets
+      </button>
+
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-semibold tracking-tight">
           {t("outlets.createNew")}
         </h1>
-        <Button variant="outlined" onClick={() => navigate("/outlets")}>
-          {t("common.cancel")}
-        </Button>
+        <p className="text-sm text-muted-foreground mt-1">
+          Fill in the details below to create a new outlet.
+        </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("outlets.details")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormBuilder
-                fields={fields}
-                control={form.control}
-                getValues={form.getValues}
-              />
+      {/* Form Card */}
+      <div className="bg-card border border-border/60 rounded-xl p-6">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <FormBuilder
+              fields={fields}
+              control={form.control}
+              getValues={form.getValues}
+            />
 
-              <Button type="submit" className="w-full" disabled={isPending}>
+            <div className="flex items-center gap-3 pt-2">
+              <Button
+                type="button"
+                variant="outlined"
+                onClick={() => navigate("/outlets")}
+                className="flex-1"
+              >
+                {t("common.cancel")}
+              </Button>
+              <Button type="submit" className="flex-1" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
+                    <Spinner className="size-4" />
+                    {t("common.creating")}
                   </>
                 ) : (
                   t("outlets.createButton")
                 )}
               </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+            </div>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }

@@ -1,31 +1,13 @@
-import { LogOutIcon } from "lucide-react";
-import { Button } from "@/common/@atoms/Button";
-import { Separator } from "@/common/@atoms/separator";
 import { SidebarTrigger } from "@/common/@atoms/sidebar";
-import { useLogout } from "@/api/queries/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Separator } from "@/common/@atoms/separator";
+import { AppBreadcrumbs } from "./AppBreadcrumbs";
 
 export default function Header() {
-  const { mutate: logout } = useLogout();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   return (
-    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-      <SidebarTrigger className="-ml-1" />
-      <Separator orientation="vertical" className="mr-2 h-4" />
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium">Welcome back!</span>
-      </div>
-      <div className="ml-auto flex items-center gap-2">
-        <Button variant="outlined" size="sm" onClick={handleLogout}>
-          <LogOutIcon className="mr-2 size-3" />
-          Logout
-        </Button>
-      </div>
+    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-3 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+      <SidebarTrigger className="-ml-2 size-8 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors" />
+      <Separator orientation="vertical" className="h-5 bg-border/60" />
+      <AppBreadcrumbs />
     </header>
   );
 }
