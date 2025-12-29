@@ -1,0 +1,179 @@
+/* Cell Renderer Base Styles */
+.agGridCustomCell {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.agGridCustomCellCenter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agGridCustomImageCell {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.agGridCustomImageCell:hover {
+  opacity: 0.8;
+}
+
+.agGridCustomTextCell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agGridCustomTextCell:hover {
+  text-decoration: underline;
+}
+
+.agGridCustomCellHyperLink {
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.agGridCustomCellHyperLink:hover {
+  text-decoration: underline;
+}
+
+/* Image styles */
+.imageStyle {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.imageStyleRounded {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Icon styles */
+.iconStyle {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  transition: all 0.15s ease;
+}
+
+.iconStyle:hover {
+  color: var(--foreground);
+  transform: scale(1.1);
+}
+
+.iconStyleDanger {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  transition: all 0.15s ease;
+}
+
+.iconStyleDanger:hover {
+  color: var(--destructive);
+  transform: scale(1.1);
+}
+
+/* Badge/Chip styles */
+.badgeCell {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.badgeSuccess {
+  background-color: var(--color-lightest);
+  color: var(--color-dark);
+}
+
+.badgeWarning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badgeError {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badgeDefault {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+/* Status dot */
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.statusDotSuccess {
+  background-color: var(--color-medium);
+}
+
+.statusDotWarning {
+  background-color: #f59e0b;
+}
+
+.statusDotError {
+  background-color: #ef4444;
+}
+
+.statusDotDefault {
+  background-color: var(--muted-foreground);
+}
+
+/* Action buttons container */
+.actionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+}
+
+/* Toggle container */
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+/* Currency cell */
+.currencyCell {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Number cell */
+.numberCell {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* Empty cell placeholder */
+.emptyCell {
+  color: var(--muted-foreground);
+}

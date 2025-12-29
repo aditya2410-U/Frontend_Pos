@@ -1,0 +1,707 @@
+/* AG-Grid Custom Theme - Aligned with app theme */
+.ag-theme-custom {
+  /* Core colors using CSS variables from theme */
+  --ag-background-color: var(--background);
+  --ag-foreground-color: var(--foreground);
+  --ag-header-background-color: var(--color-lightest);
+  --ag-header-foreground-color: var(--foreground);
+  --ag-odd-row-background-color: var(--background);
+  --ag-row-hover-color: var(--secondary);
+  --ag-selected-row-background-color: var(--accent);
+  --ag-border-color: var(--border);
+  --ag-secondary-border-color: var(--border);
+  --ag-input-border-color: var(--border);
+  --ag-checkbox-checked-color: var(--primary);
+  --ag-checkbox-unchecked-color: var(--muted-foreground);
+  --ag-range-selection-border-color: var(--primary);
+  --ag-range-selection-background-color: var(--accent);
+  --ag-cell-horizontal-padding: 12px;
+  --ag-header-height: 42px;
+  --ag-row-height: 40px;
+  --ag-font-size: 14px;
+  --ag-font-family: inherit;
+  --ag-grid-size: 4px;
+  --ag-icon-size: 16px;
+  --ag-row-border-width: 1px;
+  --ag-borders: solid 1px;
+  --ag-border-radius: 0;
+  --ag-wrapper-border-radius: var(--radius);
+}
+
+/* Root wrapper styling */
+.ag-theme-custom .ag-root-wrapper {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Header styling */
+.ag-theme-custom .ag-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.ag-theme-custom .ag-header-cell {
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Alternating header colors (only for column headers, not filters) */
+.ag-theme-custom
+  .ag-header-row.ag-header-row-column
+  .ag-header-cell:nth-of-type(odd) {
+  background-color: #ebf4dd !important;
+  border-right: 2px solid white !important;
+}
+
+.ag-theme-custom
+  .ag-header-row.ag-header-row-column
+  .ag-header-cell:nth-of-type(even) {
+  background-color: #d4e4be !important;
+  border-right: 2px solid white !important;
+}
+
+.ag-theme-custom
+  .ag-header-row.ag-header-row-column
+  .ag-header-cell:last-child {
+  border-right: none !important;
+}
+
+.ag-theme-custom
+  .ag-header-row.ag-header-row-column
+  .ag-header-cell:nth-of-type(odd):hover {
+  background-color: #dde8cf !important;
+}
+
+.ag-theme-custom
+  .ag-header-row.ag-header-row-column
+  .ag-header-cell:nth-of-type(even):hover {
+  background-color: #c5d9a8 !important;
+}
+
+.ag-theme-custom .ag-header-cell-label {
+  gap: 6px;
+}
+
+/* Alternating row colors */
+.ag-theme-custom .ag-row:nth-child(even) {
+  background-color: var(--secondary);
+}
+
+.ag-theme-custom .ag-row:nth-child(odd) {
+  background-color: var(--background);
+}
+
+/* Row hover state */
+.ag-theme-custom .ag-row-hover {
+  background-color: var(--accent) !important;
+}
+
+/* Selected row state */
+.ag-theme-custom .ag-row-selected {
+  background-color: var(--accent) !important;
+}
+
+/* Cell focus state */
+.ag-theme-custom .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
+  border-color: var(--ring) !important;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Cell editing state */
+.ag-theme-custom .ag-cell-inline-editing {
+  border-color: var(--ring) !important;
+  background-color: var(--background);
+  border-radius: 4px;
+}
+
+/* Input styling */
+.ag-theme-custom .ag-text-field-input {
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.ag-theme-custom .ag-text-field-input:focus {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 118, 59, 0.1);
+}
+
+/* Floating filter styling */
+.ag-theme-custom .ag-floating-filter {
+  background-color: var(--background);
+}
+
+.ag-theme-custom .ag-floating-filter-input {
+  background-color: var(--background);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* Floating filter button */
+.ag-theme-custom .ag-floating-filter-button {
+  background-color: transparent;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.ag-theme-custom .ag-floating-filter-button:hover {
+  background-color: var(--secondary);
+}
+
+.ag-theme-custom .ag-floating-filter-button .ag-icon {
+  color: var(--muted-foreground);
+}
+
+.ag-theme-custom .ag-floating-filter-button:hover .ag-icon {
+  color: var(--foreground);
+}
+
+/* Floating filter button when filter is active */
+.ag-theme-custom .ag-floating-filter-button.ag-floating-filter-button-active,
+.ag-theme-custom .ag-header-cell-filtered .ag-floating-filter-button {
+  background-color: var(--color-lightest);
+}
+
+.ag-theme-custom
+  .ag-floating-filter-button.ag-floating-filter-button-active
+  .ag-icon,
+.ag-theme-custom .ag-header-cell-filtered .ag-floating-filter-button .ag-icon {
+  color: var(--color-medium);
+}
+
+/* ============================================
+   FILTER PANEL/POPUP STYLING
+   ============================================ */
+
+/* Filter panel container */
+.ag-theme-custom .ag-filter {
+  background-color: var(--background);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--foreground);
+  padding: 12px;
+}
+
+/* Filter panel wrapper */
+.ag-theme-custom .ag-filter-wrapper {
+  background-color: var(--background);
+}
+
+/* Filter body */
+.ag-theme-custom .ag-filter-body-wrapper {
+  padding: 0;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Simple filter body */
+.ag-theme-custom .ag-simple-filter-body-wrapper {
+  padding: 0;
+  gap: 8px;
+}
+
+/* Filter condition (greater than, less than, equals, etc.) */
+.ag-theme-custom .ag-filter-condition {
+  margin: 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.ag-theme-custom .ag-filter-condition:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Filter select dropdown (contains, equals, greater than, etc.) */
+.ag-theme-custom .ag-filter-select,
+.ag-theme-custom .ag-picker-field-wrapper {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  /* padding: 6px 10px; */
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--foreground);
+  cursor: pointer;
+  min-height: 32px;
+}
+
+.ag-theme-custom .ag-filter-select:hover,
+.ag-theme-custom .ag-picker-field-wrapper:hover {
+  border-color: var(--ring);
+}
+
+.ag-theme-custom .ag-filter-select:focus,
+.ag-theme-custom .ag-picker-field-wrapper:focus-within {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 118, 59, 0.1);
+}
+
+/* Select dropdown display */
+.ag-theme-custom .ag-picker-field-display {
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--foreground);
+}
+
+/* Select dropdown icon */
+.ag-theme-custom .ag-picker-field-icon {
+  color: var(--muted-foreground);
+}
+
+/* Filter text input */
+.ag-theme-custom .ag-filter-filter,
+.ag-theme-custom .ag-input-field-input {
+  background-color: var(--background) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+  /* padding: 6px 10px !important; */
+  font-size: 13px !important;
+  font-family: inherit !important;
+  color: var(--foreground) !important;
+  min-height: 32px;
+}
+
+.ag-theme-custom .ag-filter-filter:focus,
+.ag-theme-custom .ag-input-field-input:focus {
+  border-color: var(--ring) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(76, 118, 59, 0.1) !important;
+}
+
+.ag-theme-custom .ag-filter-filter::placeholder,
+.ag-theme-custom .ag-input-field-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* Filter apply/reset buttons panel */
+.ag-theme-custom .ag-filter-apply-panel {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* Filter buttons (Apply, Reset, Cancel) */
+.ag-theme-custom .ag-filter-apply-panel-button,
+.ag-theme-custom .ag-standard-button {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ag-theme-custom .ag-filter-apply-panel-button:hover,
+.ag-theme-custom .ag-standard-button:hover {
+  background-color: var(--secondary);
+  border-color: var(--ring);
+}
+
+/* Primary button style for Apply */
+.ag-theme-custom .ag-filter-apply-panel-button[ref="applyFilterButton"] {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.ag-theme-custom .ag-filter-apply-panel-button[ref="applyFilterButton"]:hover {
+  background-color: var(--primary-hover, var(--primary));
+  opacity: 0.9;
+}
+
+/* AND/OR radio buttons */
+.ag-theme-custom .ag-filter-condition-operator {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.ag-theme-custom .ag-filter-condition-operator-or,
+.ag-theme-custom .ag-filter-condition-operator-and {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+/* Radio button styling */
+.ag-theme-custom .ag-radio-button-input-wrapper {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background-color: var(--background);
+}
+
+.ag-theme-custom .ag-radio-button-input-wrapper.ag-checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.ag-theme-custom .ag-radio-button-input-wrapper.ag-checked::after {
+  background-color: var(--primary-foreground);
+}
+
+/* Select list (dropdown options) */
+.ag-theme-custom .ag-select-list {
+  background-color: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.ag-theme-custom .ag-select-list-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.ag-theme-custom .ag-select-list-item:hover {
+  background-color: var(--accent);
+}
+
+.ag-theme-custom .ag-select-list-item.ag-active-item {
+  background-color: var(--accent);
+}
+
+/* Rich select (advanced dropdowns) */
+.ag-theme-custom .ag-rich-select {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.ag-theme-custom .ag-rich-select-value {
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.ag-theme-custom .ag-rich-select-list {
+  background-color: var(--popover);
+}
+
+.ag-theme-custom .ag-rich-select-row {
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.ag-theme-custom .ag-rich-select-row-selected {
+  background-color: var(--accent);
+}
+
+/* Set filter (checkboxes list) */
+.ag-theme-custom .ag-set-filter-list {
+  padding: 8px 0;
+}
+
+.ag-theme-custom .ag-set-filter-item {
+  padding: 4px 12px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.ag-theme-custom .ag-set-filter-item:hover {
+  background-color: var(--secondary);
+}
+
+/* Filter virtual list */
+.ag-theme-custom .ag-virtual-list-viewport {
+  background-color: var(--background);
+}
+
+/* Status bar styling */
+.ag-theme-custom .ag-status-bar {
+  border-top: 1px solid var(--border);
+  padding: 8px 12px;
+  min-height: 36px;
+  background: var(--background);
+}
+
+/* Popup styling (filters, context menus) */
+.ag-theme-custom .ag-popup-child:not(.ag-tooltip-custom) {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  background-color: var(--popover);
+}
+
+/* Menu styling */
+.ag-theme-custom .ag-menu {
+  background-color: var(--popover);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.ag-theme-custom .ag-menu-header {
+  background-color: var(--secondary);
+  padding: 8px 12px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+
+.ag-theme-custom .ag-menu-body {
+  padding: 4px 0;
+}
+
+.ag-theme-custom .ag-menu-option {
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--foreground);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.1s ease;
+}
+
+.ag-theme-custom .ag-menu-option:hover,
+.ag-theme-custom .ag-menu-option-active {
+  background-color: var(--accent);
+}
+
+.ag-theme-custom .ag-menu-option-icon {
+  color: var(--muted-foreground);
+  width: 16px;
+  height: 16px;
+}
+
+.ag-theme-custom .ag-menu-option-text {
+  flex: 1;
+}
+
+.ag-theme-custom .ag-menu-option-shortcut {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+
+.ag-theme-custom .ag-menu-option-popup-pointer {
+  color: var(--muted-foreground);
+}
+
+.ag-theme-custom .ag-menu-separator {
+  height: 1px;
+  background-color: var(--border);
+  margin: 4px 0;
+}
+
+.ag-theme-custom .ag-menu-separator-cell::after {
+  background-color: var(--border);
+}
+
+/* Tabs in menu (used for column menu tabs) */
+.ag-theme-custom .ag-tab-header {
+  background-color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.ag-theme-custom .ag-tab {
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--muted-foreground);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ag-theme-custom .ag-tab:hover {
+  color: var(--foreground);
+}
+
+.ag-theme-custom .ag-tab-selected {
+  color: var(--foreground);
+  border-bottom: 2px solid var(--primary);
+  background-color: var(--background);
+}
+
+.ag-theme-custom .ag-tab-body {
+  padding: 12px;
+  background-color: var(--background);
+}
+
+/* Checkbox styling */
+.ag-theme-custom .ag-checkbox-input-wrapper {
+  border-radius: 4px;
+}
+
+.ag-theme-custom .ag-checkbox-input-wrapper.ag-checked::after {
+  color: var(--primary);
+}
+
+/* Pagination styling */
+.ag-theme-custom .ag-paging-panel {
+  border-top: 1px solid var(--border);
+  padding: 8px 12px;
+  background: var(--background);
+}
+
+.ag-theme-custom .ag-paging-button {
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.ag-theme-custom .ag-paging-button:hover {
+  background-color: var(--secondary);
+}
+
+/* Loading overlay */
+.ag-theme-custom .ag-overlay-loading-center {
+  background-color: var(--background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 16px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* No rows overlay */
+.ag-theme-custom .ag-overlay-no-rows-center {
+  background-color: var(--background);
+  padding: 24px;
+  color: var(--muted-foreground);
+}
+
+/* Icons styling */
+.ag-theme-custom .ag-icon {
+  color: var(--muted-foreground);
+  font-family: inherit;
+}
+
+.ag-theme-custom .ag-header-cell:hover .ag-icon {
+  color: var(--foreground);
+}
+
+/* Sort icons */
+.ag-theme-custom .ag-sort-indicator-icon {
+  color: var(--muted-foreground);
+}
+
+.ag-theme-custom .ag-sort-indicator-icon.ag-sort-ascending-icon,
+.ag-theme-custom .ag-sort-indicator-icon.ag-sort-descending-icon {
+  color: var(--primary);
+}
+
+/* Filter icon in header */
+.ag-theme-custom .ag-header-icon {
+  color: var(--muted-foreground);
+}
+
+.ag-theme-custom .ag-header-cell-filtered .ag-header-icon {
+  color: var(--primary);
+}
+
+/* Column resize handle */
+.ag-theme-custom .ag-header-cell-resize {
+  width: 8px;
+}
+
+.ag-theme-custom .ag-header-cell-resize::after {
+  background-color: var(--border);
+  width: 1px;
+}
+
+/* Pinned columns */
+.ag-theme-custom .ag-pinned-left-header,
+.ag-theme-custom .ag-pinned-left-cols-container {
+  border-right: 1px solid var(--border);
+}
+
+.ag-theme-custom .ag-pinned-right-header,
+.ag-theme-custom .ag-pinned-right-cols-container {
+  border-left: 1px solid var(--border);
+}
+
+/* Row drag styling */
+.ag-theme-custom .ag-row-drag {
+  cursor: grab;
+}
+
+.ag-theme-custom .ag-row-dragging {
+  opacity: 0.5;
+}
+
+/* Tooltip styling */
+.ag-theme-custom .ag-tooltip {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border-radius: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+}
+
+/* Dark mode adjustments */
+.dark .ag-theme-custom {
+  --ag-background-color: var(--background);
+  --ag-foreground-color: var(--foreground);
+  --ag-header-background-color: var(--card);
+  --ag-header-foreground-color: var(--foreground);
+  --ag-odd-row-background-color: var(--background);
+  --ag-row-hover-color: var(--secondary);
+  --ag-selected-row-background-color: var(--accent);
+  --ag-border-color: var(--border);
+}
+
+.dark .ag-theme-custom .ag-row:nth-child(even) {
+  background-color: var(--secondary);
+}
+
+.dark .ag-theme-custom .ag-row:nth-child(odd) {
+  background-color: var(--background);
+}
+
+/* Container utilities */
+.data-table-container {
+  height: 100%;
+  width: 100%;
+}
+
+.data-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.data-table-header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.data-table-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
