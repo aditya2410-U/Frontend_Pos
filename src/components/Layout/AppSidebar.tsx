@@ -21,7 +21,7 @@ import {
   SidebarFooter,
 } from "@/common/@atoms/sidebar";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Button } from "@/common/@atoms/Button";
+import { Button } from "@/common/@atoms/button";
 import { useLogout } from "@/api/queries/useAuth";
 import { useTranslation } from "react-i18next";
 
@@ -143,7 +143,7 @@ export function AppSidebar() {
               className="group-data-[collapsible=icon]:justify-center"
             >
               <Button
-                variant="outlined"
+                variant="outline"
                 className="w-full justify-start group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 hover:bg-red-600 hover:text-white"
                 onClick={handleLogout}
               >

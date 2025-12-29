@@ -1,5 +1,5 @@
 import { LogOutIcon } from "lucide-react";
-import { Button } from "@/common/@atoms/Button";
+import { Button } from "@/common/@atoms/button";
 import { Separator } from "@/common/@atoms/separator";
 import { SidebarTrigger } from "@/common/@atoms/sidebar";
 import { useLogout } from "@/api/queries/useAuth";
@@ -21,7 +21,7 @@ export default function Header() {
         <span className="text-sm font-medium">Welcome back!</span>
       </div>
       <div className="ml-auto flex items-center gap-2">
-        <Button variant="outlined" size="sm" onClick={handleLogout}>
+        <Button variant="outline" size="sm" onClick={handleLogout}>
           <LogOutIcon className="mr-2 size-3" />
           Logout
         </Button>

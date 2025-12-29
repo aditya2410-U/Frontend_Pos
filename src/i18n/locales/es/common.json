@@ -34,6 +34,21 @@
     "description": "Configure los ajustes de su sistema POS.",
     "language": "Idioma",
     "selectLanguage": "Seleccionar idioma",
+    "theme": "Tema",
+    "selectTheme": "Seleccionar tema",
+    "themes": {
+      "green": "Verde",
+      "blue": "Azul",
+      "rose": "Rosa",
+      "orange": "Naranja"
+    },
+    "mode": "Modo",
+    "selectMode": "Seleccionar modo",
+    "modes": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    },
     "placeholder": "Las opciones de configuración se implementarán aquí. Esta es una página de prueba con contenido de marcador de posición."
   },
   "notFound": {

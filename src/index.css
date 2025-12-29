@@ -290,6 +290,158 @@
   --border-outlined: rgb(255, 255, 255); /* White for outlined buttons */
 }
 
+/* Color Themes */
+/* Default Green is set in :root and .dark above, but explicit class for clarity */
+.theme-green {
+  /* Inherits default variables */
+}
+
+.theme-blue {
+  --color-lightest: #dbeafe; /* blue-100 */
+  --color-light: #60a5fa; /* blue-400 */
+  --color-medium: #2563eb; /* blue-600 */
+  --color-dark: #1e3a8a; /* blue-900 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-rose {
+  --color-lightest: #ffe4e6; /* rose-100 */
+  --color-light: #fb7185; /* rose-400 */
+  --color-medium: #e11d48; /* rose-600 */
+  --color-dark: #881337; /* rose-900 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-orange {
+  --color-lightest: #ffedd5; /* orange-100 */
+  --color-light: #fb923c; /* orange-400 */
+  --color-medium: #ea580c; /* orange-600 */
+  --color-dark: #7c2d12; /* orange-900 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.dark.theme-green,
+.dark .theme-green {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-blue,
+.dark .theme-blue {
+  /* Use colored primary for dark mode instead of white */
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #60a5fa;
+  --chart-2: #2563eb;
+
+  /* Sidebar specific for dark mode - keep transparent/dark or use theme override if desired */
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-rose,
+.dark .theme-rose {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #fb7185;
+  --chart-2: #e11d48;
+
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-orange,
+.dark .theme-orange {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #fb923c;
+  --chart-2: #ea580c;
+
+  --sidebar-primary: var(--color-medium);
+}
+
 @layer base {
   * {
     @apply border-border;

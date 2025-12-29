@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/common/@atoms/Button";
+import { Button } from "@/common/@atoms/button";
 import {
   Card,
   CardContent,

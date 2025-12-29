@@ -13,14 +13,14 @@ import {
 } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/common/@atoms/Button";
+import { Button, buttonVariants } from "@/common/@atoms/button";
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
   captionLayout = "label",
-  buttonVariant = "text",
+  buttonVariant = "outline",
   formatters,
   components,
   ...props
@@ -195,7 +195,7 @@ function CalendarDayButton({
   return (
     <Button
       ref={ref}
-      variant="text"
+      variant="outline"
       size="icon"
       data-day={day.date.toLocaleDateString()}
       data-selected-single={

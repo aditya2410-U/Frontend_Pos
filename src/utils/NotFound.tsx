@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { HomeIcon, ArrowLeftIcon, Search } from "lucide-react";
-import { Button } from "@/common/@atoms/Button";
+import { Button } from "@/common/@atoms/button";
 import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
@@ -39,11 +39,7 @@ export default function NotFound() {
             {t("notFound.goDashboard")}
           </Link>
         </Button>
-        <Button
-          asChild
-          variant="outlined"
-          onClick={() => window.history.back()}
-        >
+        <Button asChild variant="outline" onClick={() => window.history.back()}>
           <Link
             to="#"
             onClick={(e) => {

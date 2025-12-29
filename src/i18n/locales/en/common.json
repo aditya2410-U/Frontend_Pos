@@ -34,6 +34,21 @@
     "description": "Configure your POS system settings.",
     "language": "Language",
     "selectLanguage": "Select Language",
+    "theme": "Theme",
+    "selectTheme": "Select Theme",
+    "themes": {
+      "green": "Green",
+      "blue": "Blue",
+      "rose": "Rose",
+      "orange": "Orange"
+    },
+    "mode": "Mode",
+    "selectMode": "Select Mode",
+    "modes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "placeholder": "Settings configuration options will be implemented here. This is a mock page with placeholder content."
   },
   "notFound": {

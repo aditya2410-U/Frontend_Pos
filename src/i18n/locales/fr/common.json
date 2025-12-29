@@ -34,6 +34,21 @@
     "description": "Configurez les paramètres de votre système POS.",
     "language": "Langue",
     "selectLanguage": "Choisir la langue",
+    "theme": "Thème",
+    "selectTheme": "Choisir le thème",
+    "themes": {
+      "green": "Vert",
+      "blue": "Bleu",
+      "rose": "Rose",
+      "orange": "Orange"
+    },
+    "mode": "Mode",
+    "selectMode": "Choisir le mode",
+    "modes": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
     "placeholder": "Les options de configuration des paramètres seront implémentées ici. Ceci est une page fictive avec du contenu fictif."
   },
   "notFound": {
