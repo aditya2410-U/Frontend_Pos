@@ -1,11 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { SidebarInset, SidebarProvider } from '@/common/@atoms/sidebar';
-import Header from './Header';
-import { AppSidebar } from './AppSidebar';
-import { AppBreadcrumbs } from './AppBreadcrumbs';
+import { Outlet } from "react-router-dom";
+import { SidebarInset, SidebarProvider } from "@/common/@atoms/sidebar";
+import Header from "./Header";
+import { AppSidebar } from "./AppSidebar";
+import { AppBreadcrumbs } from "./AppBreadcrumbs";
 
 export default function DashboardLayout() {
-
   return (
     <SidebarProvider>
       <AppSidebar />
