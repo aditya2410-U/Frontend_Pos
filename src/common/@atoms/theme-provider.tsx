@@ -2,10 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light" | "system";
 export type ColorTheme =
-  | "theme-green"
+  | "theme-teal"
   | "theme-blue"
+  | "theme-yellow"
+  | "theme-orange"
   | "theme-rose"
-  | "theme-orange";
+  | "theme-purple"
+  | "theme-green";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -25,7 +28,7 @@ type ThemeProviderState = {
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
-  colorTheme: "theme-green",
+  colorTheme: "theme-teal",
   setColorTheme: () => null,
 };
 
@@ -34,7 +37,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  defaultColorTheme = "theme-green",
+  defaultColorTheme = "theme-teal",
   storageKey = "vite-ui-theme",
   colorStorageKey = "vite-ui-color-theme",
   ...props
@@ -69,12 +72,16 @@ export function ThemeProvider({
     const root = window.document.documentElement;
 
     // Remove all known color themes
-    root.classList.remove(
-      "theme-green",
+    const allColorThemes = [
+      "theme-teal",
       "theme-blue",
+      "theme-yellow",
+      "theme-orange",
       "theme-rose",
-      "theme-orange"
-    );
+      "theme-purple",
+      "theme-green",
+    ];
+    allColorThemes.forEach((t) => root.classList.remove(t));
 
     // Add new color theme
     root.classList.add(colorTheme);

@@ -30,26 +30,19 @@
     "usersTrend": "+180.1% respecto al mes pasado"
   },
   "settings": {
-    "title": "Configuración",
-    "description": "Configure los ajustes de su sistema POS.",
-    "language": "Idioma",
-    "selectLanguage": "Seleccionar idioma",
+    "title": "Apariencia",
+    "description": "Personaliza el aspecto de tu plataforma",
     "theme": "Tema",
-    "selectTheme": "Seleccionar tema",
-    "themes": {
-      "green": "Verde",
-      "blue": "Azul",
-      "rose": "Rosa",
-      "orange": "Naranja"
-    },
-    "mode": "Modo",
-    "selectMode": "Seleccionar modo",
+    "themeDescription": "Selecciona un tema para personalizar la apariencia de tu plataforma",
+    "accentColor": "Color de acento",
+    "accentColorDescription": "Elige el color principal que define el tono general",
+    "language": "Idioma",
+    "selectLanguage": "Selecciona tu idioma preferido",
     "modes": {
       "light": "Claro",
       "dark": "Oscuro",
       "system": "Sistema"
-    },
-    "placeholder": "Las opciones de configuración se implementarán aquí. Esta es una página de prueba con contenido de marcador de posición."
+    }
   },
   "notFound": {
     "title": "Página no encontrada",

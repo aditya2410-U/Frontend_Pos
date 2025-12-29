@@ -329,7 +329,69 @@
 /* Color Themes */
 /* Default Green is set in :root and .dark above, but explicit class for clarity */
 .theme-green {
-  /* Inherits default variables */
+  --color-lightest: #dcfce7; /* green-100 */
+  --color-light: #4ade80; /* green-400 */
+  --color-medium: #22c55e; /* green-500 */
+  --color-dark: #166534; /* green-800 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-teal {
+  --color-lightest: #ccfbf1; /* teal-100 */
+  --color-light: #2dd4bf; /* teal-400 */
+  --color-medium: #14b8a6; /* teal-500 */
+  --color-dark: #115e59; /* teal-800 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
 }
 
 .theme-blue {
@@ -401,8 +463,74 @@
 .theme-orange {
   --color-lightest: #ffedd5; /* orange-100 */
   --color-light: #fb923c; /* orange-400 */
-  --color-medium: #ea580c; /* orange-600 */
-  --color-dark: #7c2d12; /* orange-900 */
+  --color-medium: #f97316; /* orange-500 */
+  --color-dark: #9a3412; /* orange-800 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-yellow {
+  --color-lightest: #fef9c3; /* yellow-100 */
+  --color-light: #facc15; /* yellow-400 */
+  --color-medium: #eab308; /* yellow-500 */
+  --color-dark: #854d0e; /* yellow-800 */
+  --color-yellow: #fef08a; /* yellow-200 */
+
+  --primary: var(--color-medium);
+  --primary-hover: var(--color-dark);
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+
+  --ring: var(--color-medium);
+
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --success: var(--color-medium);
+  --success-hover: var(--color-dark);
+  --success-light: var(--color-lightest);
+  --success-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-purple {
+  --color-lightest: #f3e8ff; /* purple-100 */
+  --color-light: #c084fc; /* purple-400 */
+  --color-medium: #a855f7; /* purple-500 */
+  --color-dark: #6b21a8; /* purple-800 */
   --color-yellow: #fef08a; /* yellow-200 */
 
   --primary: var(--color-medium);
@@ -473,7 +601,43 @@
   --primary-hover: var(--color-light);
 
   --chart-1: #fb923c;
-  --chart-2: #ea580c;
+  --chart-2: #f97316;
+
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-teal,
+.dark .theme-teal {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #2dd4bf;
+  --chart-2: #14b8a6;
+
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-yellow,
+.dark .theme-yellow {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(10, 10, 10);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #facc15;
+  --chart-2: #eab308;
+
+  --sidebar-primary: var(--color-medium);
+}
+
+.dark.theme-purple,
+.dark .theme-purple {
+  --primary: var(--color-medium);
+  --primary-foreground: rgb(255, 255, 255);
+  --primary-hover: var(--color-light);
+
+  --chart-1: #c084fc;
+  --chart-2: #a855f7;
 
   --sidebar-primary: var(--color-medium);
 }
