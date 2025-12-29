@@ -7,7 +7,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Sun, Moon, Monitor, Check } from "lucide-react";
 
-// Theme preview component
+// Theme preview component - Attio style
 interface ThemePreviewProps {
   mode: Theme;
   isSelected: boolean;
@@ -23,83 +23,91 @@ function ThemePreview({ mode, isSelected, onClick, label }: ThemePreviewProps) {
     <button
       onClick={onClick}
       className={cn(
-        "group relative flex flex-col items-center gap-3 rounded-xl border-2 p-3 transition-all duration-200",
+        "group relative flex flex-col items-center gap-3 rounded-xl border-2 p-4 transition-all duration-200 cursor-pointer",
         isSelected
-          ? "border-primary bg-primary/5 shadow-lg"
-          : "border-border hover:border-primary/50 hover:bg-muted/50"
+          ? "border-primary bg-accent/50"
+          : "border-border hover:border-muted-foreground/30 hover:bg-muted/30"
       )}
     >
       {/* Preview Card */}
       <div
         className={cn(
-          "relative w-full aspect-[4/3] rounded-lg overflow-hidden border shadow-sm",
+          "relative w-full aspect-[16/10] rounded-lg overflow-hidden border shadow-sm",
           isDark
-            ? "bg-zinc-900"
+            ? "bg-[#0f172a]"
             : isSystem
-              ? "bg-gradient-to-r from-white to-zinc-900"
+              ? "bg-gradient-to-r from-white to-[#0f172a]"
               : "bg-white"
         )}
       >
         {/* Sidebar Preview */}
         <div
           className={cn(
-            "absolute left-0 top-0 bottom-0 w-1/4 border-r",
+            "absolute left-0 top-0 bottom-0 w-[28%] border-r",
             isDark
-              ? "bg-zinc-800 border-zinc-700"
+              ? "bg-[#1e293b] border-[#334155]"
               : isSystem
-                ? "bg-gradient-to-b from-zinc-100 to-zinc-800"
-                : "bg-zinc-100 border-zinc-200"
+                ? "bg-gradient-to-b from-[#fafbfc] to-[#1e293b]"
+                : "bg-[#fafbfc] border-[#e5e7eb]"
           )}
         >
-          {/* Sidebar items */}
-          {[...Array(4)].map((_, i) => (
+          {/* Logo area */}
+          <div className="p-2">
             <div
-              key={i}
               className={cn(
-                "mx-1 my-1 h-1.5 rounded-sm",
-                isDark
-                  ? "bg-zinc-600"
-                  : isSystem
-                    ? "bg-zinc-300"
-                    : "bg-zinc-300",
-                i === 0 && "bg-primary/60"
+                "w-4 h-4 rounded-md",
+                isDark ? "bg-[#3b82f6]" : "bg-primary"
               )}
             />
-          ))}
+          </div>
+          {/* Sidebar items */}
+          <div className="px-2 space-y-1">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className={cn(
+                  "h-2 rounded",
+                  isDark ? "bg-[#334155]" : "bg-[#e5e7eb]",
+                  i === 1 && (isDark ? "bg-[#3b82f6]" : "bg-primary")
+                )}
+                style={{ width: `${60 + Math.random() * 30}%` }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Main Content Preview */}
-        <div className="absolute left-1/4 right-0 top-0 bottom-0 p-2">
+        <div className="absolute left-[28%] right-0 top-0 bottom-0 p-3">
           {/* Header */}
           <div
             className={cn(
-              "h-2 w-1/2 rounded-sm mb-2",
-              isDark ? "bg-zinc-700" : "bg-zinc-200"
+              "h-2 w-1/3 rounded mb-3",
+              isDark ? "bg-[#334155]" : "bg-[#e5e7eb]"
             )}
           />
           {/* Content blocks */}
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {[...Array(3)].map((_, i) => (
               <div
                 key={i}
                 className={cn(
-                  "h-1.5 rounded-sm",
-                  isDark ? "bg-zinc-700" : "bg-zinc-200",
-                  i === 2 && "w-2/3"
+                  "h-1.5 rounded",
+                  isDark ? "bg-[#334155]" : "bg-[#e5e7eb]"
                 )}
+                style={{ width: `${70 + Math.random() * 30}%` }}
               />
             ))}
           </div>
           {/* Cards */}
-          <div className="mt-2 grid grid-cols-2 gap-1">
+          <div className="mt-3 grid grid-cols-2 gap-2">
             {[...Array(2)].map((_, i) => (
               <div
                 key={i}
                 className={cn(
-                  "h-4 rounded-sm",
+                  "h-6 rounded",
                   isDark
-                    ? "bg-zinc-800 border border-zinc-700"
-                    : "bg-zinc-50 border border-zinc-200"
+                    ? "bg-[#1e293b] border border-[#334155]"
+                    : "bg-white border border-[#e5e7eb]"
                 )}
               />
             ))}
@@ -108,27 +116,30 @@ function ThemePreview({ mode, isSelected, onClick, label }: ThemePreviewProps) {
 
         {/* Selection Check */}
         {isSelected && (
-          <div className="absolute top-1 right-1 size-4 rounded-full bg-primary flex items-center justify-center">
-            <Check
-              className="size-2.5 text-primary-foreground"
-              strokeWidth={3}
-            />
+          <div className="absolute top-2 right-2 size-5 rounded-full bg-primary flex items-center justify-center shadow-sm">
+            <Check className="size-3 text-primary-foreground" strokeWidth={3} />
           </div>
         )}
       </div>
 
       {/* Label with Icon */}
       <div className="flex items-center gap-2 text-sm font-medium">
-        {mode === "light" && <Sun className="size-4" />}
-        {mode === "dark" && <Moon className="size-4" />}
-        {mode === "system" && <Monitor className="size-4" />}
-        <span>{label}</span>
+        {mode === "light" && <Sun className="size-4 text-muted-foreground" />}
+        {mode === "dark" && <Moon className="size-4 text-muted-foreground" />}
+        {mode === "system" && (
+          <Monitor className="size-4 text-muted-foreground" />
+        )}
+        <span
+          className={isSelected ? "text-foreground" : "text-muted-foreground"}
+        >
+          {label}
+        </span>
       </div>
     </button>
   );
 }
 
-// Color option component
+// Color option component - Attio style
 interface ColorOptionProps {
   color: ColorTheme;
   bgColor: string;
@@ -141,21 +152,25 @@ function ColorOption({ bgColor, isSelected, onClick }: ColorOptionProps) {
     <button
       onClick={onClick}
       className={cn(
-        "relative size-9 rounded-full transition-all duration-200 hover:scale-110",
-        isSelected && "ring-2 ring-offset-2 ring-offset-background ring-primary"
+        "relative size-10 rounded-full transition-all duration-200 hover:scale-110 focus:outline-none",
+        isSelected &&
+          "ring-2 ring-offset-2 ring-offset-background ring-foreground"
       )}
       style={{ backgroundColor: bgColor }}
     >
       {isSelected && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Check className="size-4 text-white drop-shadow-md" strokeWidth={3} />
+          <Check
+            className="size-5 text-white drop-shadow-md"
+            strokeWidth={2.5}
+          />
         </div>
       )}
     </button>
   );
 }
 
-// Language option component
+// Language option component - Attio style
 interface LanguageOptionProps {
   code: string;
   label: string;
@@ -174,14 +189,21 @@ function LanguageOption({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 px-4 py-3 rounded-lg border-2 transition-all duration-200",
+        "flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all duration-200 text-left",
         isSelected
-          ? "border-primary bg-primary/5"
-          : "border-border hover:border-primary/50 hover:bg-muted/50"
+          ? "border-primary bg-accent/50"
+          : "border-border hover:border-muted-foreground/30 hover:bg-muted/30"
       )}
     >
       <span className="text-2xl">{flag}</span>
-      <span className="font-medium">{label}</span>
+      <span
+        className={cn(
+          "font-medium text-sm",
+          isSelected ? "text-foreground" : "text-muted-foreground"
+        )}
+      >
+        {label}
+      </span>
       {isSelected && (
         <Check className="size-4 text-primary ml-auto" strokeWidth={2.5} />
       )}
@@ -211,27 +233,29 @@ export default function Settings() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-8">
+    <div className="space-y-10">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl font-semibold tracking-tight">
           {t("settings.title")}
         </h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-muted-foreground mt-1 text-sm">
           {t("settings.description")}
         </p>
       </div>
 
       {/* Theme Section */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div>
-          <h2 className="text-lg font-semibold">{t("settings.theme")}</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-base font-semibold text-foreground">
+            {t("settings.theme")}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-0.5">
             {t("settings.themeDescription")}
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 max-w-2xl">
           <ThemePreview
             mode="light"
             isSelected={theme === "light"}
@@ -254,10 +278,12 @@ export default function Settings() {
       </section>
 
       {/* Accent Color Section */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div>
-          <h2 className="text-lg font-semibold">{t("settings.accentColor")}</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-base font-semibold text-foreground">
+            {t("settings.accentColor")}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-0.5">
             {t("settings.accentColorDescription")}
           </p>
         </div>
@@ -276,15 +302,17 @@ export default function Settings() {
       </section>
 
       {/* Language Section */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div>
-          <h2 className="text-lg font-semibold">{t("settings.language")}</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-base font-semibold text-foreground">
+            {t("settings.language")}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-0.5">
             {t("settings.selectLanguage")}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
           {languageOptions.map((lang) => (
             <LanguageOption
               key={lang.code}

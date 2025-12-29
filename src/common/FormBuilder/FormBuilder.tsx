@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import type { Control, FieldValues, Path } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import type { FormFieldConfig, FieldType } from "./types";
+import type { FormFieldConfig } from "./types";
 import {
   TextField,
   SelectField,
@@ -26,7 +26,7 @@ function FormBuilderField<TFieldValues extends FieldValues = FieldValues>({
   getValues,
   onChangeCapture,
 }: FormBuilderProps<TFieldValues>) {
-  const { type, name } = field;
+  const { type } = field;
 
   const renderFieldByType = () => {
     const commonProps = {

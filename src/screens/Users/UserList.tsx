@@ -1,5 +1,10 @@
 import { Button } from "@/common/@atoms/Button";
-import { PlusIcon, PencilIcon, TrashIcon } from "lucide-react";
+import {
+  PlusIcon,
+  PencilIcon,
+  TrashIcon,
+  SlidersHorizontal,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUsers, useUpdateUser, useDeleteUser } from "@/api/queries/useUsers";
 import { Spinner } from "@/common/@atoms/spinner";
@@ -22,8 +27,10 @@ import {
   processColumns,
   type ExtendedColDef,
 } from "@/lib/tableColumns";
+import { useTranslation } from "react-i18next";
 
 export default function UserList() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: users, isLoading } = useUsers();
   const { mutate: updateUser } = useUpdateUser();
@@ -65,83 +72,95 @@ export default function UserList() {
           },
         },
         {
-          headerName: "Actions",
+          headerName: "",
           field: "id",
-          flex: 1,
+          width: 80,
+          maxWidth: 80,
           isSortable: false,
           hideFilter: true,
           cellRenderer: (params: ICellRendererParams<User>) => {
             const user = params.data;
             if (!user) return null;
             return (
-              <div className="flex items-center justify-end gap-2 h-full">
-                <Button
-                  variant="outlined"
-                  size="icon"
+              <div className="flex items-center justify-end gap-0.5 h-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
                   onClick={() => navigate(`/users/${user.id}/edit`)}
+                  className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <PencilIcon className="size-4" />
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="icon"
-                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                  <PencilIcon className="size-3.5" />
+                </button>
+                <button
+                  className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                   onClick={() => setUserToDelete(user)}
                 >
-                  <TrashIcon className="size-4" />
-                </Button>
+                  <TrashIcon className="size-3.5" />
+                </button>
               </div>
             );
           },
-          cellStyle: { display: "flex", justifyContent: "flex-end" },
+          cellClass: "group",
         },
       ] as ExtendedColDef<User>[]),
     [navigate]
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
+      {/* Toolbar - Attio style */}
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Users</h1>
-        <Button onClick={() => navigate("/users/new")}>
-          <PlusIcon className="mr-2 size-4" />
-          Create User
-        </Button>
+        <div className="flex items-center gap-3">
+          <h1 className="text-lg font-medium">{t("users.title")}</h1>
+          <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+            {users?.length || 0}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="text" size="sm" className="text-muted-foreground">
+            <SlidersHorizontal className="size-4" />
+            Filter
+          </Button>
+          <Button onClick={() => navigate("/users/new")} size="sm">
+            <PlusIcon className="size-4" />
+            {t("users.create")}
+          </Button>
+        </div>
       </div>
 
+      {/* Data Table - Clean, no wrapper border */}
       {isLoading ? (
-        <div className="flex justify-center p-8">
+        <div className="flex justify-center items-center h-64">
           <Spinner />
         </div>
       ) : (
-        <DataTable<User>
-          rowData={users || []}
-          columnDefs={columnDefs}
-          height={400}
-          floatingFilter
-          pagination
-          paginationPageSize={10}
-          noRowsOverlayText="No users found. Create one to get started."
-          getRowId={(params) => params.data.id}
-        />
+        <div className="border border-border rounded-lg overflow-hidden">
+          <DataTable<User>
+            rowData={users || []}
+            columnDefs={columnDefs}
+            height={520}
+            floatingFilter={false}
+            pagination
+            paginationPageSize={15}
+            noRowsOverlayText="No users found"
+            getRowId={(params) => params.data.id}
+          />
+        </div>
       )}
 
-      {/* Delete Confirmation Dialog */}
+      {/* Delete Dialog */}
       <AlertDialog
         open={!!userToDelete}
         onOpenChange={() => setUserToDelete(null)}
       >
-        <AlertDialogContent>
+        <AlertDialogContent className="max-w-sm">
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>Delete user?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              user
+              This will permanently delete
               <span className="font-medium text-foreground">
                 {" "}
-                {userToDelete?.name}{" "}
+                {userToDelete?.name}
               </span>
-              and remove their data from our servers.
+              .
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

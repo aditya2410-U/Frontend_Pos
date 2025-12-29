@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @import "./fonts/switzer.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -37,356 +37,260 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Attio-style radius - softer, more rounded */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
 }
+
+/* ============================================
+   ATTIO DESIGN SYSTEM
+   Clean, minimal, professional SaaS aesthetic
+   ============================================ */
 
 :root {
-  /* Theme Palette Colors - Light to Dark */
-  /* EBF4DD (lightest), B0CE88 (light), 4C763B (medium), 043915 (dark), FFFD8F (yellow) */
-  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
-  --color-light: rgb(176, 206, 136); /* B0CE88 */
-  --color-medium: rgb(76, 118, 59); /* 4C763B */
-  --color-dark: rgb(4, 57, 21); /* 043915 */
-  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
+  /* Attio Color Palette - Light Mode */
+  --color-lightest: #f0f4ff;
+  --color-light: #6b8afd;
+  --color-medium: #2864f0;
+  --color-dark: #1e3a8a;
+  --color-yellow: #fef08a;
 
-  /* Core Theme Variables - Neutral (white/black based) */
-  /* Theme Palette Colors - Light to Dark */
-  /* EBF4DD (lightest), B0CE88 (light), 4C763B (medium), 043915 (dark), FFFD8F (yellow) */
-  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
-  --color-light: rgb(176, 206, 136); /* B0CE88 */
-  --color-medium: rgb(76, 118, 59); /* 4C763B */
-  --color-dark: rgb(4, 57, 21); /* 043915 */
-  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
+  /* Core Background Colors - Attio uses very clean whites */
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
 
-  /* Core Theme Variables - Neutral (white/black based) */
-  --background: rgb(255, 255, 255);
-  --foreground: rgb(10, 10, 10);
-  --card: rgb(255, 255, 255);
-  --card-foreground: rgb(10, 10, 10);
-  --popover: rgb(255, 255, 255);
-  --popover-foreground: rgb(10, 10, 10);
-
-  /* Primary Colors - Green Palette (for buttons, switches, checkboxes, focus) */
-  --primary: var(--color-medium); /* 4C763B */
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-dark); /* 043915 */
-  --primary-light: var(--color-lightest); /* EBF4DD */
-  --primary-text: var(--color-dark); /* 043915 */
-  --primary-text-light: rgb(255, 255, 255);
-
-  /* Secondary Colors - Neutral */
-  --secondary: rgb(245, 245, 245);
-  --secondary-foreground: rgb(23, 23, 23);
-
-  /* Muted Colors - Neutral */
-  --muted: rgb(245, 245, 245);
-  --muted-foreground: rgb(115, 115, 115);
-
-  /* Accent Colors - Uses palette for interactive highlights */
-  --accent: var(--color-lightest); /* EBF4DD */
-  --accent-foreground: var(--color-dark);
-
-  /* Destructive Colors */
-  --destructive: rgb(220, 38, 38);
-  --destructive-foreground: rgb(255, 255, 255);
-
-  /* Border & Input - Neutral */
-  --border: rgb(229, 229, 229);
-  --input: rgb(229, 229, 229);
-  --ring: var(--color-medium); /* 4C763B - Focus ring uses palette */
-
-  /* Chart Colors - Uses palette */
-  --chart-1: var(--color-medium); /* 4C763B */
-  --chart-2: var(--color-light); /* B0CE88 */
-  --chart-3: var(--color-dark); /* 043915 */
-  --chart-4: var(--color-yellow); /* FFFD8F */
-  --chart-5: var(--color-lightest); /* EBF4DD */
-
-  /* Sidebar Colors - Neutral */
-  --sidebar: rgb(250, 250, 250);
-  --sidebar-foreground: rgb(10, 10, 10);
-  --sidebar-primary: var(
-    --color-medium
-  ); /* 4C763B - Active items use palette */
-  --sidebar-primary-foreground: rgb(255, 255, 255);
-  --sidebar-accent: rgb(245, 245, 245);
-  --sidebar-accent-foreground: rgb(23, 23, 23);
-  --sidebar-border: rgb(229, 229, 229);
-  --sidebar-ring: var(--color-medium); /* 4C763B */
-
-  /* Typography */
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-
-  /* Spacing & Radius */
-  --radius: 0.625rem;
-  --shadow-x: 0;
-  --shadow-y: 1px;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.1;
-  --shadow-color: oklch(0 0 0);
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow-md:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-  --shadow-lg:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  --shadow-xl:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
-  --card-shadow: rgba(0, 0, 0, 0.04) 0px 0px 0px 6px;
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-
-  /* Semantic Color Variables - For buttons/interactive elements */
-  --info: var(--color-medium); /* 4C763B */
-  --info-hover: var(--color-dark); /* 043915 */
-  --info-light: var(--color-lightest); /* EBF4DD */
-  --info-text: var(--color-dark); /* 043915 */
-
-  --success: var(--color-medium); /* 4C763B */
-  --success-hover: var(--color-dark); /* 043915 */
-  --success-light: var(--color-lightest); /* EBF4DD */
-  --success-text: var(--color-dark); /* 043915 */
-
-  --error: rgb(220, 38, 38);
-  --error-hover: rgb(185, 28, 28);
-  --error-light: rgba(220, 38, 38, 0.1);
-  --error-text: rgb(220, 38, 38);
-
-  --warning: var(--color-yellow); /* FFFD8F */
-  --warning-hover: rgb(234, 179, 8);
-  --warning-light: rgba(255, 253, 143, 0.2);
-  --warning-text: rgb(161, 98, 7);
-
-  --white: rgb(255, 255, 255);
-  --text-primary: rgb(10, 10, 10);
-  --text-secondary: rgb(115, 115, 115);
-  --border-outlined: var(--color-dark); /* 043915 - For outlined buttons */
-}
-
-.dark {
-  /* Theme Palette Colors - Keep for reference */
-  --color-lightest: rgb(235, 244, 221); /* EBF4DD */
-  --color-light: rgb(176, 206, 136); /* B0CE88 */
-  --color-medium: rgb(76, 118, 59); /* 4C763B */
-  --color-dark: rgb(4, 57, 21); /* 043915 */
-  --color-yellow: rgb(255, 253, 143); /* FFFD8F */
-
-  /* Core Theme Variables - Dark Mode - Black based */
-  --background: rgb(10, 10, 10);
-  --foreground: rgb(250, 250, 250);
-  --card: rgb(23, 23, 23);
-  --card-foreground: rgb(250, 250, 250);
-  --popover: rgb(38, 38, 38);
-  --popover-foreground: rgb(250, 250, 250);
-
-  /* Primary Colors - WHITE for buttons, switches, checkboxes, focus */
-  --primary: rgb(255, 255, 255);
-  --primary-foreground: rgb(10, 10, 10);
-  --primary-hover: rgb(229, 229, 229);
-  --primary-light: rgba(255, 255, 255, 0.1);
-  --primary-text: rgb(250, 250, 250);
-  --primary-text-light: rgb(10, 10, 10);
-
-  /* Secondary Colors - Neutral dark */
-  --secondary: rgb(38, 38, 38);
-  --secondary-foreground: rgb(250, 250, 250);
-
-  /* Muted Colors - Neutral dark */
-  --muted: rgb(38, 38, 38);
-  --muted-foreground: rgb(161, 161, 161);
-
-  /* Accent Colors - Light for dark mode */
-  --accent: rgba(255, 255, 255, 0.1);
-  --accent-foreground: rgb(250, 250, 250);
-
-  /* Destructive Colors */
-  --destructive: rgb(255, 100, 103);
-  --destructive-foreground: rgb(250, 250, 250);
-
-  /* Border & Input - Dark neutral */
-  --border: rgb(40, 40, 40);
-  --input: rgb(52, 52, 52);
-  --ring: rgb(255, 255, 255); /* White focus ring */
-
-  /* Chart Colors - Uses palette */
-  --chart-1: var(--color-light); /* B0CE88 */
-  --chart-2: var(--color-medium); /* 4C763B */
-  --chart-3: var(--color-lightest); /* EBF4DD */
-  --chart-4: var(--color-yellow); /* FFFD8F */
-  --chart-5: rgb(255, 255, 255);
-
-  /* Sidebar Colors - Dark */
-  --sidebar: rgb(23, 23, 23);
-  --sidebar-foreground: rgb(250, 250, 250);
-  --sidebar-primary: rgb(255, 255, 255);
-  --sidebar-primary-foreground: rgb(10, 10, 10);
-  --sidebar-accent: rgb(38, 38, 38);
-  --sidebar-accent-foreground: rgb(250, 250, 250);
-  --sidebar-border: rgb(40, 40, 40);
-  --sidebar-ring: rgb(255, 255, 255);
-
-  /* Typography */
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-
-  /* Spacing & Radius */
-  --radius: 0.625rem;
-  --shadow-x: 0;
-  --shadow-y: 1px;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.1;
-  --shadow-color: oklch(0 0 0);
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow-md:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-  --shadow-lg:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  --shadow-xl:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
-  --card-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 6px;
-
-  /* Semantic Color Variables - White based for dark mode */
-  --info: rgb(255, 255, 255);
-  --info-hover: rgb(229, 229, 229);
-  --info-light: rgba(255, 255, 255, 0.1);
-  --info-text: rgb(250, 250, 250);
-
-  --success: rgb(255, 255, 255);
-  --success-hover: rgb(229, 229, 229);
-  --success-light: rgba(255, 255, 255, 0.1);
-  --success-text: rgb(250, 250, 250);
-
-  --error: rgb(248, 113, 113);
-  --error-hover: rgb(239, 68, 68);
-  --error-light: rgba(248, 113, 113, 0.15);
-  --error-text: rgb(248, 113, 113);
-
-  --warning: var(--color-yellow); /* FFFD8F */
-  --warning-hover: rgb(251, 191, 36);
-  --warning-light: rgba(255, 253, 143, 0.2);
-  --warning-text: var(--color-yellow);
-
-  --white: rgb(255, 255, 255);
-  --text-primary: rgb(250, 250, 250);
-  --text-secondary: rgb(161, 161, 161);
-  --border-outlined: rgb(255, 255, 255); /* White for outlined buttons */
-  --card-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 6px;
-
-  /* Semantic Color Variables - White based for dark mode */
-  --info: rgb(255, 255, 255);
-  --info-hover: rgb(229, 229, 229);
-  --info-light: rgba(255, 255, 255, 0.1);
-  --info-text: rgb(250, 250, 250);
-
-  --success: rgb(255, 255, 255);
-  --success-hover: rgb(229, 229, 229);
-  --success-light: rgba(255, 255, 255, 0.1);
-  --success-text: rgb(250, 250, 250);
-
-  --error: rgb(248, 113, 113);
-  --error-hover: rgb(239, 68, 68);
-  --error-light: rgba(248, 113, 113, 0.15);
-  --error-text: rgb(248, 113, 113);
-
-  --warning: var(--color-yellow); /* FFFD8F */
-  --warning-hover: rgb(251, 191, 36);
-  --warning-light: rgba(255, 253, 143, 0.2);
-  --warning-text: var(--color-yellow);
-
-  --white: rgb(255, 255, 255);
-  --text-primary: rgb(250, 250, 250);
-  --text-secondary: rgb(161, 161, 161);
-  --border-outlined: rgb(255, 255, 255); /* White for outlined buttons */
-}
-
-/* Color Themes */
-/* Default Green is set in :root and .dark above, but explicit class for clarity */
-.theme-green {
-  --color-lightest: #dcfce7; /* green-100 */
-  --color-light: #4ade80; /* green-400 */
-  --color-medium: #22c55e; /* green-500 */
-  --color-dark: #166534; /* green-800 */
-  --color-yellow: #fef08a; /* yellow-200 */
-
+  /* Primary Colors - Attio's signature blue */
   --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
+  --primary-foreground: #ffffff;
+  --primary-hover: #1e50d0;
   --primary-light: var(--color-lightest);
   --primary-text: var(--color-dark);
+  --primary-text-light: #ffffff;
 
+  /* Secondary Colors - Soft grays */
+  --secondary: #f5f7fa;
+  --secondary-foreground: #1a1a2e;
+
+  /* Muted Colors - Attio's subtle text colors */
+  --muted: #f5f7fa;
+  --muted-foreground: #6b7280;
+
+  /* Accent Colors */
+  --accent: #f0f4ff;
+  --accent-foreground: #1e3a8a;
+
+  /* Destructive Colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Border & Input - Attio uses very subtle borders */
+  --border: #e5e7eb;
+  --input: #e5e7eb;
   --ring: var(--color-medium);
 
-  --sidebar-primary: var(--color-medium);
-  --sidebar-ring: var(--color-medium);
-
-  --info: var(--color-medium);
-  --info-hover: var(--color-dark);
-  --info-light: var(--color-lightest);
-  --info-text: var(--color-dark);
-
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
-
+  /* Chart Colors */
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
   --chart-3: var(--color-dark);
+  --chart-4: #8b5cf6;
   --chart-5: var(--color-lightest);
-}
 
-.theme-teal {
-  --color-lightest: #ccfbf1; /* teal-100 */
-  --color-light: #2dd4bf; /* teal-400 */
-  --color-medium: #14b8a6; /* teal-500 */
-  --color-dark: #115e59; /* teal-800 */
-  --color-yellow: #fef08a; /* yellow-200 */
-
-  --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
-  --primary-light: var(--color-lightest);
-  --primary-text: var(--color-dark);
-
-  --ring: var(--color-medium);
-
+  /* Sidebar Colors - Attio style clean sidebar */
+  --sidebar: #fafbfc;
+  --sidebar-foreground: #1a1a2e;
   --sidebar-primary: var(--color-medium);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f4ff;
+  --sidebar-accent-foreground: #1e3a8a;
+  --sidebar-border: #e5e7eb;
   --sidebar-ring: var(--color-medium);
 
+  /* Typography - Attio uses clean, geometric sans-serif */
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Switzer", var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Attio Spacing Scale - 4px base unit */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Border Radius - Attio uses soft, rounded corners */
+  --radius: 12px;
+
+  /* Shadows - Attio uses very subtle shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md:
+    0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  /* Semantic Colors */
   --info: var(--color-medium);
   --info-hover: var(--color-dark);
   --info-light: var(--color-lightest);
   --info-text: var(--color-dark);
 
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
+  --success: #10b981;
+  --success-hover: #059669;
+  --success-light: #d1fae5;
+  --success-text: #065f46;
+
+  --error: #ef4444;
+  --error-hover: #dc2626;
+  --error-light: #fee2e2;
+  --error-text: #dc2626;
+
+  --warning: #f59e0b;
+  --warning-hover: #d97706;
+  --warning-light: #fef3c7;
+  --warning-text: #92400e;
+
+  --white: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+  --border-outlined: #d1d5db;
+}
+
+/* ============================================
+   DARK MODE - Attio Style
+   ============================================ */
+.dark {
+  --color-lightest: #1e293b;
+  --color-light: #6b8afd;
+  --color-medium: #3b82f6;
+  --color-dark: #60a5fa;
+
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --primary-hover: #60a5fa;
+  --primary-light: rgba(59, 130, 246, 0.15);
+  --primary-text: #93c5fd;
+  --primary-text-light: #0f172a;
+
+  --secondary: #334155;
+  --secondary-foreground: #f1f5f9;
+
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+
+  --accent: rgba(59, 130, 246, 0.15);
+  --accent-foreground: #93c5fd;
+
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
+
+  --border: #334155;
+  --input: #475569;
+  --ring: #3b82f6;
+
+  --chart-1: #60a5fa;
+  --chart-2: #3b82f6;
+  --chart-3: #93c5fd;
+  --chart-4: #a78bfa;
+  --chart-5: #1e293b;
+
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(59, 130, 246, 0.15);
+  --sidebar-accent-foreground: #93c5fd;
+  --sidebar-border: #334155;
+  --sidebar-ring: #3b82f6;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --shadow-md:
+    0 4px 8px -2px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  --info: #3b82f6;
+  --info-hover: #60a5fa;
+  --info-light: rgba(59, 130, 246, 0.15);
+  --info-text: #93c5fd;
+
+  --success: #10b981;
+  --success-hover: #34d399;
+  --success-light: rgba(16, 185, 129, 0.15);
+  --success-text: #6ee7b7;
+
+  --error: #f87171;
+  --error-hover: #fca5a5;
+  --error-light: rgba(248, 113, 113, 0.15);
+  --error-text: #fca5a5;
+
+  --warning: #fbbf24;
+  --warning-hover: #fcd34d;
+  --warning-light: rgba(251, 191, 36, 0.15);
+  --warning-text: #fcd34d;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-outlined: #475569;
+}
+
+/* ============================================
+   COLOR THEMES - Accent Colors
+   ============================================ */
+
+.theme-teal {
+  --color-lightest: #ccfbf1;
+  --color-light: #2dd4bf;
+  --color-medium: #14b8a6;
+  --color-dark: #0f766e;
+
+  --primary: var(--color-medium);
+  --primary-hover: #0d9488;
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+  --ring: var(--color-medium);
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
 
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
@@ -395,31 +299,27 @@
 }
 
 .theme-blue {
-  --color-lightest: #dbeafe; /* blue-100 */
-  --color-light: #60a5fa; /* blue-400 */
-  --color-medium: #2563eb; /* blue-600 */
-  --color-dark: #1e3a8a; /* blue-900 */
-  --color-yellow: #fef08a; /* yellow-200 */
+  --color-lightest: #dbeafe;
+  --color-light: #60a5fa;
+  --color-medium: #3b82f6;
+  --color-dark: #1d4ed8;
 
   --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
+  --primary-hover: #2563eb;
   --primary-light: var(--color-lightest);
   --primary-text: var(--color-dark);
-
   --ring: var(--color-medium);
-
   --sidebar-primary: var(--color-medium);
   --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
 
   --info: var(--color-medium);
   --info-hover: var(--color-dark);
   --info-light: var(--color-lightest);
   --info-text: var(--color-dark);
-
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
 
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
@@ -427,65 +327,28 @@
   --chart-5: var(--color-lightest);
 }
 
-.theme-rose {
-  --color-lightest: #ffe4e6; /* rose-100 */
-  --color-light: #fb7185; /* rose-400 */
-  --color-medium: #e11d48; /* rose-600 */
-  --color-dark: #881337; /* rose-900 */
-  --color-yellow: #fef08a; /* yellow-200 */
+.theme-green {
+  --color-lightest: #dcfce7;
+  --color-light: #4ade80;
+  --color-medium: #22c55e;
+  --color-dark: #15803d;
 
   --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
+  --primary-hover: #16a34a;
   --primary-light: var(--color-lightest);
   --primary-text: var(--color-dark);
-
   --ring: var(--color-medium);
-
   --sidebar-primary: var(--color-medium);
   --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
 
   --info: var(--color-medium);
   --info-hover: var(--color-dark);
   --info-light: var(--color-lightest);
   --info-text: var(--color-dark);
-
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
-
-  --chart-1: var(--color-medium);
-  --chart-2: var(--color-light);
-  --chart-3: var(--color-dark);
-  --chart-5: var(--color-lightest);
-}
-
-.theme-orange {
-  --color-lightest: #ffedd5; /* orange-100 */
-  --color-light: #fb923c; /* orange-400 */
-  --color-medium: #f97316; /* orange-500 */
-  --color-dark: #9a3412; /* orange-800 */
-  --color-yellow: #fef08a; /* yellow-200 */
-
-  --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
-  --primary-light: var(--color-lightest);
-  --primary-text: var(--color-dark);
-
-  --ring: var(--color-medium);
-
-  --sidebar-primary: var(--color-medium);
-  --sidebar-ring: var(--color-medium);
-
-  --info: var(--color-medium);
-  --info-hover: var(--color-dark);
-  --info-light: var(--color-lightest);
-  --info-text: var(--color-dark);
-
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
 
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
@@ -494,31 +357,85 @@
 }
 
 .theme-yellow {
-  --color-lightest: #fef9c3; /* yellow-100 */
-  --color-light: #facc15; /* yellow-400 */
-  --color-medium: #eab308; /* yellow-500 */
-  --color-dark: #854d0e; /* yellow-800 */
-  --color-yellow: #fef08a; /* yellow-200 */
+  --color-lightest: #fef9c3;
+  --color-light: #fde047;
+  --color-medium: #eab308;
+  --color-dark: #a16207;
 
   --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
+  --primary-hover: #ca8a04;
   --primary-light: var(--color-lightest);
   --primary-text: var(--color-dark);
-
   --ring: var(--color-medium);
-
   --sidebar-primary: var(--color-medium);
   --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
 
   --info: var(--color-medium);
   --info-hover: var(--color-dark);
   --info-light: var(--color-lightest);
   --info-text: var(--color-dark);
 
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-orange {
+  --color-lightest: #ffedd5;
+  --color-light: #fb923c;
+  --color-medium: #f97316;
+  --color-dark: #c2410c;
+
+  --primary: var(--color-medium);
+  --primary-hover: #ea580c;
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+  --ring: var(--color-medium);
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
+
+  --chart-1: var(--color-medium);
+  --chart-2: var(--color-light);
+  --chart-3: var(--color-dark);
+  --chart-5: var(--color-lightest);
+}
+
+.theme-rose {
+  --color-lightest: #ffe4e6;
+  --color-light: #fb7185;
+  --color-medium: #f43f5e;
+  --color-dark: #be123c;
+
+  --primary: var(--color-medium);
+  --primary-hover: #e11d48;
+  --primary-light: var(--color-lightest);
+  --primary-text: var(--color-dark);
+  --ring: var(--color-medium);
+  --sidebar-primary: var(--color-medium);
+  --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
+
+  --info: var(--color-medium);
+  --info-hover: var(--color-dark);
+  --info-light: var(--color-lightest);
+  --info-text: var(--color-dark);
 
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
@@ -527,31 +444,27 @@
 }
 
 .theme-purple {
-  --color-lightest: #f3e8ff; /* purple-100 */
-  --color-light: #c084fc; /* purple-400 */
-  --color-medium: #a855f7; /* purple-500 */
-  --color-dark: #6b21a8; /* purple-800 */
-  --color-yellow: #fef08a; /* yellow-200 */
+  --color-lightest: #f3e8ff;
+  --color-light: #c084fc;
+  --color-medium: #a855f7;
+  --color-dark: #7e22ce;
 
   --primary: var(--color-medium);
-  --primary-hover: var(--color-dark);
+  --primary-hover: #9333ea;
   --primary-light: var(--color-lightest);
   --primary-text: var(--color-dark);
-
   --ring: var(--color-medium);
-
   --sidebar-primary: var(--color-medium);
   --sidebar-ring: var(--color-medium);
+  --sidebar-accent: var(--color-lightest);
+  --sidebar-accent-foreground: var(--color-dark);
+  --accent: var(--color-lightest);
+  --accent-foreground: var(--color-dark);
 
   --info: var(--color-medium);
   --info-hover: var(--color-dark);
   --info-light: var(--color-lightest);
   --info-text: var(--color-dark);
-
-  --success: var(--color-medium);
-  --success-hover: var(--color-dark);
-  --success-light: var(--color-lightest);
-  --success-text: var(--color-dark);
 
   --chart-1: var(--color-medium);
   --chart-2: var(--color-light);
@@ -559,99 +472,166 @@
   --chart-5: var(--color-lightest);
 }
 
-.dark.theme-green,
-.dark .theme-green {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --sidebar-primary: var(--color-medium);
-}
-
-.dark.theme-blue,
-.dark .theme-blue {
-  /* Use colored primary for dark mode instead of white */
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #60a5fa;
-  --chart-2: #2563eb;
-
-  /* Sidebar specific for dark mode - keep transparent/dark or use theme override if desired */
-  --sidebar-primary: var(--color-medium);
-}
-
-.dark.theme-rose,
-.dark .theme-rose {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #fb7185;
-  --chart-2: #e11d48;
-
-  --sidebar-primary: var(--color-medium);
-}
-
-.dark.theme-orange,
-.dark .theme-orange {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #fb923c;
-  --chart-2: #f97316;
-
-  --sidebar-primary: var(--color-medium);
-}
-
+/* Dark mode theme variants */
 .dark.theme-teal,
-.dark .theme-teal {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #2dd4bf;
-  --chart-2: #14b8a6;
-
-  --sidebar-primary: var(--color-medium);
+.dark .theme-teal,
+.dark.theme-blue,
+.dark .theme-blue,
+.dark.theme-green,
+.dark .theme-green,
+.dark.theme-yellow,
+.dark .theme-yellow,
+.dark.theme-orange,
+.dark .theme-orange,
+.dark.theme-rose,
+.dark .theme-rose,
+.dark.theme-purple,
+.dark .theme-purple {
+  --primary-foreground: #ffffff;
+  --primary-light: rgba(var(--color-medium), 0.15);
+  --sidebar-accent: rgba(var(--color-medium), 0.15);
 }
 
 .dark.theme-yellow,
 .dark .theme-yellow {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(10, 10, 10);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #facc15;
-  --chart-2: #eab308;
-
-  --sidebar-primary: var(--color-medium);
+  --primary-foreground: #1a1a2e;
 }
 
-.dark.theme-purple,
-.dark .theme-purple {
-  --primary: var(--color-medium);
-  --primary-foreground: rgb(255, 255, 255);
-  --primary-hover: var(--color-light);
-
-  --chart-1: #c084fc;
-  --chart-2: #a855f7;
-
-  --sidebar-primary: var(--color-medium);
-}
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
 @layer base {
   * {
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  H1 {
-    font-family: "IBM Plex Serif", serif;
+  body {
+    @apply bg-background text-foreground;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
+
+  /* Attio-style headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+}
+
+/* ============================================
+   ATTIO-STYLE UTILITY CLASSES
+   ============================================ */
+
+/* Card styles */
+.attio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+}
+
+/* Input styles */
+.attio-input {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--background);
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.attio-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Button base styles */
+.attio-btn {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.attio-btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.attio-btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+/* Section spacing */
+.attio-section {
+  padding: 24px 0;
+}
+
+.attio-section + .attio-section {
+  border-top: 1px solid var(--border);
+}
+
+/* Page container */
+.attio-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
