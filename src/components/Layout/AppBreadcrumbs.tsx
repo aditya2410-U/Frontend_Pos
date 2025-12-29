@@ -9,8 +9,10 @@ import {
 } from "@/common/@atoms/breadcrumb";
 import React from "react";
 import { LayoutDashboardIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function AppBreadcrumbs() {
+  const { t } = useTranslation();
   const matches = useMatches();
 
   const breadcrumbs = matches
@@ -18,7 +20,7 @@ export function AppBreadcrumbs() {
     .map((match) => {
       const { breadcrumb } = match.handle as any;
       return {
-        label: breadcrumb,
+        label: t(breadcrumb),
         href: match.pathname,
       };
     });
@@ -32,12 +34,12 @@ export function AppBreadcrumbs() {
               <BreadcrumbLink asChild>
                 <div className="flex items-center gap-2">
                   <LayoutDashboardIcon className="size-4" />
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/dashboard">{t("sidebar.dashboard")}</Link>
                 </div>
               </BreadcrumbLink>
             </BreadcrumbItem>
             {breadcrumbs.map((crumb, index) => {
-              if (crumb.label === "Dashboard") return null;
+              if (crumb.label === t("sidebar.dashboard")) return null;
 
               return (
                 <div key={crumb.href} className="flex items-center">

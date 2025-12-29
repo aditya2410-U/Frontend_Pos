@@ -1,0 +1,74 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "userManagement": "User Management",
+    "roles": "Roles",
+    "outlets": "Outlets",
+    "administration": "Administration",
+    "settings": "Settings",
+    "profile": "Profile",
+    "posSystem": "POS System",
+    "adminPanel": "Admin Panel",
+    "logout": "Logout"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "enterCredentials": "Enter your credentials to access your account",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "emailPlaceholder": "you@example.com"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalSales": "Total Sales",
+    "activeUsers": "Active Users",
+    "salesTrend": "+20.1% from last month",
+    "usersTrend": "+180.1% from last month"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Configure your POS system settings.",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "theme": "Theme",
+    "selectTheme": "Select Theme",
+    "themes": {
+      "green": "Green",
+      "blue": "Blue",
+      "rose": "Rose",
+      "orange": "Orange"
+    },
+    "mode": "Mode",
+    "selectMode": "Select Mode",
+    "modes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "placeholder": "Settings configuration options will be implemented here. This is a mock page with placeholder content."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or you may have mistyped the URL.",
+    "goDashboard": "Go to Dashboard",
+    "goBack": "Go Back"
+  },
+  "loader": {
+    "loading": "Loading",
+    "pleaseWait": "Please wait..."
+  },
+  "roles": {
+    "create": "Create Role"
+  },
+  "outlets": {
+    "create": "Create Outlet"
+  },
+  "users": {
+    "create": "Create User",
+    "edit": "Edit User"
+  }
+}

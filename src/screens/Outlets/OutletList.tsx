@@ -21,7 +21,7 @@ import {
   OUTLET_COLUMNS,
   processColumns,
   type ExtendedColDef,
-} from "@/Lib/tableColumns";
+} from "@/lib/tableColumns";
 
 export default function OutletList() {
   const { data: outlets, isLoading, isError } = useOutlets();

@@ -7,7 +7,7 @@ import { DataTable } from "@/common/DataTable";
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { useMemo } from "react";
 import type { Role } from "@/api/schemas/role";
-import { ROLE_COLUMNS } from "@/Lib/tableColumns";
+import { ROLE_COLUMNS } from "@/lib/tableColumns";
 
 export default function RoleList() {
   const { data: roles, isLoading, isError } = useRoles();
