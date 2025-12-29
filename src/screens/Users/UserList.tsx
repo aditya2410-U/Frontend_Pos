@@ -132,18 +132,16 @@ export default function UserList() {
           <Spinner />
         </div>
       ) : (
-        <div className="border border-border rounded-lg overflow-hidden">
-          <DataTable<User>
-            rowData={users || []}
-            columnDefs={columnDefs}
-            height={520}
-            floatingFilter={false}
-            pagination
-            paginationPageSize={15}
-            noRowsOverlayText="No users found"
-            getRowId={(params) => params.data.id}
-          />
-        </div>
+        <DataTable<User>
+          rowData={users || []}
+          columnDefs={columnDefs}
+          height={400}
+          floatingFilter
+          pagination
+          paginationPageSize={10}
+          noRowsOverlayText="No users found. Create one to get started."
+          getRowId={(params) => params.data.id}
+        />
       )}
 
       {/* Delete Dialog */}
