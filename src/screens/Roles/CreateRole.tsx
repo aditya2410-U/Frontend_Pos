@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { Label } from "@/common/@atoms/label";
@@ -19,6 +20,7 @@ interface CreateRoleFormData {
 }
 
 export default function CreateRole() {
+  const { t } = useTranslation();
   const { mutate: createRole, isPending } = useCreateRole();
   const { data: permissions, isLoading: isLoadingPermissions } =
     usePermissions();
@@ -39,18 +41,18 @@ export default function CreateRole() {
       {
         name: "name",
         type: "text",
-        label: "Role Name",
-        placeholder: "e.g. Store Manager",
+        label: t("forms.fields.name"),
+        placeholder: t("forms.placeholders.roleName"),
         validations: { required: true },
       },
       {
         name: "description",
         type: "textarea",
-        label: "Description",
-        placeholder: "Describe what this role can do...",
+        label: t("forms.fields.description"),
+        placeholder: t("forms.placeholders.description"),
       },
     ],
-    []
+    [t]
   );
 
   const handlePermissionChange = (permKey: string) => {
@@ -72,15 +74,17 @@ export default function CreateRole() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Create New Role</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {t("roles.createNew")}
+        </h1>
         <Button variant="outlined" onClick={() => navigate("/roles")}>
-          Cancel
+          {t("common.cancel")}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Role Details</CardTitle>
+          <CardTitle>{t("roles.details")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -92,7 +96,7 @@ export default function CreateRole() {
               />
 
               <div className="grid gap-4">
-                <Label>Permissions</Label>
+                <Label>{t("forms.fields.permissions")}</Label>
                 {isLoadingPermissions ? (
                   <div className="flex justify-center p-4">
                     <Spinner />
@@ -133,10 +137,10 @@ export default function CreateRole() {
               <Button type="submit" className="w-full" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> Creating...
+                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
                   </>
                 ) : (
-                  "Create Role"
+                  t("roles.createButton")
                 )}
               </Button>
             </form>

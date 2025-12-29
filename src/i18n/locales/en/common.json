@@ -61,14 +61,71 @@
     "loading": "Loading",
     "pleaseWait": "Please wait..."
   },
-  "roles": {
-    "create": "Create Role"
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "edit": "Edit",
+    "creating": "Creating...",
+    "updating": "Updating...",
+    "loading": "Loading..."
   },
-  "outlets": {
-    "create": "Create Outlet"
+  "forms": {
+    "fields": {
+      "name": "Name",
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "password": "Password",
+      "role": "Role",
+      "outlet": "Outlet",
+      "address": "Address",
+      "description": "Description",
+      "status": "Status",
+      "activeStatus": "Active Status",
+      "permissions": "Permissions"
+    },
+    "placeholders": {
+      "name": "Enter name",
+      "fullName": "John Doe",
+      "email": "john@example.com",
+      "password": "••••••••",
+      "selectRole": "Select Role",
+      "selectOutlet": "Select Outlet",
+      "address": "123 Market St",
+      "outletName": "Main Branch",
+      "roleName": "e.g. Store Manager",
+      "description": "Describe what this role can do..."
+    },
+    "labels": {
+      "optional": "(Optional)"
+    }
   },
   "users": {
+    "title": "Users",
     "create": "Create User",
-    "edit": "Edit User"
+    "createNew": "Create New User",
+    "edit": "Edit User",
+    "details": "User Details",
+    "createButton": "Create User",
+    "updateButton": "Update User",
+    "manageSubtitle": "Manage your store users."
+  },
+  "roles": {
+    "title": "Roles",
+    "create": "Create Role",
+    "createNew": "Create New Role",
+    "details": "Role Details",
+    "createButton": "Create Role",
+    "manageSubtitle": "Manage user roles and permissions."
+  },
+  "outlets": {
+    "title": "Outlets",
+    "create": "Create Outlet",
+    "createNew": "Create New Outlet",
+    "details": "Outlet Details",
+    "createButton": "Create Outlet",
+    "manageSubtitle": "Manage your store outlets."
   }
 }

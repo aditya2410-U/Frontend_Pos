@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { useCreateOutlet } from "@/api/queries/useOutlets";
@@ -15,6 +16,7 @@ interface CreateOutletFormData {
 }
 
 export default function CreateOutlet() {
+  const { t } = useTranslation();
   const { mutate: createOutlet, isPending } = useCreateOutlet();
   const navigate = useNavigate();
 
@@ -30,18 +32,18 @@ export default function CreateOutlet() {
       {
         name: "name",
         type: "text",
-        label: "Outlet Name",
-        placeholder: "Main Branch",
+        label: t("forms.fields.name"),
+        placeholder: t("forms.placeholders.outletName"),
         validations: { required: true },
       },
       {
         name: "address",
         type: "text",
-        label: "Address",
-        placeholder: "123 Market St",
+        label: t("forms.fields.address"),
+        placeholder: t("forms.placeholders.address"),
       },
     ],
-    []
+    [t]
   );
 
   const onSubmit = (data: CreateOutletFormData) => {
@@ -56,15 +58,17 @@ export default function CreateOutlet() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Create New Outlet</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {t("outlets.createNew")}
+        </h1>
         <Button variant="outlined" onClick={() => navigate("/outlets")}>
-          Cancel
+          {t("common.cancel")}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Outlet Details</CardTitle>
+          <CardTitle>{t("outlets.details")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -78,10 +82,10 @@ export default function CreateOutlet() {
               <Button type="submit" className="w-full" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> Creating...
+                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
                   </>
                 ) : (
-                  "Create Outlet"
+                  t("outlets.createButton")
                 )}
               </Button>
             </form>

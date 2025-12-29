@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { useCreateUser } from "@/api/queries/useUsers";
@@ -19,6 +20,7 @@ interface CreateUserFormData {
 }
 
 export default function CreateUser() {
+  const { t } = useTranslation();
   const { mutate: createUser, isPending } = useCreateUser();
   const { data: roles } = useRoles();
   const { data: outlets } = useOutlets();
@@ -39,29 +41,29 @@ export default function CreateUser() {
       {
         name: "name",
         type: "text",
-        label: "Full Name",
-        placeholder: "John Doe",
+        label: t("forms.fields.fullName"),
+        placeholder: t("forms.placeholders.fullName"),
         validations: { required: true },
       },
       {
         name: "email",
         type: "email",
-        label: "Email Address",
-        placeholder: "john@example.com",
+        label: t("forms.fields.email"),
+        placeholder: t("forms.placeholders.email"),
         validations: { required: true },
       },
       {
         name: "password",
         type: "text",
-        label: "Password",
-        placeholder: "••••••••",
+        label: t("forms.fields.password"),
+        placeholder: t("forms.placeholders.password"),
         validations: { required: true, minLength: 6 },
       },
       {
         name: "roleId",
         type: "select",
-        label: "Role (Optional)",
-        placeholder: "Select Role",
+        label: `${t("forms.fields.role")} ${t("forms.labels.optional")}`,
+        placeholder: t("forms.placeholders.selectRole"),
         options:
           roles?.map((role) => ({
             value: role.id,
@@ -71,8 +73,8 @@ export default function CreateUser() {
       {
         name: "outletId",
         type: "select",
-        label: "Outlet (Optional)",
-        placeholder: "Select Outlet",
+        label: `${t("forms.fields.outlet")} ${t("forms.labels.optional")}`,
+        placeholder: t("forms.placeholders.selectOutlet"),
         options:
           outlets?.map((outlet) => ({
             value: outlet.id,
@@ -80,7 +82,7 @@ export default function CreateUser() {
           })) || [],
       },
     ],
-    [roles, outlets]
+    [roles, outlets, t]
   );
 
   const onSubmit = (data: CreateUserFormData) => {
@@ -101,15 +103,17 @@ export default function CreateUser() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Create New User</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {t("users.createNew")}
+        </h1>
         <Button variant="outlined" onClick={() => navigate("/users")}>
-          Cancel
+          {t("common.cancel")}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>User Details</CardTitle>
+          <CardTitle>{t("users.details")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -123,10 +127,10 @@ export default function CreateUser() {
               <Button type="submit" className="w-full" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> Creating...
+                    <Spinner className="mr-2 size-4" /> {t("common.creating")}
                   </>
                 ) : (
-                  "Create User"
+                  t("users.createButton")
                 )}
               </Button>
             </form>

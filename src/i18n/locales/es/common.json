@@ -61,14 +61,71 @@
     "loading": "Cargando",
     "pleaseWait": "Por favor espere..."
   },
-  "roles": {
-    "create": "Crear rol"
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "creating": "Creando...",
+    "updating": "Actualizando...",
+    "loading": "Cargando..."
   },
-  "outlets": {
-    "create": "Crear punto de venta"
+  "forms": {
+    "fields": {
+      "name": "Nombre",
+      "fullName": "Nombre completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "role": "Rol",
+      "outlet": "Punto de venta",
+      "address": "Dirección",
+      "description": "Descripción",
+      "status": "Estado",
+      "activeStatus": "Estado activo",
+      "permissions": "Permisos"
+    },
+    "placeholders": {
+      "name": "Ingrese nombre",
+      "fullName": "Juan Pérez",
+      "email": "juan@ejemplo.com",
+      "password": "••••••••",
+      "selectRole": "Seleccionar rol",
+      "selectOutlet": "Seleccionar punto de venta",
+      "address": "Calle Principal 123",
+      "outletName": "Sucursal principal",
+      "roleName": "ej. Gerente de tienda",
+      "description": "Describa lo que puede hacer este rol..."
+    },
+    "labels": {
+      "optional": "(Opcional)"
+    }
   },
   "users": {
+    "title": "Usuarios",
     "create": "Crear usuario",
-    "edit": "Editar usuario"
+    "createNew": "Crear nuevo usuario",
+    "edit": "Editar usuario",
+    "details": "Detalles del usuario",
+    "createButton": "Crear usuario",
+    "updateButton": "Actualizar usuario",
+    "manageSubtitle": "Administre los usuarios de su tienda."
+  },
+  "roles": {
+    "title": "Roles",
+    "create": "Crear rol",
+    "createNew": "Crear nuevo rol",
+    "details": "Detalles del rol",
+    "createButton": "Crear rol",
+    "manageSubtitle": "Administre los roles y permisos de usuario."
+  },
+  "outlets": {
+    "title": "Puntos de venta",
+    "create": "Crear punto de venta",
+    "createNew": "Crear nuevo punto de venta",
+    "details": "Detalles del punto de venta",
+    "createButton": "Crear punto de venta",
+    "manageSubtitle": "Administre los puntos de venta de su tienda."
   }
 }

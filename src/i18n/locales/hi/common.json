@@ -61,14 +61,71 @@
     "loading": "लोड हो रहा है",
     "pleaseWait": "कृपया प्रतीक्षा करें..."
   },
-  "roles": {
-    "create": "भूमिका बनाएं"
+  "common": {
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "create": "बनाएं",
+    "update": "अपडेट करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "creating": "बना रहा है...",
+    "updating": "अपडेट हो रहा है...",
+    "loading": "लोड हो रहा है..."
   },
-  "outlets": {
-    "create": "आउटलेट बनाएं"
+  "forms": {
+    "fields": {
+      "name": "नाम",
+      "fullName": "पूरा नाम",
+      "email": "ईमेल पता",
+      "password": "पासवर्ड",
+      "role": "भूमिका",
+      "outlet": "आउटलेट",
+      "address": "पता",
+      "description": "विवरण",
+      "status": "स्थिति",
+      "activeStatus": "सक्रिय स्थिति",
+      "permissions": "अनुमतियां"
+    },
+    "placeholders": {
+      "name": "नाम दर्ज करें",
+      "fullName": "जॉन डो",
+      "email": "john@example.com",
+      "password": "••••••••",
+      "selectRole": "भूमिका चुनें",
+      "selectOutlet": "आउटलेट चुनें",
+      "address": "123 मार्केट स्ट्रीट",
+      "outletName": "मुख्य शाखा",
+      "roleName": "जैसे स्टोर मैनेजर",
+      "description": "वर्णन करें कि यह भूमिका क्या कर सकती है..."
+    },
+    "labels": {
+      "optional": "(वैकल्पिक)"
+    }
   },
   "users": {
+    "title": "उपयोगकर्ता",
     "create": "उपयोगकर्ता बनाएं",
-    "edit": "उपयोगकर्ता संपादित करें"
+    "createNew": "नया उपयोगकर्ता बनाएं",
+    "edit": "उपयोगकर्ता संपादित करें",
+    "details": "उपयोगकर्ता विवरण",
+    "createButton": "उपयोगकर्ता बनाएं",
+    "updateButton": "उपयोगकर्ता अपडेट करें",
+    "manageSubtitle": "अपने स्टोर उपयोगकर्ताओं को प्रबंधित करें।"
+  },
+  "roles": {
+    "title": "भूमिकाएं",
+    "create": "भूमिका बनाएं",
+    "createNew": "नई भूमिका बनाएं",
+    "details": "भूमिका विवरण",
+    "createButton": "भूमिका बनाएं",
+    "manageSubtitle": "उपयोगकर्ता भूमिकाओं और अनुमतियों को प्रबंधित करें।"
+  },
+  "outlets": {
+    "title": "आउटलेट्स",
+    "create": "आउटलेट बनाएं",
+    "createNew": "नया आउटलेट बनाएं",
+    "details": "आउटलेट विवरण",
+    "createButton": "आउटलेट बनाएं",
+    "manageSubtitle": "अपने स्टोर आउटलेट्स को प्रबंधित करें।"
   }
 }

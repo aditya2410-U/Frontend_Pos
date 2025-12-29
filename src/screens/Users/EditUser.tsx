@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { useUpdateUser, useUser } from "@/api/queries/useUsers";
@@ -16,6 +17,7 @@ interface EditUserFormData {
 }
 
 export default function EditUser() {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -47,24 +49,24 @@ export default function EditUser() {
       {
         name: "name",
         type: "text",
-        label: "Full Name",
-        placeholder: "John Doe",
+        label: t("forms.fields.fullName"),
+        placeholder: t("forms.placeholders.fullName"),
         validations: { required: true },
       },
       {
         name: "email",
         type: "email",
-        label: "Email Address",
-        placeholder: "john@example.com",
+        label: t("forms.fields.email"),
+        placeholder: t("forms.placeholders.email"),
         validations: { required: true },
       },
       {
         name: "isActive",
         type: "switch",
-        label: "Active Status",
+        label: t("forms.fields.activeStatus"),
       },
     ],
-    []
+    [t]
   );
 
   const onSubmit = (data: EditUserFormData) => {
@@ -92,15 +94,15 @@ export default function EditUser() {
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Edit User</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t("users.edit")}</h1>
         <Button variant="outlined" onClick={() => navigate("/users")}>
-          Cancel
+          {t("common.cancel")}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>User Details</CardTitle>
+          <CardTitle>{t("users.details")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -114,10 +116,10 @@ export default function EditUser() {
               <Button type="submit" className="w-full" disabled={isUpdating}>
                 {isUpdating ? (
                   <>
-                    <Spinner className="mr-2 size-4" /> Updating...
+                    <Spinner className="mr-2 size-4" /> {t("common.updating")}
                   </>
                 ) : (
-                  "Update User"
+                  t("users.updateButton")
                 )}
               </Button>
             </form>
