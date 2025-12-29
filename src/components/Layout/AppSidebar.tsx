@@ -23,44 +23,51 @@ import {
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/common/@atoms/Button";
 import { useLogout } from "@/api/queries/useAuth";
-
-const menuItems = [
-  {
-    title: "Dashboard",
-    icon: LayoutDashboardIcon,
-    url: "/dashboard",
-  },
-  {
-    title: "Products",
-    icon: PackageIcon,
-    url: "/products",
-  },
-  {
-    title: "Orders",
-    icon: ShoppingCartIcon,
-    url: "/orders",
-  },
-  {
-    title: "User Management",
-    icon: UsersIcon,
-    url: "/users",
-  },
-  {
-    title: "Roles",
-    icon: SettingsIcon,
-    url: "/roles",
-  },
-  {
-    title: "Outlets",
-    icon: StoreIcon,
-    url: "/outlets",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export function AppSidebar() {
+  const { t } = useTranslation();
   const { mutate: logout } = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const menuItems = [
+    {
+      title: t("sidebar.dashboard"),
+      icon: LayoutDashboardIcon,
+      url: "/dashboard",
+    },
+    {
+      title: t("sidebar.products"),
+      icon: PackageIcon,
+      url: "/products",
+    },
+    {
+      title: t("sidebar.orders"),
+      icon: ShoppingCartIcon,
+      url: "/orders",
+    },
+    {
+      title: t("sidebar.userManagement"),
+      icon: UsersIcon,
+      url: "/users",
+    },
+    {
+      title: t("sidebar.roles"),
+      icon: SettingsIcon,
+      url: "/roles",
+    },
+    {
+      title: t("sidebar.outlets"),
+      icon: StoreIcon,
+      url: "/outlets",
+    },
+    {
+      title: t("sidebar.settings"),
+      icon: SettingsIcon,
+      url: "/settings",
+    },
+  ];
 
   const handleLogout = () => {
     logout();
@@ -85,9 +92,11 @@ export function AppSidebar() {
                   <StoreIcon className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">POS System</span>
+                  <span className="truncate font-semibold">
+                    {t("sidebar.posSystem")}
+                  </span>
                   <span className="truncate text-xs text-muted-foreground">
-                    Admin Panel
+                    {t("sidebar.adminPanel")}
                   </span>
                 </div>
               </Link>
@@ -98,11 +107,11 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Administration</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton
                     asChild
                     tooltip={item.title}
@@ -130,7 +139,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              tooltip="Logout"
+              tooltip={t("sidebar.logout")}
               className="group-data-[collapsible=icon]:justify-center"
             >
               <Button
@@ -140,7 +149,7 @@ export function AppSidebar() {
               >
                 <LogOut className="h-4 w-4" />
                 <span className="group-data-[collapsible=icon]:hidden">
-                  Logout
+                  {t("sidebar.logout")}
                 </span>
               </Button>
             </SidebarMenuButton>

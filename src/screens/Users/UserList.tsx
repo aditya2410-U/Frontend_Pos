@@ -21,7 +21,7 @@ import {
   USER_COLUMNS,
   processColumns,
   type ExtendedColDef,
-} from "@/Lib/tableColumns";
+} from "@/lib/tableColumns";
 
 export default function UserList() {
   const navigate = useNavigate();

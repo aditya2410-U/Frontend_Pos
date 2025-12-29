@@ -1,31 +1,42 @@
+import { useTranslation } from "react-i18next";
+
 const LoaderScreen = () => {
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center">
-
       {/* Loader container */}
       <div className="relative">
         {/* Outer ring */}
         <div className="size-24 rounded-full border-4 border-white/10 animate-pulse" />
-        
+
         {/* Spinning ring 1 */}
-        <div className="absolute inset-0 size-24 rounded-full border-4 border-transparent border-t-primary animate-spin" style={{ animationDuration: '1s' }} />
-        
+        <div
+          className="absolute inset-0 size-24 rounded-full border-4 border-transparent border-t-primary animate-spin"
+          style={{ animationDuration: "1s" }}
+        />
+
         {/* Spinning ring 2 */}
-        <div className="absolute inset-2 size-20 rounded-full border-4 border-transparent border-r-chart-2 animate-spin" style={{ animationDuration: '0.8s', animationDirection: 'reverse' }} />
-        
+        <div
+          className="absolute inset-2 size-20 rounded-full border-4 border-transparent border-r-chart-2 animate-spin"
+          style={{ animationDuration: "0.8s", animationDirection: "reverse" }}
+        />
+
         {/* Spinning ring 3 */}
-        <div className="absolute inset-4 size-16 rounded-full border-4 border-transparent border-b-chart-4 animate-spin" style={{ animationDuration: '1.2s' }} />
-        
+        <div
+          className="absolute inset-4 size-16 rounded-full border-4 border-transparent border-b-chart-4 animate-spin"
+          style={{ animationDuration: "1.2s" }}
+        />
+
         {/* Center dot with glow */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="size-4 rounded-full bg-linear-to-r from-chart-1 to-chart-2 animate-pulse shadow-lg shadow-purple-500/50" />
+          <div className="size-4 rounded-full bg-linear-to-r from-chart-1 to-chart-2 animate-pulse loader-glow" />
         </div>
       </div>
 
       {/* Loading text */}
       <div className="mt-8 flex flex-col items-center gap-2">
         <p className="text-lg font-medium tracking-wide animate-pulse">
-          Loading
+          {t("loader.loading")}
         </p>
         <div className="flex gap-1">
           {[0, 1, 2].map((i) => (
@@ -36,9 +47,7 @@ const LoaderScreen = () => {
             />
           ))}
         </div>
-        <p className="text-sm mt-2">
-          Please wait...
-        </p>
+        <p className="text-sm mt-2">{t("loader.pleaseWait")}</p>
       </div>
 
       {/* Floating particles */}
@@ -78,6 +87,10 @@ const LoaderScreen = () => {
         }
         .animate-float {
           animation: float 4s ease-in-out infinite;
+        }
+        .loader-glow {
+          box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--chart-1) 50%, transparent), 
+                      0 4px 6px -4px color-mix(in srgb, var(--chart-2) 50%, transparent);
         }
       `}</style>
     </div>

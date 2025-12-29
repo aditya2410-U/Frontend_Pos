@@ -1,18 +1,137 @@
+import { useTranslation } from "react-i18next";
+import { Button } from "@/common/@atoms/Button";
+import { useTheme } from "@/common/@atoms/theme-provider";
+
 export default function Settings() {
+  const { t, i18n } = useTranslation();
+  const { theme, setTheme, colorTheme, setColorTheme } = useTheme();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {t("settings.title")}
+        </h1>
         <p className="text-muted-foreground mt-2">
-          Configure your POS system settings. This is a placeholder page.
+          {t("settings.description")}
         </p>
       </div>
 
-      <div className="rounded-lg border bg-card p-6">
-        <p className="text-muted-foreground">
-          Settings configuration options will be implemented here. This is a
-          mock page with placeholder content.
-        </p>
+      <div className="rounded-lg border bg-card p-6 space-y-8">
+        <p className="text-muted-foreground">{t("settings.placeholder")}</p>
+
+        {/* Language Selection */}
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold">
+            {t("settings.selectLanguage")}
+          </h2>
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={i18n.language === "en" ? "default" : "outlined"}
+              onClick={() => changeLanguage("en")}
+            >
+              English
+            </Button>
+            <Button
+              variant={i18n.language === "fr" ? "default" : "outlined"}
+              onClick={() => changeLanguage("fr")}
+            >
+              Français
+            </Button>
+            <Button
+              variant={i18n.language === "es" ? "default" : "outlined"}
+              onClick={() => changeLanguage("es")}
+            >
+              Español
+            </Button>
+            <Button
+              variant={i18n.language === "hi" ? "default" : "outlined"}
+              onClick={() => changeLanguage("hi")}
+            >
+              हिंदी
+            </Button>
+          </div>
+        </div>
+
+        {/* Mode Selection */}
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold">{t("settings.selectMode")}</h2>
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={theme === "light" ? "default" : "outlined"}
+              onClick={() => setTheme("light")}
+            >
+              {t("settings.modes.light")}
+            </Button>
+            <Button
+              variant={theme === "dark" ? "default" : "outlined"}
+              onClick={() => setTheme("dark")}
+            >
+              {t("settings.modes.dark")}
+            </Button>
+            <Button
+              variant={theme === "system" ? "default" : "outlined"}
+              onClick={() => setTheme("system")}
+            >
+              {t("settings.modes.system")}
+            </Button>
+          </div>
+        </div>
+
+        {/* Theme Selection */}
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold">{t("settings.selectTheme")}</h2>
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={colorTheme === "theme-green" ? "default" : "outlined"}
+              onClick={() => setColorTheme("theme-green")}
+              className={
+                colorTheme === "theme-green"
+                  ? ""
+                  : "hover:text-green-600 hover:border-green-600 hover:bg-green-50"
+              }
+            >
+              {t("settings.themes.green")}
+            </Button>
+            <Button
+              variant={colorTheme === "theme-blue" ? "default" : "outlined"}
+              onClick={() => setColorTheme("theme-blue")}
+              className={
+                colorTheme === "theme-blue"
+                  ? ""
+                  : "hover:text-blue-600 hover:border-blue-600 hover:bg-blue-50"
+              }
+            >
+              {t("settings.themes.blue")}
+            </Button>
+            <Button
+              variant={colorTheme === "theme-rose" ? "default" : "outlined"}
+              onClick={() => setColorTheme("theme-rose")}
+              className={
+                colorTheme === "theme-rose"
+                  ? ""
+                  : "hover:text-rose-600 hover:border-rose-600 hover:bg-rose-50"
+              }
+            >
+              {t("settings.themes.rose")}
+            </Button>
+            <Button
+              variant={colorTheme === "theme-orange" ? "default" : "outlined"}
+              onClick={() => setColorTheme("theme-orange")}
+              className={
+                colorTheme === "theme-orange"
+                  ? ""
+                  : "hover:text-orange-600 hover:border-orange-600 hover:bg-orange-50"
+              }
+            >
+              {t("settings.themes.orange")}
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

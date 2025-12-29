@@ -77,24 +77,29 @@
 }
 
 /* Variant: Default (Filled) - Premium style with double border and inset shadows */
+/* Theme-aware: Adapts to all color themes (green, blue, rose, orange) */
 .variant-default {
-  background-color: rgb(76, 118, 59); /* 4C763B - Medium green */
-  color: rgb(255, 255, 255);
-  border: 2px double rgba(176, 206, 136, 0.6); /* B0CE88 with opacity */
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
     rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
     rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    rgba(4, 57, 21, 0.08) 0px -0.557334px 0.278667px -0.1875px inset,
-    rgba(4, 57, 21, 0.1) 0px -1.69015px 0.845077px -0.375px inset,
-    rgba(4, 57, 21, 0.165) 0px -4.46786px 2.23393px -0.5625px inset,
-    rgba(4, 57, 21, 0.373) 0px -14px 7px -0.75px inset;
+    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
+      0.278667px -0.1875px inset,
+    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
+      0.845077px -0.375px inset,
+    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
+      2.23393px -0.5625px inset,
+    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
+      7px -0.75px inset;
 }
 
 .variant-default:hover {
-  background-color: rgb(4, 57, 21); /* 043915 - Dark green */
-  color: rgb(255, 255, 255);
-  border-color: rgba(235, 244, 221, 0.6); /* EBF4DD with opacity */
+  background-color: var(--primary-hover);
+  color: var(--primary-foreground);
+  border-color: color-mix(in srgb, var(--color-lightest) 60%, transparent);
 }
 
 .variant-default[data-type="error"] {
@@ -117,41 +122,49 @@
 }
 
 .variant-default[data-type="info"] {
-  background-color: rgb(76, 118, 59); /* 4C763B */
-  color: rgb(255, 255, 255);
-  border: 2px double rgba(176, 206, 136, 0.6);
+  background-color: var(--info);
+  color: var(--primary-foreground);
+  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
     rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
     rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    rgba(4, 57, 21, 0.08) 0px -0.557334px 0.278667px -0.1875px inset,
-    rgba(4, 57, 21, 0.1) 0px -1.69015px 0.845077px -0.375px inset,
-    rgba(4, 57, 21, 0.165) 0px -4.46786px 2.23393px -0.5625px inset,
-    rgba(4, 57, 21, 0.373) 0px -14px 7px -0.75px inset;
+    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
+      0.278667px -0.1875px inset,
+    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
+      0.845077px -0.375px inset,
+    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
+      2.23393px -0.5625px inset,
+    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
+      7px -0.75px inset;
 }
 
 .variant-default[data-type="info"]:hover {
-  background-color: rgb(4, 57, 21); /* 043915 */
-  color: rgb(255, 255, 255);
+  background-color: var(--info-hover);
+  color: var(--primary-foreground);
 }
 
 .variant-default[data-type="success"] {
-  background-color: rgb(76, 118, 59); /* 4C763B */
-  color: rgb(255, 255, 255);
-  border: 2px double rgba(176, 206, 136, 0.6);
+  background-color: var(--success);
+  color: var(--primary-foreground);
+  border: 2px double color-mix(in srgb, var(--color-light) 60%, transparent);
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 0.602187px 0.602187px -1.25px,
     rgba(0, 0, 0, 0.224) 0px 2.28853px 2.28853px -2.5px,
     rgba(0, 0, 0, 0.086) 0px 10px 10px -3.75px,
-    rgba(4, 57, 21, 0.08) 0px -0.557334px 0.278667px -0.1875px inset,
-    rgba(4, 57, 21, 0.1) 0px -1.69015px 0.845077px -0.375px inset,
-    rgba(4, 57, 21, 0.165) 0px -4.46786px 2.23393px -0.5625px inset,
-    rgba(4, 57, 21, 0.373) 0px -14px 7px -0.75px inset;
+    color-mix(in srgb, var(--color-dark) 8%, transparent) 0px -0.557334px
+      0.278667px -0.1875px inset,
+    color-mix(in srgb, var(--color-dark) 10%, transparent) 0px -1.69015px
+      0.845077px -0.375px inset,
+    color-mix(in srgb, var(--color-dark) 16.5%, transparent) 0px -4.46786px
+      2.23393px -0.5625px inset,
+    color-mix(in srgb, var(--color-dark) 37.3%, transparent) 0px -14px
+      7px -0.75px inset;
 }
 
 .variant-default[data-type="success"]:hover {
-  background-color: rgb(4, 57, 21); /* 043915 */
-  color: rgb(255, 255, 255);
+  background-color: var(--success-hover);
+  color: var(--primary-foreground);
 }
 
 .variant-default[data-type="warning"] {
@@ -174,19 +187,20 @@
 }
 
 /* Variant: Outlined */
+/* Theme-aware: Adapts to all color themes */
 .variant-outlined {
   background-color: transparent;
-  border: 2px double rgba(76, 118, 59, 0.6); /* 4C763B with opacity */
-  color: rgb(76, 118, 59); /* 4C763B */
+  border: 2px double color-mix(in srgb, var(--primary) 60%, transparent);
+  color: var(--primary);
   box-shadow:
     rgba(0, 0, 0, 0.05) 0px 0.602187px 0.602187px -1.25px,
     rgba(0, 0, 0, 0.04) 0px 2.28853px 2.28853px -2.5px;
 }
 
 .variant-outlined:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
-  border-color: rgba(4, 57, 21, 0.6); /* 043915 with opacity */
-  color: rgb(4, 57, 21); /* 043915 */
+  background-color: var(--color-lightest);
+  border-color: color-mix(in srgb, var(--primary-hover) 60%, transparent);
+  color: var(--primary-hover);
 }
 
 .variant-outlined[data-type="error"] {
@@ -201,25 +215,25 @@
 }
 
 .variant-outlined[data-type="info"] {
-  border: 2px double rgba(76, 118, 59, 0.6);
-  color: rgb(76, 118, 59);
+  border: 2px double color-mix(in srgb, var(--info) 60%, transparent);
+  color: var(--info);
 }
 
 .variant-outlined[data-type="info"]:hover {
-  background-color: rgb(76, 118, 59);
-  border-color: rgba(176, 206, 136, 0.6);
-  color: rgb(255, 255, 255);
+  background-color: var(--info);
+  border-color: color-mix(in srgb, var(--color-light) 60%, transparent);
+  color: var(--primary-foreground);
 }
 
 .variant-outlined[data-type="success"] {
-  border: 2px double rgba(76, 118, 59, 0.6);
-  color: rgb(76, 118, 59);
+  border: 2px double color-mix(in srgb, var(--success) 60%, transparent);
+  color: var(--success);
 }
 
 .variant-outlined[data-type="success"]:hover {
-  background-color: rgb(76, 118, 59);
-  border-color: rgba(176, 206, 136, 0.6);
-  color: rgb(255, 255, 255);
+  background-color: var(--success);
+  border-color: color-mix(in srgb, var(--color-light) 60%, transparent);
+  color: var(--primary-foreground);
 }
 
 .variant-outlined[data-type="warning"] {
@@ -234,14 +248,15 @@
 }
 
 /* Variant: Text */
+/* Theme-aware: Adapts to all color themes */
 .variant-text {
   background-color: transparent;
   border: none;
-  color: rgb(76, 118, 59); /* 4C763B */
+  color: var(--primary);
 }
 
 .variant-text:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
+  background-color: var(--color-lightest);
 }
 
 .variant-text[data-type="error"] {
@@ -253,19 +268,19 @@
 }
 
 .variant-text[data-type="info"] {
-  color: rgb(76, 118, 59); /* 4C763B */
+  color: var(--info);
 }
 
 .variant-text[data-type="info"]:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
+  background-color: var(--info-light);
 }
 
 .variant-text[data-type="success"] {
-  color: rgb(76, 118, 59); /* 4C763B */
+  color: var(--success);
 }
 
 .variant-text[data-type="success"]:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
+  background-color: var(--success-light);
 }
 
 .variant-text[data-type="warning"] {
@@ -277,18 +292,19 @@
 }
 
 /* Variant: Dashed */
+/* Theme-aware: Adapts to all color themes */
 .variant-dashed {
   background-color: transparent;
   border-width: 2px;
   border-style: dashed;
-  border-color: rgb(76, 118, 59); /* 4C763B */
-  color: rgb(76, 118, 59); /* 4C763B */
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .variant-dashed:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
-  border-color: rgb(4, 57, 21); /* 043915 */
-  color: rgb(4, 57, 21); /* 043915 */
+  background-color: var(--color-lightest);
+  border-color: var(--primary-hover);
+  color: var(--primary-hover);
 }
 
 .variant-dashed[data-type="error"] {
@@ -302,23 +318,23 @@
 }
 
 .variant-dashed[data-type="info"] {
-  border-color: rgb(76, 118, 59); /* 4C763B */
-  color: rgb(76, 118, 59); /* 4C763B */
+  border-color: var(--info);
+  color: var(--info);
 }
 
 .variant-dashed[data-type="info"]:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
-  border-color: rgb(4, 57, 21); /* 043915 */
+  background-color: var(--info-light);
+  border-color: var(--info-hover);
 }
 
 .variant-dashed[data-type="success"] {
-  border-color: rgb(76, 118, 59); /* 4C763B */
-  color: rgb(76, 118, 59); /* 4C763B */
+  border-color: var(--success);
+  color: var(--success);
 }
 
 .variant-dashed[data-type="success"]:hover {
-  background-color: rgb(235, 244, 221); /* EBF4DD */
-  border-color: rgb(4, 57, 21); /* 043915 */
+  background-color: var(--success-light);
+  border-color: var(--success-hover);
 }
 
 .variant-dashed[data-type="warning"] {
