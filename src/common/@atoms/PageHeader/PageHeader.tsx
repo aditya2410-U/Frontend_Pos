@@ -37,8 +37,8 @@ export function PageHeader({
     <div
       className={cn(
         "flex items-center justify-between",
-        showBorder && "",
-        padding && "px-6 pt-1",
+        showBorder && "border-b border-border",
+        padding && "px-6 py-3",
         className
       )}
     >

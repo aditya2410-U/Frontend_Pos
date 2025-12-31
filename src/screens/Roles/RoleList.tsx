@@ -1,6 +1,6 @@
 import { useRoles } from "@/api/queries/useRoles";
 import { PageHeader } from "@/common/@atoms/PageHeader";
-import { Spinner } from "@/common/@atoms/spinner";
+import { SkeletonTable } from "@/common/DataTable/SkeletonTable";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -51,12 +51,6 @@ export default function RoleList() {
     []
   );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center p-8">
-        <Spinner />
-      </div>
-    );
   if (isError)
     return <div className="text-red-500 p-8">Failed to load roles.</div>;
 
@@ -72,14 +66,18 @@ export default function RoleList() {
         }}
       />
 
-      <DataTable<Role>
-        rowData={roles || []}
-        columnDefs={columnDefs}
-        height={400}
-        floatingFilter
-        noRowsOverlayText="No roles found."
-        getRowId={(params) => params.data.id}
-      />
+      {isLoading ? (
+        <SkeletonTable columnCount={10} rowCount={10} />
+      ) : (
+        <DataTable<Role>
+          rowData={roles || []}
+          columnDefs={columnDefs}
+          height={400}
+          floatingFilter
+          noRowsOverlayText="No roles found."
+          getRowId={(params) => params.data.id}
+        />
+      )}
     </div>
   );
 }

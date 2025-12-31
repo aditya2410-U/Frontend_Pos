@@ -13,6 +13,7 @@ import {
   SystemThemePreviewDark,
   THEME_COLORS,
 } from "@/assets/theme-previews";
+import { PageHeader } from "@/common/@atoms/PageHeader";
 
 // Theme preview component - Exact Attio style
 interface ThemePreviewProps {
@@ -183,17 +184,13 @@ export default function Settings() {
   return (
     <div className="space-y-10">
       {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {t("settings.title")}
-        </h1>
-        <p className="text-muted-foreground mt-1 text-sm">
-          {t("settings.description")}
-        </p>
-      </div>
+      <PageHeader
+        title={t("settings.title")}
+        description={t("settings.description")}
+      />
 
       {/* Theme Section */}
-      <section className="space-y-5">
+      <section className="space-y-5 px-6 ">
         <div>
           <h2 className="text-base font-semibold text-foreground">
             {t("settings.theme")}
@@ -229,7 +226,7 @@ export default function Settings() {
       </section>
 
       {/* Accent Color Section */}
-      <section className="space-y-5">
+      <section className="space-y-5 px-6">
         <div>
           <h2 className="text-base font-semibold text-foreground">
             {t("settings.accentColor")}
@@ -253,7 +250,7 @@ export default function Settings() {
       </section>
 
       {/* Language Section */}
-      <section className="space-y-5">
+      <section className="space-y-5 px-6">
         <div>
           <h2 className="text-base font-semibold text-foreground">
             {t("settings.language")}

@@ -4,7 +4,7 @@ import { PageHeader } from "@/common/@atoms/PageHeader";
 import { useNavigate } from "react-router-dom";
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Spinner } from "@/common/@atoms/spinner";
+import { SkeletonTable } from "@/common/DataTable/SkeletonTable";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -71,12 +71,6 @@ export default function OutletList() {
     []
   );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center p-8">
-        <Spinner />
-      </div>
-    );
   if (isError)
     return <div className="text-red-500 p-8">Failed to load outlets.</div>;
 
@@ -92,16 +86,19 @@ export default function OutletList() {
         }}
       />
 
-      <DataTable<Outlet>
-        rowData={outlets || []}
-        columnDefs={columnDefs}
-        height="70vh"
-        containerStyle={{ height: "70vh" }}
-        floatingFilter
-        noRowsOverlayText="No outlets found. Create one to get started."
-        getRowId={(params) => params.data.id}
-      />
-
+      {isLoading ? (
+        <SkeletonTable columnCount={10} rowCount={10} />
+      ) : (
+        <DataTable<Outlet>
+          rowData={outlets || []}
+          columnDefs={columnDefs}
+          height="70vh"
+          containerStyle={{ height: "70vh" }}
+          floatingFilter
+          noRowsOverlayText="No outlets found. Create one to get started."
+          getRowId={(params) => params.data.id}
+        />
+      )}
       {/* Delete Confirmation Dialog */}
       <AlertDialog
         open={!!outletToDelete}

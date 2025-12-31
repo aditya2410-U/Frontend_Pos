@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUsers, useUpdateUser, useDeleteUser } from "@/api/queries/useUsers";
-import { Spinner } from "@/common/@atoms/spinner";
+import { SkeletonTable } from "@/common/DataTable/SkeletonTable";
 import type { User } from "@/api/schemas/user";
 import {
   AlertDialog,
@@ -134,9 +134,7 @@ export default function UserList() {
 
       {/* Data Table - Clean, no wrapper border */}
       {isLoading ? (
-        <div className="flex justify-center items-center h-64">
-          <Spinner />
-        </div>
+        <SkeletonTable columnCount={columnDefs.length} rowCount={8} />
       ) : (
         <DataTable<User>
           rowData={users || []}
