@@ -36,27 +36,42 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
           return true;
         },
       }}
-      render={({ field: formField }) => (
-        <FormItem
-          className={cn(
-            "flex flex-row items-center space-x-3 space-y-0",
-            className
-          )}
-          style={style}
-        >
-          <FormControl>
-            <Checkbox
-              checked={formField.value}
-              onCheckedChange={formField.onChange}
-              disabled={disabled}
-            />
-          </FormControl>
-          {label && (
-            <FormLabel className="!mt-0 cursor-pointer">{label}</FormLabel>
-          )}
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field: formField }) => {
+        const checked = Boolean(formField.value);
+
+        return (
+          <FormItem
+            className={cn(
+              "flex flex-row items-center space-x-3 space-y-0",
+              className
+            )}
+            style={style}
+          >
+            <FormControl>
+              <Checkbox
+                checked={checked}
+                onCheckedChange={(checked) => {
+                  formField.onChange(Boolean(checked));
+                }}
+                disabled={disabled}
+              />
+            </FormControl>
+            {label && (
+              <FormLabel
+                className="!mt-0 cursor-pointer"
+                onClick={() => {
+                  if (!disabled) {
+                    formField.onChange(!checked);
+                  }
+                }}
+              >
+                {label}
+              </FormLabel>
+            )}
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 }

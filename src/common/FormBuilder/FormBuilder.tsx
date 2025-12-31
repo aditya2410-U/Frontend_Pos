@@ -10,6 +10,7 @@ import {
   SwitchField,
   RadioField,
   DateField,
+  DateRangeField,
   UrlField,
 } from "./fields";
 
@@ -72,6 +73,9 @@ function FormBuilderField<TFieldValues extends FieldValues = FieldValues>({
       case "date":
       case "date_only":
         return <DateField {...commonProps} />;
+
+      case "date_range":
+        return <DateRangeField {...commonProps} />;
 
       case "url":
         return <UrlField {...commonProps} />;

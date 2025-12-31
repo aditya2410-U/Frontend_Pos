@@ -97,45 +97,63 @@ export function TextField<TFieldValues extends FieldValues = FieldValues>({
           return true;
         },
       }}
-      render={({ field: formField }) => (
-        <FormItem className={cn("w-full", className)} style={style}>
-          {label && <FormLabel>{label}</FormLabel>}
-          <FormControl>
-            {isTextarea ? (
-              <Textarea
-                {...formField}
-                placeholder={placeholder}
-                disabled={disabled}
-                autoFocus={autoFocus}
-                rows={4}
-              />
-            ) : isPercentage ? (
-              <InputGroup className="w-full">
-                <Input
+      render={({ field: formField }) => {
+        const handleChange = (
+          e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        ) => {
+          const value = e.target.value;
+          // Convert to number for number/amount/percentage types
+          if (inputType === "number") {
+            const numValue = value === "" ? "" : Number(value);
+            formField.onChange(numValue);
+          } else {
+            formField.onChange(value);
+          }
+        };
+
+        return (
+          <FormItem className={cn("w-full", className)} style={style}>
+            {label && <FormLabel>{label}</FormLabel>}
+            <FormControl>
+              {isTextarea ? (
+                <Textarea
                   {...formField}
-                  type={inputType}
+                  onChange={handleChange}
                   placeholder={placeholder}
                   disabled={disabled}
                   autoFocus={autoFocus}
-                  className="pr-10"
+                  rows={4}
                 />
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <Percent className="h-4 w-4 text-muted-foreground" />
-                </div>
-              </InputGroup>
-            ) : (
-              <Input
-                {...formField}
-                type={inputType}
-                placeholder={placeholder}
-                disabled={disabled}
-                autoFocus={autoFocus}
-              />
-            )}
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
+              ) : isPercentage ? (
+                <InputGroup className="w-full">
+                  <Input
+                    {...formField}
+                    type={inputType}
+                    onChange={handleChange}
+                    placeholder={placeholder}
+                    disabled={disabled}
+                    autoFocus={autoFocus}
+                    className="pr-10"
+                  />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <Percent className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </InputGroup>
+              ) : (
+                <Input
+                  {...formField}
+                  type={inputType}
+                  onChange={handleChange}
+                  placeholder={placeholder}
+                  disabled={disabled}
+                  autoFocus={autoFocus}
+                />
+              )}
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 }

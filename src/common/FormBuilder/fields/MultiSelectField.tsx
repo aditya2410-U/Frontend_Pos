@@ -1,12 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import type { Control, FieldValues } from "react-hook-form";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/common/@atoms/select";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/common/@atoms/popover";
 import {
   FormControl,
   FormField,
@@ -16,6 +14,7 @@ import {
 } from "@/common/@atoms/form";
 import { Checkbox } from "@/common/@atoms/checkbox";
 import { cn } from "@/lib/utils";
+import { ChevronDownIcon, CheckIcon, XIcon } from "lucide-react";
 import type { FormFieldConfig } from "../types";
 
 interface MultiSelectFieldProps<
@@ -37,6 +36,7 @@ export function MultiSelectField<
     options,
     style,
     className,
+    disabled,
   } = field;
 
   const fieldOptions = options || field.configuration?.options || [];
@@ -60,9 +60,6 @@ export function MultiSelectField<
         const selectedValues: string[] = Array.isArray(formField.value)
           ? formField.value.map((v: any) => String(v))
           : [];
-        const selectedLabels = fieldOptions
-          .filter((opt) => selectedValues.includes(String(opt.value)))
-          .map((opt) => opt.label);
 
         const toggleValue = (value: string) => {
           const currentValues = selectedValues;
@@ -72,43 +69,97 @@ export function MultiSelectField<
           formField.onChange(newValues);
         };
 
+        const removeValue = (value: string, e: React.MouseEvent) => {
+          e.stopPropagation();
+          const newValues = selectedValues.filter((v: string) => v !== value);
+          formField.onChange(newValues);
+        };
+
+        const selectedOptions = fieldOptions.filter((opt) =>
+          selectedValues.includes(String(opt.value))
+        );
+
         return (
           <FormItem className={cn("w-full", className)} style={style}>
             {label && <FormLabel>{label}</FormLabel>}
-            <Select open={open} onOpenChange={setOpen}>
-              <FormControl>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={placeholder || "Select options"}>
-                    {selectedLabels.length > 0
-                      ? `${selectedLabels.length} selected`
-                      : placeholder || "Select options"}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {fieldOptions.map((option) => {
-                  const isSelected = selectedValues.includes(
-                    String(option.value)
-                  );
-                  return (
-                    <SelectItem
-                      key={String(option.value)}
-                      value={String(option.value)}
-                      onSelect={(e) => {
-                        e.preventDefault();
-                        toggleValue(String(option.value));
-                      }}
-                      className="cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Checkbox checked={isSelected} />
-                        <span>{option.label}</span>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <div
+                    role="combobox"
+                    aria-expanded={open}
+                    className={cn(
+                      "flex items-center w-full min-h-9 px-3 py-1.5 border border-input rounded-md overflow-scroll bg-transparent text-sm shadow-xs transition-[color,box-shadow] cursor-pointer",
+                      "focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]",
+                      disabled && "cursor-not-allowed opacity-50",
+                      !selectedValues.length && "text-muted-foreground"
+                    )}
+                  >
+                    {selectedOptions.length > 0 ? (
+                      <div className="flex-1 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+                        {selectedOptions.map((option) => (
+                          <span
+                            key={String(option.value)}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-medium whitespace-nowrap shrink-0"
+                          >
+                            {option.label}
+                            <button
+                              type="button"
+                              onClick={(e) =>
+                                removeValue(String(option.value), e)
+                              }
+                              className="hover:bg-primary/20 rounded-full p-0.5 transition-colors"
+                              disabled={disabled}
+                            >
+                              <XIcon className="h-3 w-3" />
+                            </button>
+                          </span>
+                        ))}
                       </div>
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
+                    ) : (
+                      <span className="flex-1">
+                        {placeholder || "Select options"}
+                      </span>
+                    )}
+                    <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </div>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent
+                className="w-[var(--radix-popover-trigger-width)] p-1"
+                align="start"
+              >
+                <div className="max-h-[300px] overflow-y-auto">
+                  {fieldOptions.map((option) => {
+                    const isSelected = selectedValues.includes(
+                      String(option.value)
+                    );
+                    return (
+                      <div
+                        key={String(option.value)}
+                        className={cn(
+                          "flex items-center gap-2 px-2 py-1.5 rounded-sm cursor-pointer hover:bg-accent transition-colors",
+                          isSelected && "bg-accent"
+                        )}
+                        onClick={() => toggleValue(String(option.value))}
+                      >
+                        <Checkbox
+                          checked={isSelected}
+                          onCheckedChange={() =>
+                            toggleValue(String(option.value))
+                          }
+                          className="pointer-events-none"
+                        />
+                        <span className="text-sm flex-1">{option.label}</span>
+                        {isSelected && (
+                          <CheckIcon className="h-4 w-4 text-primary" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </PopoverContent>
+            </Popover>
             <FormMessage />
           </FormItem>
         );

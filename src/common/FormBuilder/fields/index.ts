@@ -5,4 +5,5 @@ export { CheckboxField } from "./CheckboxField";
 export { SwitchField } from "./SwitchField";
 export { RadioField } from "./RadioField";
 export { DateField } from "./DateField";
+export { DateRangeField } from "./DateRangeField";
 export { UrlField } from "./UrlField";
