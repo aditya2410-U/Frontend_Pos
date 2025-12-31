@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from "electron";
-import { join } from "path";
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -27,6 +26,8 @@ const preload = join(__dirname, "preload.js");
 const url = process.env.VITE_DEV_SERVER_URL || "http://localhost:5173";
 
 function createWindow() {
+  const isDev = !app.isPackaged && !!process.env.VITE_DEV_SERVER_URL;
+
   win = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -40,8 +41,8 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       webSecurity: true,
+      devTools: false, // Disable DevTools in all modes (local and production)
     },
-    titleBarStyle: process.platform === "darwin" ? "hiddenInset" : "default",
     frame: true,
     show: false,
   });
@@ -51,11 +52,9 @@ function createWindow() {
     win?.show();
   });
 
-  if (url) {
+  if (isDev) {
     // Development mode
     win.loadURL(url);
-    // Open DevTools in development
-    win.webContents.openDevTools();
   } else {
     // Production mode
     const distPath = process.env.DIST || join(__dirname, "../dist");
@@ -69,14 +68,28 @@ function createWindow() {
 
 // This method will be called when Electron has finished initialization
 app.whenReady().then(() => {
-  createWindow();
+  try {
+    createWindow();
 
-  // macOS specific: re-create window when dock icon is clicked
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
+    // macOS specific: re-create window when dock icon is clicked
+    app.on("activate", () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+      }
+    });
+  } catch (error) {
+    console.error("Error creating window:", error);
+    app.quit();
+  }
+});
+
+// Handle uncaught exceptions
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
 });
 
 // Quit when all windows are closed

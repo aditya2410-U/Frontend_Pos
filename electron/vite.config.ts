@@ -20,7 +20,41 @@ export default defineConfig({
         entryFileNames: "[name].js",
         format: "es",
       },
-      external: ["electron", "url", "path", "node:url", "node:path"],
+      // Externalize all Node.js built-in modules and Electron
+      external: (id) => {
+        // Externalize Electron
+        if (id === "electron") return true;
+
+        // Externalize Node.js built-ins (both node: protocol and regular names)
+        if (id.startsWith("node:")) return true;
+
+        // Externalize common Node.js built-in modules
+        const nodeBuiltins = [
+          "url",
+          "path",
+          "fs",
+          "os",
+          "util",
+          "stream",
+          "events",
+          "crypto",
+          "buffer",
+          "process",
+          "assert",
+          "constants",
+          "querystring",
+          "http",
+          "https",
+          "net",
+          "tls",
+          "zlib",
+          "child_process",
+        ];
+        if (nodeBuiltins.includes(id)) return true;
+
+        // Don't externalize anything else (relative imports, node_modules, etc.)
+        return false;
+      },
     },
   },
   // Ensure Node.js modules are available

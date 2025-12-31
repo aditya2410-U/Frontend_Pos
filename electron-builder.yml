@@ -4,8 +4,21 @@ directories:
   output: release
 files:
   - dist/**/*
-  - dist-electron/**/*
-  - node_modules/**/*
+  - dist-electron/main.js
+  - dist-electron/preload.js
+  - dist-electron/vite.svg
+  - dist-electron/fonts/**/*
+  - "!dist/downloads/**/*"  # Exclude downloads folder from dist (contains DMG files)
+  - "!dist-electron/downloads/**/*"  # Exclude downloads folder from dist-electron (contains DMG files)
+  - "!dist/**/*.dmg"  # Exclude any DMG files from dist
+  - "!dist-electron/**/*.dmg"  # Exclude any DMG files from dist-electron
+  - "!dist/**/*.exe"  # Exclude any EXE files from dist
+  - "!dist-electron/**/*.exe"  # Exclude any EXE files from dist-electron
+  - "!dist/**/*.AppImage"  # Exclude any AppImage files from dist
+  - "!dist-electron/**/*.AppImage"  # Exclude any AppImage files from dist-electron
+  - "!**/*.map"  # Exclude source maps
+  - "!**/node_modules/**/*"  # Explicitly exclude node_modules
+  # Don't include node_modules - electron-builder automatically includes only production dependencies
 # Auto-updater configuration
 # Option 1: GitHub Releases (recommended for open source)
 # publish:
@@ -29,12 +42,22 @@ mac:
   icon: build/icon.icns
   hardenedRuntime: false
   gatekeeperAssess: false
+  # Completely disable code signing to avoid invalid signature issues
+  # This makes the app truly unsigned (no adhoc signature)
+  identity: null
+  type: distribution
+  # Remove any existing signatures
+  signIgnore: ["**"]
   # DMG specific settings to prevent corruption
   dmg:
     # Don't sign the DMG (prevents corruption for unsigned apps)
     sign: false
     # Write DMG in UDZO format (compressed, compatible)
     format: "UDZO"
+    # Additional settings to prevent "damaged" errors
+    writeUpdate: false
+    # Compression level (0-9, higher = more compression but slower)
+    compressionLevel: 9
     # Background image (optional)
     # background: "build/background.png"
     # Window settings

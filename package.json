@@ -149,8 +149,20 @@
     },
     "files": [
       "dist/**/*",
-      "dist-electron/**/*",
-      "node_modules/**/*"
+      "dist-electron/main.js",
+      "dist-electron/preload.js",
+      "dist-electron/vite.svg",
+      "dist-electron/fonts/**/*",
+      "!dist/downloads/**/*",
+      "!dist-electron/downloads/**/*",
+      "!dist/**/*.dmg",
+      "!dist-electron/**/*.dmg",
+      "!dist/**/*.exe",
+      "!dist-electron/**/*.exe",
+      "!dist/**/*.AppImage",
+      "!dist-electron/**/*.AppImage",
+      "!**/*.map",
+      "!**/node_modules/**/*"
     ],
     "mac": {
       "category": "public.app-category.business",

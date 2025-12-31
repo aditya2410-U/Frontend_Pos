@@ -6,3 +6,4 @@
 # After building with: npm run electron:build
 # Copy the files from release/ directory to this downloads/ folder
 
+

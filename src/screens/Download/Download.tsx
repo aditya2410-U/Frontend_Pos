@@ -61,9 +61,17 @@ export default function Download() {
   const appVersion = import.meta.env.VITE_APP_VERSION || "1.0.1";
 
   // Detect if Apple Silicon or Intel Mac
+  // Default to arm64 for Mac users (most modern Macs are Apple Silicon)
   const isAppleSilicon =
     navigator.platform.toLowerCase().includes("arm") ||
-    navigator.userAgent.toLowerCase().includes("arm");
+    navigator.userAgent.toLowerCase().includes("arm") ||
+    // Check for M1/M2/M3 chips in user agent
+    navigator.userAgent.toLowerCase().includes("m1") ||
+    navigator.userAgent.toLowerCase().includes("m2") ||
+    navigator.userAgent.toLowerCase().includes("m3") ||
+    // Default to arm64 for Mac users (better compatibility)
+    (detectedPlatform === "macos" &&
+      !navigator.userAgent.toLowerCase().includes("intel"));
 
   const platforms: Platform[] = [
     {
@@ -71,12 +79,12 @@ export default function Download() {
       name: "macOS",
       icon: <Laptop className="size-6" />,
       extension: ".dmg",
-      // Use Apple Silicon version if detected, otherwise Intel
+      // Default to Apple Silicon (arm64) version - works on both Intel and Apple Silicon Macs
       // GitHub releases format: /releases/download/{tag}/{filename}
-      // Tag: v1.0.1, Filename version: 1.0.0
-      downloadUrl: isAppleSilicon
-        ? `${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-arm64-${fileVersion}.dmg`
-        : `${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-${fileVersion}.dmg`,
+      downloadUrl:
+        isAppleSilicon || detectedPlatform === "macos"
+          ? `${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-arm64-${appVersion}.dmg`
+          : `${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-${appVersion}.dmg`,
       recommended: detectedPlatform === "macos",
     },
     {
@@ -98,20 +106,20 @@ export default function Download() {
   ];
 
   const handleDownload = (platform: Platform) => {
-    // Create a temporary anchor element to trigger download
+    // GitHub releases URLs work with spaces - browser will encode automatically
+    // Format: https://github.com/owner/repo/releases/download/tag/filename
     const link = document.createElement("a");
     link.href = platform.downloadUrl;
-    // Extract filename from URL for better download name
+    // Extract filename from URL
     const filename =
       platform.downloadUrl.split("/").pop() ||
       `inventory-pos${platform.extension}`;
     link.download = filename;
-    const downloadLink = document.createElement("a");
-    downloadLink.href = platform.downloadUrl;
-    downloadLink.download = filename;
-    document.body.appendChild(downloadLink);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
     link.click();
-    document.body.removeChild(downloadLink);
+    document.body.removeChild(link);
   };
 
   return (
@@ -177,19 +185,118 @@ export default function Download() {
                         Choose your Mac:
                       </p>
                       <a
-                        href={`https://github.com/aditya2410-U/Frontend_Pos/releases/download/v1.0.1/inventory-pos-mac-arm64-1.0.0.dmg`}
+                        href={`${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-${appVersion}.dmg`}
                         download
                         className="block text-xs text-primary hover:underline"
                       >
                         Intel Mac (x64)
                       </a>
                       <a
-                        href={`https://github.com/aditya2410-U/Frontend_Pos/releases/download/v1.0.1/inventory-pos-mac-arm64-1.0.0.dmg`}
+                        href={`${downloadBaseUrl}/${releaseTag}/inventory-pos-mac-arm64-${appVersion}.dmg`}
                         download
                         className="block text-xs text-primary hover:underline"
                       >
                         Apple Silicon (M1/M2/M3)
                       </a>
+                      <div className="mt-2 pt-2 border-t bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded">
+                        <p className="text-xs font-medium text-yellow-800 dark:text-yellow-200 mb-2">
+                          ⚠️ Important: "Damaged" Error Fix
+                        </p>
+                        <p className="text-xs text-yellow-700 dark:text-yellow-300 mb-2">
+                          This app is <strong>unsigned</strong> (free/open
+                          source). macOS blocks unsigned apps by default.
+                        </p>
+                        <div className="bg-yellow-100 dark:bg-yellow-900/40 p-2 rounded mb-2">
+                          <p className="text-xs font-semibold text-yellow-900 dark:text-yellow-100 mb-1">
+                            ✅ Solution (Choose One):
+                          </p>
+                          <div className="text-xs text-yellow-800 dark:text-yellow-200 space-y-2">
+                            <div>
+                              <strong>
+                                Method 1 - Copy App & Remove Quarantine:
+                              </strong>
+                              <ol className="ml-4 list-decimal space-y-1 mt-1">
+                                <li>Open the DMG file (double-click it)</li>
+                                <li>
+                                  Drag "Inventory POS.app" to your{" "}
+                                  <strong>Applications</strong> folder (or
+                                  Desktop)
+                                </li>
+                                <li>
+                                  Open <strong>Terminal</strong> app
+                                </li>
+                                <li>
+                                  Run this command to remove quarantine:
+                                  <code className="block bg-yellow-200 dark:bg-yellow-800/60 p-1 rounded mt-1 font-mono text-[10px] break-all">
+                                    xattr -cr "/Applications/Inventory POS.app"
+                                  </code>
+                                  <span className="text-[10px] italic block mt-1">
+                                    (Or use ~/Desktop/Inventory POS.app if
+                                    copied to Desktop)
+                                  </span>
+                                </li>
+                                <li>
+                                  Now try opening the app - it should work!
+                                </li>
+                              </ol>
+                            </div>
+                            <div>
+                              <strong>Method 2 - Disable Gatekeeper:</strong>
+                              <ol className="ml-4 list-decimal space-y-1 mt-1">
+                                <li>
+                                  Open <strong>Terminal</strong> app
+                                </li>
+                                <li>
+                                  Run:{" "}
+                                  <code className="bg-yellow-200 dark:bg-yellow-800/60 px-1 rounded text-[10px]">
+                                    sudo spctl --master-disable
+                                  </code>
+                                </li>
+                                <li>Enter your password when prompted</li>
+                                <li>
+                                  Check status:{" "}
+                                  <code className="bg-yellow-200 dark:bg-yellow-800/60 px-1 rounded text-[10px]">
+                                    spctl --status
+                                  </code>
+                                </li>
+                                <li>
+                                  If it says "disabled", you can now open the
+                                  app
+                                </li>
+                                <li>
+                                  Re-enable later:{" "}
+                                  <code className="bg-yellow-200 dark:bg-yellow-800/60 px-1 rounded text-[10px]">
+                                    sudo spctl --master-enable
+                                  </code>
+                                </li>
+                              </ol>
+                            </div>
+                            <div>
+                              <strong>Method 3 - Right-Click Open:</strong>
+                              <ol className="ml-4 list-decimal space-y-1 mt-1">
+                                <li>Mount the DMG file</li>
+                                <li>
+                                  <strong>Right-click</strong> on "Inventory
+                                  POS.app"
+                                </li>
+                                <li>
+                                  Select <strong>"Open"</strong> (not
+                                  double-click)
+                                </li>
+                                <li>
+                                  Click <strong>"Open"</strong> in the warning
+                                  dialog
+                                </li>
+                                <li>The app should launch</li>
+                              </ol>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-yellow-700 dark:text-yellow-300 italic">
+                          Note: The app is unsigned (free/open source). macOS
+                          blocks unsigned apps by default.
+                        </p>
+                      </div>
                     </div>
                   )}
 
