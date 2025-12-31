@@ -1,4 +1,4 @@
-import { Button } from "@/common/@atoms/Button";
+import { PageHeader } from "@/common/@atoms/PageHeader";
 import {
   PlusIcon,
   PencilIcon,
@@ -47,7 +47,11 @@ export default function UserList() {
   const columnDefs = useMemo<ColDef<User>[]>(
     () =>
       processColumns<User>([
-        ...USER_COLUMNS,
+        ...USER_COLUMNS.map((col) => ({
+          ...col,
+          // Highlight the Email column as an example
+          highlighted: col.field === "email",
+        })),
         {
           headerName: "Status",
           field: "isActive",
@@ -61,6 +65,7 @@ export default function UserList() {
           field: "roles",
           flex: 1.5,
           hideFilter: true,
+          highlighted: true, // Highlight this column
           cellRenderer: (params: ICellRendererParams<User>) => {
             const user = params.data;
             if (!user) return "-";
@@ -106,25 +111,26 @@ export default function UserList() {
 
   return (
     <div className="space-y-4">
-      {/* Toolbar - Attio style */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <h1 className="text-lg font-medium">{t("users.title")}</h1>
-          <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-            {users?.length || 0}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="text" size="sm" className="text-muted-foreground">
-            <SlidersHorizontal className="size-4" />
-            Filter
-          </Button>
-          <Button onClick={() => navigate("/users/new")} size="sm">
-            <PlusIcon className="size-4" />
-            {t("users.create")}
-          </Button>
-        </div>
-      </div>
+      <PageHeader
+        title={t("users.title")}
+        description={t("users.manageSubtitle")}
+        count={users?.length || 0}
+        actions={[
+          {
+            label: "Filter",
+            icon: SlidersHorizontal,
+            onClick: () => {},
+            variant: "text",
+            size: "sm",
+          },
+          {
+            label: t("users.create"),
+            icon: PlusIcon,
+            onClick: () => navigate("/users/new"),
+            size: "sm",
+          },
+        ]}
+      />
 
       {/* Data Table - Clean, no wrapper border */}
       {isLoading ? (

@@ -1,7 +1,9 @@
 import { useOutlets, useDeleteOutlet } from "@/api/queries/useOutlets";
 import { Button } from "@/common/@atoms/Button";
+import { PageHeader } from "@/common/@atoms/PageHeader";
 import { useNavigate } from "react-router-dom";
 import { Plus, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Spinner } from "@/common/@atoms/spinner";
 import {
   AlertDialog,
@@ -24,6 +26,7 @@ import {
 } from "@/lib/tableColumns";
 
 export default function OutletList() {
+  const { t } = useTranslation();
   const { data: outlets, isLoading, isError } = useOutlets();
   const { mutate: deleteOutlet } = useDeleteOutlet();
   const navigate = useNavigate();
@@ -79,21 +82,21 @@ export default function OutletList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Outlets</h1>
-          <p className="text-muted-foreground">Manage your store outlets.</p>
-        </div>
-        <Button onClick={() => navigate("/outlets/new")}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Outlet
-        </Button>
-      </div>
+      <PageHeader
+        title={t("outlets.title")}
+        description={t("outlets.manageSubtitle")}
+        action={{
+          label: t("outlets.create"),
+          icon: Plus,
+          onClick: () => navigate("/outlets/new"),
+        }}
+      />
 
       <DataTable<Outlet>
         rowData={outlets || []}
         columnDefs={columnDefs}
-        height={400}
+        height="70vh"
+        containerStyle={{ height: "70vh" }}
         floatingFilter
         noRowsOverlayText="No outlets found. Create one to get started."
         getRowId={(params) => params.data.id}

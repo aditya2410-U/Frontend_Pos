@@ -3,10 +3,10 @@
   /* Core colors using CSS variables from theme */
   --ag-background-color: var(--background);
   --ag-foreground-color: var(--foreground);
-  --ag-header-background-color: var(--color-lightest);
+  --ag-header-background-color: var(--card);
   --ag-header-foreground-color: var(--foreground);
   --ag-odd-row-background-color: var(--background);
-  --ag-row-hover-color: var(--secondary);
+  --ag-row-hover-color: var(--muted);
   --ag-selected-row-background-color: var(--accent);
   --ag-border-color: var(--border);
   --ag-secondary-border-color: var(--border);
@@ -25,14 +25,48 @@
   --ag-row-border-width: 1px;
   --ag-borders: solid 1px;
   --ag-border-radius: 0;
-  --ag-wrapper-border-radius: var(--radius);
+  --ag-wrapper-border-radius: 0;
 }
 
 /* Root wrapper styling */
 .ag-theme-custom .ag-root-wrapper {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border-radius: 0 !important;
+  /* border-top: none; */
+  border-bottom: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
   overflow: hidden;
+}
+
+/* Remove border radius from all ag-grid containers */
+.ag-theme-custom .ag-root,
+.ag-theme-custom .ag-root-wrapper,
+.ag-theme-custom .ag-body-viewport,
+.ag-theme-custom .ag-body-viewport-wrapper,
+.ag-theme-custom .ag-center-cols-container,
+.ag-theme-custom .ag-center-cols-viewport {
+  border-radius: 0 !important;
+}
+
+/* Ensure grid takes full height up to 90vh */
+.ag-theme-custom .ag-root {
+  height: 100% !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.ag-theme-custom .ag-body-viewport {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  min-height: 0 !important;
+}
+
+.ag-theme-custom .ag-body-viewport-wrapper {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
 }
 
 /* Header styling */
@@ -42,25 +76,14 @@
 
 .ag-theme-custom .ag-header-cell {
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-transform: none;
   letter-spacing: 0;
-}
-
-/* Alternating header colors (only for column headers, not filters) */
-/* Theme-aware: Adapts to all color themes (green, blue, rose, orange) */
-.ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(odd) {
-  background-color: var(--color-lightest) !important;
-  border-right: 2px solid var(--background) !important;
-}
-
-.ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(even) {
-  background-color: var(--color-light) !important;
-  border-right: 2px solid var(--background) !important;
+  background-color: var(--card) !important;
+  border-right: 1px solid var(--border) !important;
 }
 
 .ag-theme-custom
@@ -69,24 +92,8 @@
   border-right: none !important;
 }
 
-.ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(odd):hover {
-  background-color: color-mix(
-    in srgb,
-    var(--color-lightest) 80%,
-    var(--color-medium) 20%
-  ) !important;
-}
-
-.ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(even):hover {
-  background-color: color-mix(
-    in srgb,
-    var(--color-light) 80%,
-    var(--color-medium) 20%
-  ) !important;
+.ag-theme-custom .ag-header-row.ag-header-row-column .ag-header-cell:hover {
+  background-color: var(--muted) !important;
 }
 
 .ag-theme-custom .ag-header-cell-label {
@@ -104,18 +111,18 @@
 
 /* Row hover state */
 .ag-theme-custom .ag-row-hover {
-  background-color: var(--accent) !important;
+  background-color: var(--muted) !important;
 }
 
 /* Selected row state */
 .ag-theme-custom .ag-row-selected {
-  background-color: var(--accent) !important;
+  background-color: var(--muted) !important;
 }
 
 /* Cell focus state */
 .ag-theme-custom .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
   border-color: var(--ring) !important;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   outline: none;
 }
 
@@ -123,12 +130,61 @@
 .ag-theme-custom .ag-cell-inline-editing {
   border-color: var(--ring) !important;
   background-color: var(--background);
-  border-radius: 4px;
+  /* border-radius: 4px; */
+}
+
+/* Cell styling - ensure 14px font */
+.ag-theme-custom .ag-cell {
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 12px;
+  padding-right: 12px;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) transparent;
+}
+
+/* Custom scrollbar for cells */
+.ag-theme-custom .ag-cell::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ag-theme-custom .ag-cell::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ag-theme-custom .ag-cell::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground);
+  border-radius: 2px;
+}
+
+.ag-theme-custom .ag-cell::-webkit-scrollbar-thumb:hover {
+  background-color: var(--foreground);
+}
+
+/* Highlighted cells - theme-aware background using color-lightest */
+.ag-theme-custom .ag-cell.ag-cell-highlighted {
+  background-color: var(--color-lightest) !important;
+  color: var(--foreground);
+}
+
+/* Dark mode - use darker grayish base with subtle theme color mix */
+.dark .ag-theme-custom .ag-cell.ag-cell-highlighted {
+  /* Start with darker grayish base, then mix in theme color subtly */
+  background-color: color-mix(
+    in srgb,
+    var(--color-dark) 10%,
+    #1a1a24 88%
+  ) !important;
 }
 
 /* Input styling */
 .ag-theme-custom .ag-text-field-input {
-  border-radius: 6px;
+  border-radius: 0;
   border: 1px solid var(--border);
   background: var(--background);
   padding: 6px 10px;
@@ -157,7 +213,7 @@
   background-color: transparent;
   border: none;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 0;
   transition: background-color 0.15s ease;
 }
 
@@ -235,7 +291,7 @@
 .ag-theme-custom .ag-picker-field-wrapper {
   background-color: var(--background);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 0;
   /* padding: 6px 10px; */
   font-size: 13px;
   font-family: inherit;
@@ -273,7 +329,7 @@
 .ag-theme-custom .ag-input-field-input {
   background-color: var(--background) !important;
   border: 1px solid var(--border) !important;
-  border-radius: 6px !important;
+  border-radius: 0 !important;
   /* padding: 6px 10px !important; */
   font-size: 13px !important;
   font-family: inherit !important;
@@ -307,7 +363,7 @@
 .ag-theme-custom .ag-standard-button {
   background-color: var(--background);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 6px 12px;
   font-size: 13px;
   font-family: inherit;
@@ -375,7 +431,7 @@
 .ag-theme-custom .ag-select-list {
   background-color: var(--popover);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -401,7 +457,7 @@
 .ag-theme-custom .ag-rich-select {
   background-color: var(--background);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 .ag-theme-custom .ag-rich-select-value {
@@ -454,7 +510,7 @@
 
 /* Popup styling (filters, context menus) */
 .ag-theme-custom .ag-popup-child:not(.ag-tooltip-custom) {
-  border-radius: var(--radius);
+  border-radius: 0;
   border: 1px solid var(--border);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   background-color: var(--popover);
@@ -463,7 +519,7 @@
 /* Menu styling */
 .ag-theme-custom .ag-menu {
   background-color: var(--popover);
-  border-radius: var(--radius);
+  border-radius: 0;
   font-family: inherit;
   font-size: 13px;
   overflow: hidden;
@@ -560,7 +616,7 @@
 
 /* Checkbox styling */
 .ag-theme-custom .ag-checkbox-input-wrapper {
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .ag-theme-custom .ag-checkbox-input-wrapper.ag-checked::after {
@@ -575,7 +631,7 @@
 }
 
 .ag-theme-custom .ag-paging-button {
-  border-radius: 4px;
+  border-radius: 0;
   padding: 4px 8px;
 }
 
@@ -586,7 +642,7 @@
 /* Loading overlay */
 .ag-theme-custom .ag-overlay-loading-center {
   background-color: var(--background);
-  border-radius: var(--radius);
+  border-radius: 0;
   border: 1px solid var(--border);
   padding: 16px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -638,15 +694,53 @@
   width: 1px;
 }
 
-/* Pinned columns */
+/* Pinned columns - No shadow by default */
 .ag-theme-custom .ag-pinned-left-header,
 .ag-theme-custom .ag-pinned-left-cols-container {
   border-right: 1px solid var(--border);
+  position: relative;
+  z-index: 10;
+  transition: box-shadow 0.2s ease;
 }
 
 .ag-theme-custom .ag-pinned-right-header,
 .ag-theme-custom .ag-pinned-right-cols-container {
   border-left: 1px solid var(--border);
+  position: relative;
+  z-index: 10;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Heavy box shadow ONLY when scrolling horizontally */
+.ag-theme-custom.is-scrolling .ag-pinned-left-header,
+.ag-theme-custom.is-scrolling .ag-pinned-left-cols-container {
+  /* Heavy shadow on right edge to show separation when scrolling */
+  box-shadow:
+    8px 0 16px -4px rgba(0, 0, 0, 0.3),
+    4px 0 8px -2px rgba(0, 0, 0, 0.2);
+}
+
+.ag-theme-custom.is-scrolling .ag-pinned-right-header,
+.ag-theme-custom.is-scrolling .ag-pinned-right-cols-container {
+  /* Heavy shadow on left edge to show separation when scrolling */
+  box-shadow:
+    -8px 0 16px -4px rgba(0, 0, 0, 0.3),
+    -4px 0 8px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode - adjust shadow opacity for better visibility when scrolling */
+.dark .ag-theme-custom.is-scrolling .ag-pinned-left-header,
+.dark .ag-theme-custom.is-scrolling .ag-pinned-left-cols-container {
+  box-shadow:
+    8px 0 20px -4px rgba(0, 0, 0, 0.5),
+    4px 0 10px -2px rgba(0, 0, 0, 0.4);
+}
+
+.dark .ag-theme-custom.is-scrolling .ag-pinned-right-header,
+.dark .ag-theme-custom.is-scrolling .ag-pinned-right-cols-container {
+  box-shadow:
+    -8px 0 20px -4px rgba(0, 0, 0, 0.5),
+    -4px 0 10px -2px rgba(0, 0, 0, 0.4);
 }
 
 /* Row drag styling */
@@ -662,7 +756,7 @@
 .ag-theme-custom .ag-tooltip {
   background-color: var(--popover);
   color: var(--popover-foreground);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 8px 12px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -676,64 +770,22 @@
   --ag-header-background-color: var(--card);
   --ag-header-foreground-color: var(--foreground);
   --ag-odd-row-background-color: var(--background);
-  --ag-row-hover-color: var(--secondary);
+  --ag-row-hover-color: var(--muted);
   --ag-selected-row-background-color: var(--accent);
   --ag-border-color: var(--border);
 }
 
-.dark .ag-theme-custom .ag-row:nth-child(even) {
-  background-color: var(--secondary);
-}
-
-.dark .ag-theme-custom .ag-row:nth-child(odd) {
+.dark .ag-theme-custom .ag-row {
   background-color: var(--background);
 }
 
-/* Dark mode header cells - use darker, more subtle colors */
-.dark
-  .ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(odd) {
-  background-color: color-mix(
-    in srgb,
-    var(--color-lightest) 15%,
-    var(--card) 85%
-  ) !important;
-  border-right: 2px solid var(--background) !important;
+.dark .ag-theme-custom .ag-header-cell {
+  background-color: var(--card) !important;
+  border-right: 1px solid var(--border) !important;
 }
 
-.dark
-  .ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(even) {
-  background-color: color-mix(
-    in srgb,
-    var(--color-light) 15%,
-    var(--card) 85%
-  ) !important;
-  border-right: 2px solid var(--background) !important;
-}
-
-.dark
-  .ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(odd):hover {
-  background-color: color-mix(
-    in srgb,
-    var(--color-lightest) 25%,
-    var(--card) 75%
-  ) !important;
-}
-
-.dark
-  .ag-theme-custom
-  .ag-header-row.ag-header-row-column
-  .ag-header-cell:nth-of-type(even):hover {
-  background-color: color-mix(
-    in srgb,
-    var(--color-light) 25%,
-    var(--card) 75%
-  ) !important;
+.dark .ag-theme-custom .ag-header-cell:hover {
+  background-color: var(--muted) !important;
 }
 
 /* Container utilities */

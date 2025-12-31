@@ -9,7 +9,7 @@ export default function DashboardLayout() {
       <AppSidebar />
       <SidebarInset className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto ">
           <Outlet />
         </main>
       </SidebarInset>
