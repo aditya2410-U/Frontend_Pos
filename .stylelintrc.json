@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["apply", "reference", "import", "theme", "layer"]
+      }
+    ],
+    "declaration-block-no-duplicate-properties": null,
+    "no-empty-source": null
+  }
+}

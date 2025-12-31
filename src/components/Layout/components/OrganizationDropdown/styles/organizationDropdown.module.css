@@ -1,0 +1,95 @@
+/* stylelint-disable */
+@reference "../../../../../index.css";
+
+/* OrganizationDropdown Styles using Tailwind @apply */
+
+/* Trigger Button */
+.triggerButton {
+  @apply h-14 hover:bg-muted/50 rounded-none flex-1 justify-between border-0;
+}
+
+/* Trigger Content Wrapper */
+.triggerContentWrapper {
+  @apply flex items-center gap-3 flex-1 min-w-0;
+}
+
+/* Organization Logo Container */
+.organizationLogoContainer {
+  @apply flex aspect-square size-6 items-center justify-center bg-primary text-primary-foreground font-semibold text-sm rounded-md shrink-0;
+}
+
+/* Dropdown Content */
+.dropdownContent {
+  @apply w-[300px] -ml-2 overflow-hidden ml-2 rounded-md;
+  box-shadow:
+    rgba(255, 255, 255, 0) 0px 0px 0px 1px inset,
+    rgba(28, 40, 64, 0.12) 0px 8px 28px -6px,
+    rgba(28, 40, 64, 0.16) 0px 18px 88px -4px;
+}
+
+/* Workspace Header Item */
+.workspaceHeaderItem {
+  @apply flex items-center gap-2 cursor-pointer;
+}
+
+.workspaceHeaderItem:hover,
+.workspaceHeaderItem:focus {
+  background-color: var(--border) !important;
+}
+
+/* Workspace Logo Container */
+.workspaceLogoContainer {
+  @apply flex aspect-square size-6 items-center justify-center bg-primary text-primary-foreground font-semibold text-sm rounded-md;
+}
+
+/* Workspace Info Container */
+.workspaceInfoContainer {
+  @apply flex flex-col flex-1 min-w-0;
+}
+
+/* Workspace Name */
+.workspaceName {
+  @apply text-sm font-medium truncate;
+}
+
+/* Workspace Subtitle */
+.workspaceSubtitle {
+  @apply text-xs text-muted-foreground;
+}
+
+/* Workspace Status Indicator */
+.workspaceStatusIndicator {
+  @apply size-2 rounded-full bg-orange-500 shrink-0;
+}
+
+/* Section Wrapper */
+.sectionWrapper {
+  /* Wrapper for sections */
+  @apply block;
+}
+
+/* Menu Item */
+.menuItem {
+  @apply flex items-center gap-2 cursor-pointer;
+}
+
+.menuItem:hover,
+.menuItem:focus {
+  background-color: var(--border) !important;
+}
+
+/* Menu Item Destructive */
+.menuItemDestructive {
+  @apply flex items-center gap-2 cursor-pointer text-destructive focus:text-destructive;
+}
+
+/* Icon Container */
+.iconContainer {
+  @apply size-4;
+}
+
+/* Menu Item Label */
+.menuItemLabel {
+  /* Label text styling */
+  display: inline;
+}

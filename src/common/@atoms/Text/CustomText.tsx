@@ -64,7 +64,7 @@ const CustomText = ({
       customStyle = {
         fontSize: "16px",
         fontWeight: fontWeight || 700,
-        fontFamily: "IBM Plex Serif",
+        fontFamily: "Switzer",
       };
       break;
     case "Title":
