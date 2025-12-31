@@ -60,11 +60,11 @@
 
   /* Core Background Colors - Attio uses very clean whites */
   --background: #ffffff;
-  --foreground: #1a1a2e;
+  --foreground: #242529;
   --card: #ffffff;
-  --card-foreground: #1a1a2e;
+  --card-foreground: #242529;
   --popover: #ffffff;
-  --popover-foreground: #1a1a2e;
+  --popover-foreground: #242529;
 
   /* Primary Colors - Attio's signature blue */
   --primary: var(--color-medium);
@@ -180,17 +180,17 @@
    DARK MODE - Attio Style
    ============================================ */
 .dark {
-  --color-lightest: #1e293b;
+  --color-lightest: #27282b;
   --color-light: #6b8afd;
   --color-medium: #3b82f6;
   --color-dark: #60a5fa;
 
-  --background: #0f172a;
-  --foreground: #f1f5f9;
-  --card: #1e293b;
-  --card-foreground: #f1f5f9;
-  --popover: #1e293b;
-  --popover-foreground: #f1f5f9;
+  --background: #1a1d21;
+  --foreground: #eeeff1;
+  --card: #1a1d21;
+  --card-foreground: #eeeff1;
+  --popover: #1a1d21;
+  --popover-foreground: #eeeff1;
 
   --primary: #3b82f6;
   --primary-foreground: #ffffff;
@@ -202,16 +202,16 @@
   --secondary: #334155;
   --secondary-foreground: #f1f5f9;
 
-  --muted: #334155;
+  --muted: #27282b;
   --muted-foreground: #94a3b8;
 
-  --accent: rgba(59, 130, 246, 0.15);
+  --accent: #27282b;
   --accent-foreground: #93c5fd;
 
   --destructive: #f87171;
   --destructive-foreground: #ffffff;
 
-  --border: #334155;
+  --border: #27282b;
   --input: #475569;
   --ring: #3b82f6;
 
@@ -221,13 +221,13 @@
   --chart-4: #a78bfa;
   --chart-5: #1e293b;
 
-  --sidebar: #1e293b;
+  --sidebar: #14181c;
   --sidebar-foreground: #f1f5f9;
   --sidebar-primary: #3b82f6;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(59, 130, 246, 0.15);
+  --sidebar-accent: #27282b;
   --sidebar-accent-foreground: #93c5fd;
-  --sidebar-border: #334155;
+  --sidebar-border: #27282b;
   --sidebar-ring: #3b82f6;
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
