@@ -33,7 +33,6 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true, // Set to false in production
-    lng: "en", // Set default language to English
     fallbackLng: "en",
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
@@ -41,6 +40,14 @@ i18n
     resources,
     ns: ["common"], // Default namespaces
     defaultNS: "common",
+    detection: {
+      // Order of language detection - localStorage first to persist user preference
+      order: ["localStorage", "navigator", "htmlTag"],
+      // Key used in localStorage
+      lookupLocalStorage: "i18nextLng",
+      // Cache the detected language
+      caches: ["localStorage"],
+    },
   });
 
 export default i18n;

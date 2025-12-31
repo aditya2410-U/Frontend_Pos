@@ -1,4 +1,4 @@
-import type { Control, FieldValues, Path } from "react-hook-form";
+import type { Control, FieldValues } from "react-hook-form";
 import { Input } from "@/common/@atoms/input";
 import { Textarea } from "@/common/@atoms/textarea";
 import {

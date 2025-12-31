@@ -87,6 +87,8 @@ export function SystemThemePreviewDark({
   accentColor = "#C95908",
   className,
 }: SystemThemePreviewProps) {
+  const accentColorDark = `${accentColor}1A`; // 10% opacity version for dark theme
+
   return (
     <svg
       width="110"
@@ -121,7 +123,15 @@ export function SystemThemePreviewDark({
       <path d="M 76,112 H 223" stroke="#27282B" />
       <path d="m 138,56 v 72" stroke="#27282B" />
       <path d="m 178,56 v 72" stroke="#27282B" />
-      <rect x="143" y="61" width="17" height="4" rx="2" fill="#242529" />
+      {/* Accent colored elements for dark theme */}
+      <rect
+        x="143"
+        y="61"
+        width="17"
+        height="4"
+        rx="2"
+        fill={accentColorDark}
+      />
       <rect x="184" y="61" width="22" height="4" rx="2" fill="#242529" />
       <rect x="143" y="75" width="28" height="4" rx="2" fill="#242529" />
       <rect x="184" y="75" width="28" height="4" rx="2" fill="#242529" />
@@ -129,7 +139,7 @@ export function SystemThemePreviewDark({
       <rect x="184" y="89" width="22" height="4" rx="2" fill="#242529" />
       <rect x="143" y="103" width="22" height="4" rx="2" fill="#242529" />
       <rect x="184" y="103" width="28" height="4" rx="2" fill="#242529" />
-      <rect x="124" y="45" width="20" height="4" rx="2" fill="#242529" />
+      <rect x="124" y="45" width="20" height="4" rx="2" fill={accentColor} />
       <rect x="185" y="45" width="15" height="4" rx="2" fill="#242529" />
       <rect x="204" y="45" width="15" height="4" rx="2" fill="#242529" />
       <rect x="205" y="26" width="14" height="4" rx="2" fill="#242529" />
