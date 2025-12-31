@@ -1,13 +1,25 @@
 {
   "name": "inventory",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
+  "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "electron:build": "npm run build && vite build --config electron/vite.config.ts && electron-builder",
+    "electron:build:win": "npm run build && vite build --config electron/vite.config.ts && electron-builder --win",
+    "electron:build:mac": "npm run build && vite build --config electron/vite.config.ts && electron-builder --mac && node scripts/post-build-mac.js && ./scripts/copy-downloads.sh",
+    "electron:build:linux": "npm run build && vite build --config electron/vite.config.ts && electron-builder --linux && ./scripts/copy-downloads.sh",
+    "copy-downloads": "./scripts/copy-downloads.sh",
+    "fix-dmg": "node scripts/post-build-mac.js",
+    "release": "node scripts/prepare-release.js",
+    "release:patch": "node scripts/prepare-release.js patch",
+    "release:minor": "node scripts/prepare-release.js minor",
+    "release:major": "node scripts/prepare-release.js major",
     "prepare": "husky",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
@@ -82,6 +94,7 @@
     "clsx": "2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
+    "electron-updater": "^6.6.2",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "11.18.2",
     "i18next": "^25.7.3",
@@ -105,11 +118,16 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/electron": "^1.6.10",
     "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
@@ -120,6 +138,61 @@
     "tw-animate-css": "^1.4.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.inventory.app",
+    "productName": "Inventory POS",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.business",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Office",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }

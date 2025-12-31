@@ -11,4 +11,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "./", // Use relative paths for Electron
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+  },
+  server: {
+    port: 5173,
+    // Serve download files from public/downloads
+    fs: {
+      allow: [".."],
+    },
+  },
 });

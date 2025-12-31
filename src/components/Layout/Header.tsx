@@ -1,5 +1,3 @@
-import { SidebarTrigger } from "@/common/@atoms/sidebar";
-import { Separator } from "@/common/@atoms/separator";
 import { AppBreadcrumbs } from "./AppBreadcrumbs";
 
 export default function Header() {
