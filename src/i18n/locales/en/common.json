@@ -103,7 +103,7 @@
     "details": "User Details",
     "createButton": "Create User",
     "updateButton": "Update User",
-    "manageSubtitle": "Manage your store users."
+    "manageSubtitle": "Add team members, assign roles, and manage access permissions."
   },
   "roles": {
     "title": "Roles",
@@ -111,7 +111,7 @@
     "createNew": "Create New Role",
     "details": "Role Details",
     "createButton": "Create Role",
-    "manageSubtitle": "Manage user roles and permissions."
+    "manageSubtitle": "Define roles and configure access permissions for your team."
   },
   "outlets": {
     "title": "Outlets",
@@ -119,6 +119,6 @@
     "createNew": "Create New Outlet",
     "details": "Outlet Details",
     "createButton": "Create Outlet",
-    "manageSubtitle": "Manage your store outlets."
+    "manageSubtitle": "Create and manage your store locations and their details."
   }
 }

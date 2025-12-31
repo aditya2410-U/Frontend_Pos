@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useCallback, useMemo } from "react";
+import React, {
+  useRef,
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { AgGridReact } from "ag-grid-react";
 import type {
   ColDef,
@@ -143,6 +149,73 @@ const DataTable = <TData extends object = object>({
   groupHeaderHeight,
 }: DataTableProps<TData>) => {
   const gridRef = useRef<AgGridReact<TData>>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Attach scroll listeners
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      setIsScrolling(true);
+
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    };
+
+    // Find scrollable viewports
+    const attachListeners = () => {
+      const bodyViewport = container.querySelector(
+        ".ag-body-viewport"
+      ) as HTMLElement;
+      const headerViewport = container.querySelector(
+        ".ag-header-viewport"
+      ) as HTMLElement;
+
+      if (bodyViewport) {
+        bodyViewport.addEventListener("scroll", handleScroll, {
+          passive: true,
+        });
+      }
+
+      if (headerViewport) {
+        headerViewport.addEventListener("scroll", handleScroll, {
+          passive: true,
+        });
+      }
+
+      return () => {
+        if (bodyViewport) {
+          bodyViewport.removeEventListener("scroll", handleScroll);
+        }
+        if (headerViewport) {
+          headerViewport.removeEventListener("scroll", handleScroll);
+        }
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+      };
+    };
+
+    // Try immediately and after delay
+    let cleanup = attachListeners();
+    const timeoutId = setTimeout(() => {
+      if (cleanup) cleanup();
+      cleanup = attachListeners();
+    }, 200);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (cleanup) cleanup();
+    };
+  }, [rowData]);
 
   // Default column definition
   const defaultColDef = useMemo<ColDef<TData>>(
@@ -182,10 +255,11 @@ const DataTable = <TData extends object = object>({
     [autoSizeColumns, onFirstDataRendered]
   );
 
-  // Container style
+  // Container style - use 90vh as max height, full height otherwise
   const tableStyle = useMemo(
     () => ({
       height: typeof height === "number" ? `${height}px` : height,
+      maxHeight: "90vh",
       width: "100%",
       ...containerStyle,
     }),
@@ -194,8 +268,13 @@ const DataTable = <TData extends object = object>({
 
   return (
     <div
+      ref={containerRef}
       id={id}
-      className={cn("ag-theme-custom", className)}
+      className={cn(
+        "ag-theme-custom",
+        isScrolling && "is-scrolling",
+        className
+      )}
       style={tableStyle}
     >
       <AgGridReact<TData>

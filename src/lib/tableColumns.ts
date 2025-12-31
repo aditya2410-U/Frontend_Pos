@@ -122,7 +122,7 @@ export const USER_COLUMNS: ColDef<User>[] = [
  * Outlet Table Column Definitions (static columns only)
  * Dynamic columns (Status, Actions) are added in the component
  */
-export const OUTLET_COLUMNS: ColDef<Outlet>[] = [
+export const OUTLET_COLUMNS: ExtendedColDef<Outlet>[] = [
   {
     headerName: "Name",
     field: "name",
@@ -138,6 +138,7 @@ export const OUTLET_COLUMNS: ColDef<Outlet>[] = [
     minWidth: 200,
     valueFormatter: (params) => params.value || "-",
     filter: "agTextColumnFilter",
+    highlighted: true,
   },
   {
     headerName: "Created At",
@@ -193,6 +194,7 @@ export interface ExtendedColDef<T = unknown> extends ColDef<T> {
   clickable?: boolean;
   displayType?: string;
   isSortable?: boolean;
+  highlighted?: boolean;
   on_toggle?: (data: T) => void;
   on_click?: (data: T) => void;
   active_label?: string;
@@ -217,6 +219,7 @@ export function processColumns<T>(columns: ExtendedColDef<T>[]): ColDef<T>[] {
       clickable,
       displayType,
       isSortable,
+      highlighted,
       on_toggle,
       on_click,
       active_label,
@@ -239,6 +242,21 @@ export function processColumns<T>(columns: ExtendedColDef<T>[]): ColDef<T>[] {
 
     if (isSortable === false) {
       processedColumn.sortable = false;
+    }
+
+    // Add highlighted cell class if highlighted is true
+    if (highlighted) {
+      const existingCellClass = processedColumn.cellClass;
+      if (typeof existingCellClass === "string") {
+        processedColumn.cellClass = `${existingCellClass} ag-cell-highlighted`;
+      } else if (Array.isArray(existingCellClass)) {
+        processedColumn.cellClass = [
+          ...existingCellClass,
+          "ag-cell-highlighted",
+        ];
+      } else {
+        processedColumn.cellClass = "ag-cell-highlighted";
+      }
     }
 
     if (dtype) {
