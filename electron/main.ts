@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain, dialog } from "electron";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { autoUpdater } from "electron-updater";
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -66,10 +67,114 @@ function createWindow() {
   });
 }
 
+// Configure auto-updater
+autoUpdater.autoDownload = false; // Don't auto-download, let user choose
+autoUpdater.autoInstallOnAppQuit = true; // Install on app quit after download
+
+// Auto-updater event handlers
+autoUpdater.on("checking-for-update", () => {
+  console.log("Checking for updates...");
+  win?.webContents.send("update-checking");
+});
+
+autoUpdater.on("update-available", (info) => {
+  console.log("Update available:", info.version);
+  win?.webContents.send("update-available", {
+    version: info.version,
+    releaseDate: info.releaseDate,
+    releaseNotes: info.releaseNotes,
+  });
+});
+
+autoUpdater.on("update-not-available", () => {
+  console.log("No updates available");
+  win?.webContents.send("update-not-available");
+});
+
+autoUpdater.on("update-downloaded", (info) => {
+  console.log("Update downloaded:", info.version);
+  win?.webContents.send("update-downloaded", {
+    version: info.version,
+  });
+
+  // Show notification dialog
+  dialog
+    .showMessageBox(win!, {
+      type: "info",
+      title: "Update Ready",
+      message: `Update ${info.version} has been downloaded.`,
+      detail: "The update will be installed when you restart the application.",
+      buttons: ["Restart Now", "Later"],
+      defaultId: 0,
+      cancelId: 1,
+    })
+    .then((result) => {
+      if (result.response === 0) {
+        autoUpdater.quitAndInstall(false, true);
+      }
+    });
+});
+
+autoUpdater.on("error", (error) => {
+  console.error("Update error:", error);
+  win?.webContents.send("update-error", {
+    message: error.message,
+  });
+});
+
+autoUpdater.on("download-progress", (progressObj) => {
+  win?.webContents.send("update-download-progress", {
+    percent: progressObj.percent,
+    transferred: progressObj.transferred,
+    total: progressObj.total,
+  });
+});
+
+// IPC handlers for update actions
+ipcMain.handle("check-for-updates", async () => {
+  try {
+    await autoUpdater.checkForUpdates();
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("download-update", async () => {
+  try {
+    autoUpdater.downloadUpdate();
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("install-update", async () => {
+  try {
+    autoUpdater.quitAndInstall(false, true);
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("get-app-version", () => {
+  return app.getVersion();
+});
+
 // This method will be called when Electron has finished initialization
 app.whenReady().then(() => {
   try {
     createWindow();
+
+    // Check for updates after a short delay (only in production)
+    if (app.isPackaged) {
+      setTimeout(() => {
+        autoUpdater.checkForUpdates().catch((err) => {
+          console.error("Failed to check for updates:", err);
+        });
+      }, 3000); // Check after 3 seconds
+    }
 
     // macOS specific: re-create window when dock icon is clicked
     app.on("activate", () => {
