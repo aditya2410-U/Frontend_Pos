@@ -96,21 +96,12 @@ function ColorOption({ bgColor, isSelected, onClick }: ColorOptionProps) {
     <button
       onClick={onClick}
       className={cn(
-        "relative size-10 rounded-full transition-all duration-200 hover:scale-110 focus:outline-none",
+        "relative size-6 rounded-full transition-all duration-200 hover:scale-110 focus:outline-none",
         isSelected &&
-          "ring-2 ring-offset-2 ring-offset-background ring-foreground"
+          "ring-1 ring-offset-1 ring-offset-background ring-foreground"
       )}
       style={{ backgroundColor: bgColor }}
-    >
-      {isSelected && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Check
-            className="size-5 text-white drop-shadow-md"
-            strokeWidth={2.5}
-          />
-        </div>
-      )}
-    </button>
+    ></button>
   );
 }
 

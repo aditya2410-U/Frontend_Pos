@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/common/@atoms/card";
 import { useTranslation } from "react-i18next";
 import { TrendingUp, Users, DollarSign, ShoppingCart } from "lucide-react";
+import { PageHeader } from "@/common/@atoms/PageHeader";
 
 export default function Dashboard() {
   const { t } = useTranslation();
@@ -41,19 +42,14 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 ">
       {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {t("dashboard.title")}
-        </h1>
-        <p className="text-muted-foreground mt-1 text-sm">
-          Welcome back! Here's what's happening with your store.
-        </p>
-      </div>
-
+      <PageHeader
+        title={t("Dashboard")}
+        description={"Welcome back! Here's what's happening with your store."}
+      />
       {/* Stats Grid */}
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 px-6">
         {stats.map((stat, index) => (
           <Card
             key={index}
@@ -78,7 +74,7 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2 px-6">
         <Card className="border-border/60 shadow-sm">
           <CardHeader>
             <CardTitle className="text-base font-semibold">
