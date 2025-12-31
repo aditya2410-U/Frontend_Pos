@@ -20,6 +20,7 @@ export type FieldType =
   | "radio"
   | "date"
   | "date_only"
+  | "date_range"
   | "date_time_picker"
   | "separate_date_time_picker"
   | "phone"

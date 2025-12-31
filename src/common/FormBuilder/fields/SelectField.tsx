@@ -51,33 +51,48 @@ export function SelectField<TFieldValues extends FieldValues = FieldValues>({
       rules={{
         required: validations?.required ? "This field is required" : false,
       }}
-      render={({ field: formField }) => (
-        <FormItem className={cn("w-full", className)} style={style}>
-          {label && <FormLabel>{label}</FormLabel>}
-          <Select
-            onValueChange={formField.onChange}
-            value={formField.value}
-            disabled={disabled}
-          >
-            <FormControl>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={placeholder || "Select an option"} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              {fieldOptions.map((option) => (
-                <SelectItem
-                  key={String(option.value)}
-                  value={String(option.value)}
-                >
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field: formField }) => {
+        const currentValue =
+          formField.value !== undefined && formField.value !== null
+            ? String(formField.value)
+            : undefined;
+
+        return (
+          <FormItem className={cn("w-full", className)} style={style}>
+            {label && <FormLabel>{label}</FormLabel>}
+            <Select
+              onValueChange={(value) => {
+                // Convert back to original type if needed
+                const selectedOption = fieldOptions.find(
+                  (opt) => String(opt.value) === value
+                );
+                formField.onChange(selectedOption?.value ?? value);
+              }}
+              value={currentValue}
+              disabled={disabled}
+            >
+              <FormControl>
+                <SelectTrigger className="w-full">
+                  <SelectValue
+                    placeholder={placeholder || "Select an option"}
+                  />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {fieldOptions.map((option) => (
+                  <SelectItem
+                    key={String(option.value)}
+                    value={String(option.value)}
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 }

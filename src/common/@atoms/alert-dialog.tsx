@@ -44,6 +44,7 @@ function AlertDialogOverlay({
 
 function AlertDialogContent({
   className,
+  children,
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
   return (
@@ -61,7 +62,9 @@ function AlertDialogContent({
           boxShadow: "var(--card-shadow, rgba(0, 0, 0, 0.04) 0px 0px 0px 6px)",
         }}
         {...props}
-      />
+      >
+        {children}
+      </AlertDialogPrimitive.Content>
     </AlertDialogPortal>
   );
 }
