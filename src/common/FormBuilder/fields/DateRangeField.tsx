@@ -25,8 +25,6 @@ import {
   startOfMonth,
   parseDate,
   CalendarDate,
-  startOfDay,
-  endOfDay,
 } from "@internationalized/date";
 
 // DateRange type for HeroUI RangeCalendar
@@ -280,10 +278,10 @@ export function DateRangeField<TFieldValues extends FieldValues = FieldValues>({
                   onFocusChange={(date) => {
                     if (date && rangeValue) {
                       // Update focused value but keep range
-                      const newRange = new DateRange(
-                        rangeValue.start,
-                        rangeValue.end
-                      );
+                      const newRange: DateRange = {
+                        start: rangeValue.start,
+                        end: rangeValue.end,
+                      };
                       handleRangeChange(newRange);
                     }
                   }}
