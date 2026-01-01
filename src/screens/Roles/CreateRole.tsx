@@ -72,7 +72,7 @@ export default function CreateRole() {
   };
 
   return (
-    <div className="max-w-xl">
+    <div className="max-w-xl p-4">
       {/* Back button */}
       <button
         onClick={() => navigate("/roles")}

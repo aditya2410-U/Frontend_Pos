@@ -180,7 +180,7 @@ export function QuickActions({
       className="max-w-2xl"
     >
       <CommandInput placeholder="Search quick actions and records..." />
-      <CommandList className="flex-1 overflow-auto">
+      <CommandList className="flex-1 overflow-auto max-h-fit">
         <CommandEmpty>No results found.</CommandEmpty>
         {Object.entries(groupedActions).map(([groupName, actions]) => (
           <CommandGroup key={groupName} heading={groupName}>
