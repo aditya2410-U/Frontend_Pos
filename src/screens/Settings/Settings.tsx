@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 import {
   useTheme,
   type Theme,
   type ColorTheme,
 } from "@/common/@atoms/theme-provider";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { Check, RefreshCw, Download } from "lucide-react";
+import { Button } from "@/common/@atoms/Button";
+import { Card } from "@/common/@atoms/card";
 import {
   LightThemePreview,
   DarkThemePreview,
@@ -14,6 +17,7 @@ import {
   THEME_COLORS,
 } from "@/assets/theme-previews";
 import { PageHeader } from "@/common/@atoms/PageHeader";
+import { toast } from "sonner";
 
 // Theme preview component - Exact Attio style
 interface ThemePreviewProps {
@@ -150,6 +154,38 @@ function LanguageOption({
 export default function Settings() {
   const { t, i18n } = useTranslation();
   const { theme, setTheme, colorTheme, setColorTheme } = useTheme();
+  const [appVersion, setAppVersion] = useState<string>("");
+  const [checking, setChecking] = useState(false);
+
+  useEffect(() => {
+    // Get app version if in Electron
+    if ((window as any).electron?.updater) {
+      (window as any).electron.updater
+        .getAppVersion()
+        .then((version: string) => {
+          setAppVersion(version);
+        });
+    }
+  }, []);
+
+  const handleCheckForUpdates = async () => {
+    if (!(window as any).electron?.updater) {
+      toast.error("Update check not available", {
+        description: "This feature is only available in the desktop app",
+      });
+      return;
+    }
+
+    setChecking(true);
+    const result = await (window as any).electron.updater.checkForUpdates();
+    setChecking(false);
+
+    if (!result.success && result.error) {
+      toast.error("Failed to check for updates", {
+        description: result.error,
+      });
+    }
+  };
 
   // Get the current accent color based on selected color theme
   const currentAccentColor =
@@ -264,6 +300,56 @@ export default function Settings() {
           ))}
         </div>
       </section>
+
+      {/* Updates Section */}
+      {(window as any).electron?.updater && (
+        <section className="space-y-5 px-6">
+          <div>
+            <h2 className="text-base font-semibold text-foreground">
+              {t("settings.updates") || "Updates"}
+            </h2>
+            <p className="text-sm text-muted-foreground mt-0.5">
+              {t("settings.updatesDescription") ||
+                "Check for app updates and manage automatic updates"}
+            </p>
+          </div>
+
+          <Card className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium">
+                  {t("settings.currentVersion") || "Current Version"}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {appVersion || "Loading..."}
+                </p>
+              </div>
+              <Button
+                onClick={handleCheckForUpdates}
+                disabled={checking}
+                variant="outlined"
+                size="sm"
+              >
+                {checking ? (
+                  <>
+                    <RefreshCw className="mr-2 size-4 animate-spin" />
+                    {t("settings.checking") || "Checking..."}
+                  </>
+                ) : (
+                  <>
+                    <Download className="mr-2 size-4" />
+                    {t("settings.checkForUpdates") || "Check for Updates"}
+                  </>
+                )}
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground mt-3">
+              {t("settings.autoUpdateInfo") ||
+                "The app automatically checks for updates when you start it. You'll be notified if an update is available."}
+            </p>
+          </Card>
+        </section>
+      )}
     </div>
   );
 }

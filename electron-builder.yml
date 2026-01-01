@@ -1,0 +1,90 @@
+appId: com.inventory.app
+productName: Inventory POS
+directories:
+  output: release
+files:
+  - dist/**/*
+  - dist-electron/main.js
+  - dist-electron/preload.js
+  - dist-electron/vite.svg
+  - dist-electron/fonts/**/*
+  - "!dist/downloads/**/*"  # Exclude downloads folder from dist (contains DMG files)
+  - "!dist-electron/downloads/**/*"  # Exclude downloads folder from dist-electron (contains DMG files)
+  - "!dist/**/*.dmg"  # Exclude any DMG files from dist
+  - "!dist-electron/**/*.dmg"  # Exclude any DMG files from dist-electron
+  - "!dist/**/*.exe"  # Exclude any EXE files from dist
+  - "!dist-electron/**/*.exe"  # Exclude any EXE files from dist-electron
+  - "!dist/**/*.AppImage"  # Exclude any AppImage files from dist
+  - "!dist-electron/**/*.AppImage"  # Exclude any AppImage files from dist-electron
+  - "!**/*.map"  # Exclude source maps
+  - "!**/node_modules/**/*"  # Explicitly exclude node_modules
+  # Don't include node_modules - electron-builder automatically includes only production dependencies
+# Auto-updater configuration - GitHub Releases
+publish:
+  provider: github
+  owner: aditya2410-U
+  repo: Frontend_Pos
+  private: false
+mac:
+  category: public.app-category.business
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  icon: build/icon.icns
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  # Completely disable code signing to avoid invalid signature issues
+  # This makes the app truly unsigned (no adhoc signature)
+  identity: null
+  type: distribution
+  # Remove any existing signatures
+  signIgnore: ["**"]
+  # DMG specific settings to prevent corruption
+  dmg:
+    # Don't sign the DMG (prevents corruption for unsigned apps)
+    sign: false
+    # Write DMG in UDZO format (compressed, compatible)
+    format: "UDZO"
+    # Additional settings to prevent "damaged" errors
+    writeUpdate: false
+    # Compression level (0-9, higher = more compression but slower)
+    compressionLevel: 9
+    # Background image (optional)
+    # background: "build/background.png"
+    # Window settings
+    window:
+      width: 540
+      height: 380
+      x: 400
+      y: 100
+    # Contents settings - app icon and Applications link
+    contents:
+      - x: 130
+        y: 220
+      - x: 410
+        y: 220
+        type: link
+        path: /Applications
+  # Code signing (optional - add your identity for production)
+  # identity: "Developer ID Application: Your Name (TEAM_ID)"
+win:
+  target:
+    - target: portable
+      arch:
+        - x64
+  icon: build/icon.ico
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+  category: Office
+  icon: build/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
