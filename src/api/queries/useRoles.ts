@@ -3,6 +3,7 @@ import { roleService } from "../services/role";
 import type { CreateRoleInput } from "../schemas/role";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { STALE_TIME } from "@/lib/constants";
 
 export const useCreateRole = () => {
   const queryClient = useQueryClient();
@@ -16,8 +17,8 @@ export const useCreateRole = () => {
       navigate("/roles");
     },
     onError: (error: any) => {
-        toast.error(error.response?.data?.message || "Failed to create role");
-    }
+      toast.error(error.response?.data?.message || "Failed to create role");
+    },
   });
 };
 
@@ -25,5 +26,6 @@ export const useRoles = () => {
   return useQuery({
     queryKey: ["roles"],
     queryFn: roleService.getAll,
+    staleTime: STALE_TIME.STANDARD,
   });
 };

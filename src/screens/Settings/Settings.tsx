@@ -49,7 +49,7 @@ function ThemePreview({
         {/* SVG container - theme-aware styles */}
         <div
           className={cn(
-            "flex flex-row items-center justify-start gap-[1px] rounded-md overflow-hidden",
+            "flex flex-row items-center justify-start gap-px rounded-md overflow-hidden",
             "bg-muted",
             "border border-border"
           )}
@@ -96,7 +96,7 @@ function ColorOption({ bgColor, isSelected, onClick }: ColorOptionProps) {
     <button
       onClick={onClick}
       className={cn(
-        "relative size-6 rounded-full transition-all duration-200 hover:scale-110 focus:outline-none",
+        "relative size-12 rounded-full transition-all duration-200 hover:scale-110 focus:outline-none",
         isSelected &&
           "ring-1 ring-offset-1 ring-offset-background ring-foreground"
       )}
