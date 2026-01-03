@@ -46,6 +46,9 @@ export default function OutletList() {
         {
           headerName: "Actions",
           field: "id",
+          width: 80,
+          maxWidth: 80,
+          minWidth: 80,
           flex: 0.8,
           isSortable: false,
           hideFilter: true,
