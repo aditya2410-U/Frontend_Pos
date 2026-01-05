@@ -18,6 +18,7 @@ const Dashboard = lazy(() => import("@/screens/Dashboard/Dashboard"));
 const OutletList = lazy(() => import("@/screens/Outlets/OutletList"));
 const CreateOutlet = lazy(() => import("@/screens/Outlets/CreateOutlet"));
 const Settings = lazy(() => import("@/screens/Settings/Settings"));
+const Download = lazy(() => import("@/screens/Download/Download"));
 const NotFound = lazy(() => import("@/utils/NotFound"));
 
 // SuperAdmin imports removed
@@ -53,6 +54,9 @@ const RouteNames = {
   },
   settings: {
     path: "/settings",
+  },
+  download: {
+    path: "/download",
   },
 };
 
@@ -176,6 +180,15 @@ const routes: RouteObject[] = [
         element: (
           <Suspense fallback={<LoaderScreen />}>
             <Settings />
+          </Suspense>
+        ),
+      },
+      {
+        path: RouteNames.download.path,
+        handle: { breadcrumb: "download.title" },
+        element: (
+          <Suspense fallback={<LoaderScreen />}>
+            <Download />
           </Suspense>
         ),
       },

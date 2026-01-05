@@ -11,7 +11,8 @@
     "profile": "Profile",
     "posSystem": "POS System",
     "adminPanel": "Admin Panel",
-    "logout": "Logout"
+    "logout": "Logout",
+    "download": "Download Desktop App"
   },
   "auth": {
     "welcomeBack": "Welcome back",
@@ -120,5 +121,24 @@
     "details": "Outlet Details",
     "createButton": "Create Outlet",
     "manageSubtitle": "Create and manage your store locations and their details."
+  },
+  "download": {
+    "title": "Download Desktop App",
+    "description": "Download the desktop application for Windows, macOS, or Linux",
+    "recommended": "Recommended",
+    "downloadFor": "Download for {{platform}}",
+    "systemRequirements": "System Requirements:",
+    "installationTitle": "Installation Instructions",
+    "installationInstructions": "After downloading, run the installer and follow the on-screen instructions. The app will be installed and ready to use.",
+    "version": "Version Information",
+    "latestVersion": "Latest Version",
+    "releaseDate": "Release Date",
+    "notes": "Important Notes",
+    "note1": "Make sure you have administrator privileges for installation",
+    "note2": "The app requires an active internet connection for authentication",
+    "note3": "For macOS, you may need to allow the app in Security & Privacy settings",
+    "detectedPlatform": "Detected Platform",
+    "macosCorruptionNote": "If you see 'disk image is corrupted' error, right-click the DMG file → Open With → DiskImageMounter, or run: xattr -cr <filename>.dmg in Terminal",
+    "macosCorruptionTitle": "macOS Installation Note"
   }
 }

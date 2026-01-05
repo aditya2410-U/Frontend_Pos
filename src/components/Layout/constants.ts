@@ -27,6 +27,7 @@ import {
   IconApps,
   IconHeart,
   IconLogout,
+  IconDeviceDesktop,
 } from "@tabler/icons-react";
 
 export interface SidebarMenuItem {
@@ -206,6 +207,11 @@ export const getSidebarGroups = (
         title: t("sidebar.settings"),
         icon: IconSettings,
         url: "/settings",
+      },
+      {
+        title: t("sidebar.download"),
+        icon: IconDeviceDesktop,
+        url: "/download",
       },
       {
         title: "Notifications",
