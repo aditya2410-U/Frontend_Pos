@@ -9,6 +9,7 @@ import { Form } from "@/common/@atoms/form";
 import { FormBuilder } from "@/common/FormBuilder";
 import type { FormFieldConfig } from "@/common/FormBuilder";
 import { ArrowLeft } from "lucide-react";
+import { IconLoader } from "@tabler/icons-react";
 
 interface EditUserFormData {
   name: string;
@@ -84,7 +85,7 @@ export default function EditUser() {
   if (isUserLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <Spinner />
+        <IconLoader className="mr-2 size-4 animate-spin" strokeWidth={1} />
       </div>
     );
   }

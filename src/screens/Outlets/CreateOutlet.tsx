@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/common/@atoms/Button";
 import { useCreateOutlet } from "@/api/queries/useOutlets";
 import { useNavigate } from "react-router-dom";
-import { Spinner } from "@/common/@atoms/spinner";
 import { Form } from "@/common/@atoms/form";
 import { FormBuilder } from "@/common/FormBuilder";
 import type { FormFieldConfig } from "@/common/FormBuilder";
 import { ArrowLeft } from "lucide-react";
+import { IconLoader } from "@tabler/icons-react";
 
 interface CreateOutletFormData {
   name: string;
@@ -98,7 +98,10 @@ export default function CreateOutlet() {
               <Button type="submit" className="flex-1" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="size-4" />
+                    <IconLoader
+                      className="mr-2 size-4 animate-spin"
+                      strokeWidth={1}
+                    />
                     {t("common.creating")}
                   </>
                 ) : (

@@ -55,6 +55,26 @@ export default {
           4: "var(--chart-4)",
           5: "var(--chart-5)",
         },
+        success: {
+          DEFAULT: "var(--success)",
+          light: "var(--success-light)",
+          text: "var(--success-text)",
+        },
+        error: {
+          DEFAULT: "var(--error)",
+          light: "var(--error-light)",
+          text: "var(--error-text)",
+        },
+        warning: {
+          DEFAULT: "var(--warning)",
+          light: "var(--warning-light)",
+          text: "var(--warning-text)",
+        },
+        info: {
+          DEFAULT: "var(--info)",
+          light: "var(--info-light)",
+          text: "var(--info-text)",
+        },
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
