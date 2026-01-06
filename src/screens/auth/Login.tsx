@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/common/@atoms/Button";
 import { useLogin } from "@/api/queries/useAuth";
-import { Spinner } from "@/common/@atoms/spinner";
+import { IconLoader } from "@tabler/icons-react";
 import { StoreIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Form } from "@/common/@atoms/form";
@@ -109,7 +109,10 @@ export default function Login() {
               >
                 {isPending ? (
                   <>
-                    <Spinner className="mr-2 size-4" />
+                    <IconLoader
+                      className="mr-2 size-4 animate-spin"
+                      strokeWidth={1}
+                    />
                     {t("auth.signingIn")}
                   </>
                 ) : (

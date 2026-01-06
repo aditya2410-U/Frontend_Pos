@@ -5,13 +5,13 @@ import { Button } from "@/common/@atoms/Button";
 import { Label } from "@/common/@atoms/label";
 import { useCreateRole } from "@/api/queries/useRoles";
 import { usePermissions } from "@/api/queries/usePermissions";
-import { Spinner } from "@/common/@atoms/spinner";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@/common/@atoms/checkbox";
 import { Form } from "@/common/@atoms/form";
 import { FormBuilder } from "@/common/FormBuilder";
 import type { FormFieldConfig } from "@/common/FormBuilder";
 import { ArrowLeft } from "lucide-react";
+import { IconLoader } from "@tabler/icons-react";
 
 interface CreateRoleFormData {
   name: string;
@@ -152,7 +152,10 @@ export default function CreateRole() {
               <Button type="submit" className="flex-1" disabled={isPending}>
                 {isPending ? (
                   <>
-                    <Spinner className="size-4" />
+                    <IconLoader
+                      className="mr-2 size-4 animate-spin"
+                      strokeWidth={1}
+                    />
                     {t("common.creating")}
                   </>
                 ) : (

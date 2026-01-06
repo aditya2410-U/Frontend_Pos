@@ -11,14 +11,14 @@ import {
   SidebarFooterComponent,
 } from "./components";
 import { getSidebarGroups, DEFAULT_OPEN_GROUPS } from "./constants";
-import { useLogout } from "@/api/queries/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import { STORAGE_KEYS } from "@/lib/constants";
+import { toast } from "sonner";
 
 export function AppSidebar() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { mutate: logout } = useLogout();
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const location = useLocation();
   const [quickActionsOpen, setQuickActionsOpen] = useState(false);
   const [openGroups, setOpenGroups] =
@@ -27,8 +27,18 @@ export function AppSidebar() {
   const sidebarGroups = getSidebarGroups(t);
 
   const handleLogout = () => {
-    logout();
-    navigate("/login");
+    // Perform cleanup
+    localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.USER_DETAILS);
+
+    // Clear the auth query data to update isAuthenticated immediately
+    queryClient.setQueryData(["auth", "me"], null);
+    queryClient.clear();
+
+    toast.success("Logged out successfully");
+
+    // Force navigation to login screen
+    window.location.href = "/login";
   };
 
   const isActive = (url: string) => {
