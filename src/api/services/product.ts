@@ -11,7 +11,9 @@ const MOCK_PRODUCTS: Product[] = Array.from({ length: 20 }).map((_, i) => ({
   stock_level: i % 3 === 0 ? 0 : 50,
   category: i % 2 === 0 ? "Pharmaceuticals" : "Equipment",
   min_order_quantity: 1,
-  image: "https://placehold.co/400x400/png",
+  image:
+    "https://theordinary.com/dw/image/v2/BFKJ_PRD/on/demandware.static/-/Sites-deciem-master/default/dw661858a7/Images/products/The%20Ordinary/rdn-squalane-cleanser-50ml.png",
+  brand: i % 2 === 0 ? "PharmaPlus" : "MediTech Solutions",
 }));
 
 export const productService = {
