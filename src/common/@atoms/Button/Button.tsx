@@ -3,7 +3,12 @@ import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 import styles from "./button.module.css";
 
-export type ButtonVariant = "default" | "outlined" | "text" | "dashed";
+export type ButtonVariant =
+  | "default"
+  | "outlined"
+  | "text"
+  | "dashed"
+  | "unstyled";
 export type ButtonType = "error" | "info" | "success" | "warning";
 
 export interface ButtonProps extends Omit<
@@ -33,8 +38,10 @@ function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
-  const variantClass = styles[`variant-${variant}`];
-  const sizeClass = styles[`size-${size}`];
+  const isUnstyled = variant === "unstyled";
+  const variantClass = isUnstyled ? "" : styles[`variant-${variant}`];
+  const sizeClass = isUnstyled ? "" : styles[`size-${size}`];
+  const baseClass = isUnstyled ? "" : styles.button;
 
   return (
     <Comp
@@ -43,7 +50,7 @@ function Button({
       data-type={buttonType}
       data-size={size}
       type={type}
-      className={cn(styles.button, variantClass, sizeClass, className)}
+      className={cn(baseClass, variantClass, sizeClass, className)}
       {...props}
     >
       {asChild ? (
@@ -51,11 +58,15 @@ function Button({
       ) : (
         <>
           {icon && iconPosition === "left" && (
-            <span className="size-5 flex items-center justify-center">{icon}</span>
+            <span className="size-5 flex items-center justify-center">
+              {icon}
+            </span>
           )}
           {children}
           {icon && iconPosition === "right" && (
-            <span className="size-5 flex items-center justify-center">{icon}</span>
+            <span className="size-5 flex items-center justify-center">
+              {icon}
+            </span>
           )}
         </>
       )}
